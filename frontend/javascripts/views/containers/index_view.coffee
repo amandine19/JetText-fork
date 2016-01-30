@@ -13,7 +13,8 @@ class Views.Containers.IndexView extends Views.ApplicationView
 
  render: ->
   super(name)
+  console.log("index-view")
 	  
   $('#tester').click ->
-   console.log("ok")
+   console.log(super(name))
    console.log("ko")

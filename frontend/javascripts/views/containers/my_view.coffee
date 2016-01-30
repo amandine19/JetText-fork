@@ -13,7 +13,8 @@ class Views.Containers.MyView extends Views.ApplicationView
 
  	render: ->
    	super()
-   	$('#outlet').prepend('<h1>My</h1>')
+    console.log("my-view")
+   	$('#outlet').prepend('<h1>My from js</h1>')
 
  	cleanup: ->
    	super()

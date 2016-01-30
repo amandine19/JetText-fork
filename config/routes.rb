@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :containers
+    get "/my", :to => "containers#my"
   end
 
 end
