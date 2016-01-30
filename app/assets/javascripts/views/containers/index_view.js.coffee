@@ -1,8 +1,8 @@
-#   ___        ____
-#  /  _  __ __  /_\   _/_
-# /  / \/_//_  //_ \/ /
-# \__\_/ \_\__/ \__/\/_
-#                    \
+#     ____    ____
+#      /__ _/_ /_\   _/_
+#     //_  /  //_ \/ /
+# /__/ \__/_ / \__/\/_
+#                   \
 # views
 # |-containers
 # | |
@@ -11,12 +11,9 @@
 window.Views.Containers ||= {}
 class Views.Containers.IndexView extends Views.ApplicationView
 
- 	render: ->
-  	super(name)
-  	$('#outlet').find('p').click -> console.log("ok")
-			
-  	$('#my').click (e) ->
-   		console.log($(this).html())
-   		return
-  
-
+ render: ->
+  super(name)
+	  
+  $('#tester').click ->
+   console.log("ok")
+   console.log("ko")
