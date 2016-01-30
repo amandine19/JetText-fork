@@ -1,0 +1,14 @@
+<div id="menu">
+	<ul>
+		<% if user_signed_in? %>
+			<% if current_user.firstname && current_user.lastname %>
+				<li>
+					<i class="fa fa-user"></i> <%= current_user.firstname + " " + current_user.lastname %>
+				</li>
+				<li>
+					<%= link_to 'Déconnexion', destroy_user_session_path, method: :delete  %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
