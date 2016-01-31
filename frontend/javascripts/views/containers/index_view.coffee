@@ -5,7 +5,6 @@
 #                   \
 # views
 # |-containers
-# | |
 # | |-index_view
 
 window.Views.Containers ||= {}

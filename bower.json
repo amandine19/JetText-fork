@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "susy": "^2.2.12"
+    "susy": "^2.2.12",
+    "core.js": "^2.0.3",
+    "core": "core-js#*"
   }
 }
