@@ -24,6 +24,6 @@ gulp.task('sass:watch', function () {
 gulp.task('coffee', function() {
   gulp.src('./frontend/javascripts/**/*.coffee')
     .pipe(coffee({bare: true}).on('error', gutil.log))
-		.pipe(concat('all.js'))
+		.pipe(concat('app.js'))
     .pipe(gulp.dest('./app/assets/javascripts/'));
 });
