@@ -8,16 +8,21 @@ var gulp = require('gulp'),
 		concat = require('gulp-concat'),
 		coffee = require('gulp-coffee'),
 		babel = require('gulp-babel'),
-		sourcemaps = require('gulp-sourcemaps'),
-    browserify = require('gulp-browserify'),
-    traceur = require('gulp-traceur');
+    plumber = require('gulp-plumber'),
+		sourcemaps = require('gulp-sourcemaps');
  
 gulp.task('sass', function () {
   gulp.src('./frontend/stylesheets/**/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest('./vendor/assets/stylesheets'))
+    .pipe(sass({outputStyle: 'compressed'})
+      .on('error', sass.logError)
+      .on('error', function(){
+        gutil.log(gutil.colors.red('（ ﾟДﾟ） Aaargh, something bad happened !'));
+      })
+    )
+    .pipe(concat("main.css"))
+    .pipe(gulp.dest('./app/assets/stylesheets'))
     .on('end', function() { 
-      gutil.log(gutil.colors.green('~> css correctly generated !'));
+      gutil.log(gutil.colors.magenta('ʕ•ᴥ•ʔ ') + gutil.colors.green(' CSS generated !'))
     });
 });
  
@@ -33,12 +38,15 @@ gulp.task('coffee', function() {
 });
 
 gulp.task("default", function () {
-  return gulp.src([traceur.RUNTIME_PATH, "./frontend/javascripts/**/*.es6"])
+  return gulp.src("./frontend/javascripts/**/*.es6")
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(concat("all.js"))
     .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("./app/assets/javascripts/"));
+    .pipe(gulp.dest("./app/assets/javascripts/"))
+    .on('end', function() { 
+      gutil.log(gutil.colors.magenta('༼ つ ◕_◕ ༽つ  Yeah !') + gutil.colors.green(' JS correctly generated !'));
+    });
 });
