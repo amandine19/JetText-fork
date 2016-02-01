@@ -1,5 +1,9 @@
 <div id='outlet' data-component='Containers' data-view='Show'>
 	<h1><%= @container.name %></h1>
+	<div class="actions">
+		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
+		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+	</div>
   	
   <div>
   	<%= raw(@container.description) %>
