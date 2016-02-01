@@ -1,8 +1,8 @@
 class Container < ActiveRecord::Base
   belongs_to :user
 
-  validates :name,		:presence => true, length: { maximum: 50 }
-  validates :description, :presence => false, length: { maximum: 1000000 }
+  validates :name,		:presence => true, length: { maximum: 250 }
+  validates :description, :presence => false
 
   before_save :create_folder
 

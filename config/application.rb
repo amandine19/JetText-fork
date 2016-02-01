@@ -25,5 +25,7 @@ module JetText
 
     # Used in assets/javascripts & assets/stylesheets to load Bower modules
     config.assets.paths << Rails.root.join('bower_components')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.precompile += %w( .svg .eot .woff .ttf)
   end
 end

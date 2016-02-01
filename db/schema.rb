@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160101114326) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
+    t.binary   "description", :limit => 10.megabyte
     t.string   "url"
     t.integer  "user_id"
     t.datetime "created_at",  null: false

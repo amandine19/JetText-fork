@@ -1,4 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top">
+	<div id="logo">
+		<h1><%= link_to(raw('<i class="fa fa-plane"></i> JetText'), root_path()) %></h1>
+	</div>
+
 	<div id="user-menu">
 		<ul>
 			<% if user_signed_in? %>

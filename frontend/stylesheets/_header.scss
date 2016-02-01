@@ -1,7 +1,27 @@
 nav.navbar {
+	min-height: 40px;
+	height: 40px;
+
+	#logo {
+		@include span(4 of 12);
+
+		h1 {
+			font-family: "Lobster-Regular",Helvetica,Arial,sans-serif;
+			font-size: 30px;
+			margin-top: 0;
+			padding: 1px 0;
+
+			a {
+				color: black;
+				text-decoration: none;
+			}
+		}
+	} 
+
 	div#user-menu,
 	div#top-menu {
-		@include span(6 of 12);
+		@include span(4 of 12);
+		padding: 8px 0;
 
 		ul {
 			li {
