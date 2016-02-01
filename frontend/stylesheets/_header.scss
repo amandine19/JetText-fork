@@ -1,0 +1,12 @@
+nav.navbar {
+	div#user-menu,
+	div#top-menu {
+		@include span(6 of 12);
+
+		ul {
+			li {
+				display: inline-block;
+			}
+		}
+	}
+}

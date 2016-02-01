@@ -3,6 +3,11 @@ class ContainersController < ApplicationController
 	before_action :authenticate_user!
 
   def index
+  	@containers = Container.all
+  end
+
+  def show
+  	@container = Container.find(params[:id])
   end
 
   def new
@@ -13,7 +18,7 @@ class ContainersController < ApplicationController
   	@container = Container.new(container_params)
   	@container.user_id = current_user.id
   	if @container.save
-  		redirect_to :action => :index
+  		redirect_to action: "index"
   	end
   end
 
