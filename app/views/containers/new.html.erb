@@ -7,8 +7,14 @@
     </div>
     <div>
       <p><%= f.label :description %></p>
-      <p><%= f.text_area :name %></p>
+      <p id="editor1" contenteditable="true">claclacla</p>
     </div>
     <%= f.submit :save, class: "btn btn-primary" %>
 	<% end %>
+	<script>
+    // Turn off automatic editor creation first.
+    
+    CKEDITOR.disableAutoInline = true;
+    CKEDITOR.inline('editor1');
+	</script>
 </div>

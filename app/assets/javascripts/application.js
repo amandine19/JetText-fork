@@ -8,6 +8,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require alloyeditor/dist/alloy-editor/alloy-editor-all-min.js
+//= require cke/cke_fix.js
+//= require ckeditor/ckeditor.js
+
+//= require cke/cke_config.js
+//= require ckeditor/lang/fr.js
 //= require all
 

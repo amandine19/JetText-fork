@@ -17,8 +17,6 @@
   ],
   "dependencies": {
     "susy": "^2.2.12",
-    "core.js": "^2.0.3",
-    "core": "core-js#*",
-    "alloyeditor": "^0.7.5"
+    "ckeditor": "^4.5.6"
   }
 }

@@ -12,5 +12,5 @@
  *
  *= require_tree .
  *= require_self
- *= require alloyeditor/dist/alloy-editor/assets/alloy-editor-ocean-min.css
+ *= require ckeditor/skins/moono/editor.css
  */
