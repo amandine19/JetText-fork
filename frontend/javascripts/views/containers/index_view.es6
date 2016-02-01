@@ -7,7 +7,7 @@ class ContainersIndex extends ApplicationView {
     p.testTry();
     console.log("index-view");
     $('#tester').click(function(){
-      console.log("ko");
+      console.log("ok");
     })   
   }
 }
@@ -15,5 +15,8 @@ class ContainersIndex extends ApplicationView {
 class ContainersIndexPart extends ContainersIndex {
   testTry() {
     console.log("index-view-part");
+    $('#tester').click(function(){
+      console.log("part");
+    })
   }
 }

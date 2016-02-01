@@ -5,11 +5,11 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     watch = require('gulp-watch'),
     shell = require('gulp-shell'),
-		concat = require('gulp-concat'),
-		coffee = require('gulp-coffee'),
-		babel = require('gulp-babel'),
+    concat = require('gulp-concat'),
+    coffee = require('gulp-coffee'),
+    babel = require('gulp-babel'),
     plumber = require('gulp-plumber'),
-		sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps');
  
 gulp.task('sass', function () {
   gulp.src('./frontend/stylesheets/**/*.scss')

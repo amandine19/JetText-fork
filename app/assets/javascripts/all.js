@@ -57,7 +57,7 @@ var ContainersIndex = function (_ApplicationView) {
       p.testTry();
       console.log("index-view");
       $('#tester').click(function () {
-        console.log("ko");
+        console.log("ok");
       });
     }
   }]);
@@ -78,6 +78,9 @@ var ContainersIndexPart = function (_ContainersIndex) {
     key: 'testTry',
     value: function testTry() {
       console.log("index-view-part");
+      $('#tester').click(function () {
+        console.log("part");
+      });
     }
   }]);
 
