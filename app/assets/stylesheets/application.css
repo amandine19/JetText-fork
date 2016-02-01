@@ -13,4 +13,5 @@
  *= require_tree .
  *= require_self
  *= require ckeditor/skins/moono/editor.css
+ *= require font-awesome/css/font-awesome.min.css
  */

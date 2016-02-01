@@ -2,8 +2,7 @@
 	<h1>Create new container</h1>
   <%= form_for @container do |f| %>
     <div>
-      <p><%= f.label "Titre" %></p>
-      <p><%= f.text_field :name %></p>
+      <p><%= f.text_field :name, :placeholder => :title %></p>
     </div>
     <div>
       <p><%= f.label :description %></p>
@@ -11,10 +10,4 @@
     </div>
     <%= f.submit :save, class: "btn btn-primary" %>
 	<% end %>
-	<script>
-    // Turn off automatic editor creation first.
-    
-    CKEDITOR.disableAutoInline = true;
-    CKEDITOR.inline('editor1');
-	</script>
 </div>
