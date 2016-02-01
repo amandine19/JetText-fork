@@ -4,31 +4,34 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ApplicationView = function () {
-	function ApplicationView() {
-		_classCallCheck(this, ApplicationView);
+var App = function () {
+	function App() {
+		_classCallCheck(this, App);
 	}
 
-	_createClass(ApplicationView, [{
+	_createClass(App, [{
 		key: 'ready',
 		value: function ready() {
 			var componentName, viewName;
 			componentName = $('#outlet').data('component');
 			viewName = $('#outlet').data('view');
-
-			var view = eval("new " + componentName + viewName + "()");
-			view.render();
+			try {
+				var view = eval("new " + componentName + viewName + "()");
+				view.render();
+			} catch (err) {
+				console.error("outer", err.message);
+			}
 		}
 	}]);
 
-	return ApplicationView;
+	return App;
 }();
 
-var app = new ApplicationView();
+var app = new App();
 
 $(document).ready(app.ready);
 $(document).on('page:load', app.ready);
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -38,8 +41,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ContainersIndex = function (_ApplicationView) {
-  _inherits(ContainersIndex, _ApplicationView);
+//     ____    ____
+//      /__ _/_ /_\   _/_
+//     //_  /  //_ \/ /
+// /__/ \__/_ / \__/\/_
+// 
+// views
+// |-containers
+// | |-index
+
+var ContainersIndex = function (_App) {
+  _inherits(ContainersIndex, _App);
 
   function ContainersIndex() {
     _classCallCheck(this, ContainersIndex);
@@ -48,22 +60,14 @@ var ContainersIndex = function (_ApplicationView) {
   }
 
   _createClass(ContainersIndex, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      $('h1').first().append(' from js');
-      $('#outlet').css({ "color": "red" });
-
-      var p = new ContainersIndexPart();
-      p.testTry();
-      console.log("index-view");
-      $('#tester').click(function () {
-        console.log("ko");
-      });
+      console.log("containers/index"); //file
     }
   }]);
 
   return ContainersIndex;
-}(ApplicationView);
+}(App);
 
 var ContainersIndexPart = function (_ContainersIndex) {
   _inherits(ContainersIndexPart, _ContainersIndex);
@@ -75,7 +79,7 @@ var ContainersIndexPart = function (_ContainersIndex) {
   }
 
   _createClass(ContainersIndexPart, [{
-    key: 'testTry',
+    key: "testTry",
     value: function testTry() {
       console.log("index-view-part");
     }
@@ -83,7 +87,7 @@ var ContainersIndexPart = function (_ContainersIndex) {
 
   return ContainersIndexPart;
 }(ContainersIndex);
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -93,23 +97,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ContainersMy = function (_ApplicationView) {
-  _inherits(ContainersMy, _ApplicationView);
+//     ____    ____
+//      /__ _/_ /_\   _/_
+//     //_  /  //_ \/ /
+// /__/ \__/_ / \__/\/_
+// 
+// views
+// |-containers
+// | |-my
 
-  function ContainersMy() {
-    _classCallCheck(this, ContainersMy);
+var ContainersNew = function (_App) {
+  _inherits(ContainersNew, _App);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ContainersMy).apply(this, arguments));
+  function ContainersNew() {
+    _classCallCheck(this, ContainersNew);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ContainersNew).apply(this, arguments));
   }
 
-  _createClass(ContainersMy, [{
-    key: 'render',
+  _createClass(ContainersNew, [{
+    key: "render",
     value: function render() {
-      $('#outlet').prepend('<h1>My from js</h1>');
-      console.log("my-view");
+      console.log("containers/new"); //file
     }
   }]);
 
-  return ContainersMy;
-}(ApplicationView);
+  return ContainersNew;
+}(App);
 //# sourceMappingURL=all.js.map

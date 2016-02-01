@@ -9,7 +9,11 @@ var gulp = require('gulp'),
 		coffee = require('gulp-coffee'),
 		babel = require('gulp-babel'),
     plumber = require('gulp-plumber'),
-		sourcemaps = require('gulp-sourcemaps');
+		sourcemaps = require('gulp-sourcemaps'),
+    browserify = require('browserify'),
+    babelify = require('babelify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer');
  
 gulp.task('sass', function () {
   gulp.src('./frontend/stylesheets/**/*.scss')
@@ -35,6 +39,18 @@ gulp.task('coffee', function() {
     .pipe(coffee({bare: true}).on('error', gutil.log))
 		.pipe(concat('app.js'))
     .pipe(gulp.dest('./app/assets/javascripts/'));
+});
+
+gulp.task("es6", function () {
+  var bundler = browserify('./frontend/javascripts/app.js').transform(babelify, {presets: ["es2015"]})
+  return bundler.bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('./app/assets/javascripts'))
+    .on('end', function() { 
+      gutil.log(gutil.colors.magenta('༼ つ ◕_◕ ༽つ  Yeah !') + gutil.colors.green(' JS correctly generated !'));
+    })
 });
 
 gulp.task("default", function () {

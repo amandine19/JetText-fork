@@ -18,6 +18,7 @@
   "dependencies": {
     "susy": "^2.2.12",
     "core.js": "^2.0.3",
-    "core": "core-js#*"
+    "core": "core-js#*",
+    "alloyeditor": "^0.7.5"
   }
 }

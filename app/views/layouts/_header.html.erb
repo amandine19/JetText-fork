@@ -6,7 +6,7 @@
 					<i class="fa fa-user"></i> <%= current_user.firstname + " " + current_user.lastname %>
 				</li>
 				<li>
-					<%= link_to 'Déconnexion', destroy_user_session_path, method: :delete  %>
+					<%= link_to :logout, destroy_user_session_path, method: :delete  %>
 				</li>
 			<% end %>
 		<% end %>
@@ -16,6 +16,6 @@
 <nav>
 	<ul>
 		<li><%= link_to :containers, containers_path %></li>
-		<li><%= link_to :my, my_path %></li>
+		<li><%= link_to :my, new_container_path %></li>
 	</ul>
 </nav>

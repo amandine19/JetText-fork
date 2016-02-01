@@ -3,7 +3,8 @@ class ContainersController < ApplicationController
   def index
   end
 
-  def my
+  def new
+  	@container = Container.new
   end
 
 end
