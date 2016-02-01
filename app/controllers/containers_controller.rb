@@ -1,30 +1,30 @@
 class ContainersController < ApplicationController
 
-	before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
-  	@containers = Container.all
+    @containers = Container.all
   end
 
   def show
-  	@container = Container.find(params[:id])
+    @container = Container.find(params[:id])
   end
 
   def new
-  	@container = Container.new
+    @container = Container.new
   end
 
   def create
-  	@container = Container.new(container_params)
-  	@container.user_id = current_user.id
-  	if @container.save
-  		redirect_to action: "index"
-  	end
+    @container = Container.new(container_params)
+    @container.user_id = current_user.id
+    if @container.save
+      redirect_to action: "index"
+    end
   end
 
   private
-  	def container_params
-  		params.require(:container).permit(:name, :description, :url)
-  	end
+    def container_params
+      params.require(:container).permit(:name, :description, :url)
+    end
 
 end
