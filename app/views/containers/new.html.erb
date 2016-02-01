@@ -7,7 +7,7 @@
     </div>
     <div>
       <p><%= f.label :description %></p>
-      <p id="editor1" contenteditable="true">claclacla</p>
+      <p><%= f.text_area :description, :id => "editor1", :html => { 'contenteditable' => 'true' } %></p>
     </div>
     <%= f.submit :save, class: "btn btn-primary" %>
 	<% end %>
