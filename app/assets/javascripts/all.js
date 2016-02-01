@@ -119,8 +119,9 @@ var ContainersNew = function (_App) {
     key: "render",
     value: function render() {
       console.log("containers/new"); //file
-      CKEDITOR.disableAutoInline = true;
-      CKEDITOR.inline('editor1');
+      //CKEDITOR.disableAutoInline = true;
+      //CKEDITOR.inline('editor1');
+      AlloyEditor.editable('editor1');
     }
   }]);
 

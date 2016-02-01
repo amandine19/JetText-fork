@@ -7,6 +7,5 @@ $(function(){
 	    'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', 'BidiLtr','BidiRtl', "Table", "Source"],
 	  ];
 	  config.toolbar = "simple";
-
 	}
 });
