@@ -15,7 +15,15 @@
   	<ul>
   		<% @pages.each do |page| %>
   			<% if page.parent.nil? %>
-  				<li><%= page.name %></li>
+  				<li><%= page.id.to_s + ' ' + page.name %></li>
+          <% if has_children(page) %>
+            <ul>
+              <% children = get_children(page) %>
+              <% children.each do |c| %>
+                <li><%= c.id.to_s + ' ' + c.name %></li>
+              <% end %>
+            </ul>
+          <% end %>
   			<% end %>
   		<% end %>
   	</ul>

@@ -1,6 +1,6 @@
 <div>
 	<h3>Create new page</h3>
-  <%= form_for @page, :remote => true do |f| %>
+  <%= form_for @page, :remote => true, :html => { :multipart => true } do |f| %>
     <div>
       <p><%= f.text_field :name, :placeholder => :name %></p>
       <p><%= select('page', 'parent', Page.where(:container_id => @container.id).collect { |p| [ p.name, p.id ] }, {include_blank: 'Aucun'}) %></p>

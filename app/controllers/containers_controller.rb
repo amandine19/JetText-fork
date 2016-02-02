@@ -62,4 +62,18 @@ class ContainersController < ApplicationController
       return dest
     end
 
+    helper_method :has_children
+    def has_children(page)
+      if Page.where(:parent => page.id).empty?
+        return false
+      else
+        return true
+      end
+    end
+
+    helper_method :get_children
+    def get_children(page)
+      return Page.where(:parent => page.id)
+    end
+
 end
