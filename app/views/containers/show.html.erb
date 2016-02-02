@@ -1,5 +1,5 @@
 <div id='outlet' data-component='Containers' data-view='Show'>
-	<h1><%= @container.name %></h1>
+	<h1>Container : <%= @container.name %></h1>
 	<div class="actions">
 		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
 		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
@@ -7,5 +7,19 @@
   	
   <div>
   	<%= raw(@container.description) %>
+  </div>
+
+  <div>
+  	<ul>
+  		<% @pages.each do |page| %>
+  			<% if page.parent.nil? %>
+  				<li><%= page.name %></li>
+  			<% end %>
+  		<% end %>
+  	</ul>
+  </div>
+
+  <div>
+  	<%= render :partial => 'pages/new', :object => @page %>
   </div>
 </div>

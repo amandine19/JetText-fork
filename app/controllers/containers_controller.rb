@@ -4,11 +4,16 @@ class ContainersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    @containers = Container.all
+    @containers = Container.all.where(:user_id => current_user.id)
   end
 
   def show
     @container = Container.find(params[:id])
+    @pages = Page.where(:container_id => @container.id)
+    @page = Page.new
+    unless @container.user_id == current_user.id
+      redirect_to action: "index"
+    end
   end
 
   def new

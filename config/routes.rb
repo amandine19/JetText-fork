@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :containers
+    resources :pages
   end
 
 end

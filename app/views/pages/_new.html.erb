@@ -1,0 +1,13 @@
+<div>
+	<h1>Create new page</h1>
+  <%= form_for @page do |f| %>
+    <div>
+      <p><%= f.text_field :name, :placeholder => :name %></p>
+      <p><%= select('page', 'parent', Page.where(:container_id => @container.id).collect {|p| [ p.name, p.id ] }, {include_blank: 'Aucun'}) %></p>
+    </div>
+    <div>
+	   	<%= f.hidden_field :container_id, :value => @container.id %>
+	  </div>	
+    <%= f.submit :save, class: "btn btn-primary" %>
+  <% end %>
+</div>
