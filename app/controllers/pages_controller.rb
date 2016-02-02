@@ -17,11 +17,12 @@ class PagesController < ApplicationController
     @page = Page.new
   end
 
+  skip_before_action :verify_authenticity_token
   def create
     @page = Page.new(page_params)
     @page.user_id = current_user.id
     if @page.save
-      redirect_to container_path(@page.container_id)
+      render :nothing => true, :status => 200
     end
   end
 
@@ -36,7 +37,7 @@ class PagesController < ApplicationController
 
   private
     def page_params
-      params.require(:page).permit(:name, :parent, :container_id)
+      params.require(:page).permit(:name, :parent, :container_id, :user_id)
     end
 
 end

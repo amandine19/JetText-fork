@@ -10,12 +10,11 @@
   	<%= raw(@container.description) %>
   </div>
 
-  <div>
+  <div id="pages_list">
   	<ul>
   		<% @pages.each do |page| %>
   			<% if page.parent.nil? %>
   				<li><%= page.name %></li>
-
   			<% end %>
   		<% end %>
   	</ul>
