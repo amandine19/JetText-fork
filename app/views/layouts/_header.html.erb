@@ -11,7 +11,7 @@
 						<i class="fa fa-user"></i> <%= current_user.firstname + " " + current_user.lastname %>
 					</li>
 					<li>
-						<%= link_to :logout, destroy_user_session_path, method: :delete  %>
+						<%= link_to :logout, destroy_user_session_path, :method => :delete  %>
 					</li>
 				<% end %>
 			<% end %>

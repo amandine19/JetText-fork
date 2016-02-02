@@ -8,7 +8,7 @@ class ContainersShow extends App {
 			$.ajax({
 				type: "POST",
 				url: $(this).attr('action'),
-				data: { page: { name: name, parent: '', container_id: container, user_id: 1 } }
+				data: { page: { name: name, parent: '', container_id: container, user_id: currentUser } }
 			}).success(function() {
 				$('#pages_list > ul').append('<li>'+name+'</li>');
 				$('form').get(0).reset();

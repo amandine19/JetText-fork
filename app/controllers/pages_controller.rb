@@ -17,7 +17,6 @@ class PagesController < ApplicationController
     @page = Page.new
   end
 
-  skip_before_action :verify_authenticity_token
   def create
     @page = Page.new(page_params)
     @page.user_id = current_user.id

@@ -24,8 +24,11 @@ nav.navbar {
 		padding: 8px 0;
 
 		ul {
+			text-align: right;
+
 			li {
 				display: inline-block;
+				padding: 0 10px;
 			}
 		}
 	}
