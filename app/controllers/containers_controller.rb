@@ -24,10 +24,13 @@ class ContainersController < ApplicationController
     @container = Container.new(container_params)
     @container.user_id = current_user.id
     if @container.save
-      redirect_to action: "index"
+      if folder = create_folder
+        @container.update_attribute(:url, folder)
+        redirect_to action: "index"
+      end
     end
   end
-
+ 
   def edit
     @container = Container.find(params[:id])
   end
@@ -49,6 +52,14 @@ class ContainersController < ApplicationController
   private
     def container_params
       params.require(:container).permit(:name, :description, :url)
+    end
+
+    def create_folder
+      return nil unless current_user.present?
+      token = SecureRandom.hex(8)
+      dest = "generated/#{current_user.email}/#{token}"
+      FileUtils.mkdir_p "#{Rails.root}/public/#{dest}"
+      return dest
     end
 
 end

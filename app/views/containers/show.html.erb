@@ -3,6 +3,7 @@
 	<div class="actions">
 		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
 		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+		<%= link_to 'voir', '/'+@container.url %>
 	</div>
   	
   <div>
@@ -14,6 +15,7 @@
   		<% @pages.each do |page| %>
   			<% if page.parent.nil? %>
   				<li><%= page.name %></li>
+
   			<% end %>
   		<% end %>
   	</ul>
