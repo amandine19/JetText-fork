@@ -7,8 +7,9 @@
 	</div>
   	
   <div>
-  	<%= raw(@container.description) %>
+    <%= CGI.unescapeHTML(@container.description).html_safe %>
   </div>
+
   <div id="pages_list">
   	<h3>Pages :</h3>
   	<ul>

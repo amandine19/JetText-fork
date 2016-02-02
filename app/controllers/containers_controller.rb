@@ -26,7 +26,7 @@ class ContainersController < ApplicationController
     if @container.save
       if folder = create_folder
         @container.update_attribute(:url, folder)
-        redirect_to action: "index"
+        redirect_to container_path(@container.id)
       end
     end
   end
@@ -38,7 +38,7 @@ class ContainersController < ApplicationController
   def update
     @container = Container.where(:id => params[:id]).where(:user_id => current_user.id).take
     if @container.update_attributes(container_params)
-      redirect_to action: "index"
+      redirect_to container_path(@container.id)
     end
   end
 
