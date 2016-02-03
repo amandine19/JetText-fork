@@ -15,8 +15,12 @@ html {
 		flex: 1 0 auto;
 		margin-top: 50px;
 
-		#outlet {
-			@import 'template1';
+		div.container {
+			width: 100%;
+
+			#outlet {
+				@import 'template1';
+			}
 		}
 	}
 

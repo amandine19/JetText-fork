@@ -37,7 +37,12 @@ class ContainersController < ApplicationController
 
   def update
     @container = Container.where(:id => params[:id]).where(:user_id => current_user.id).take
-    if @container.update_attributes(container_params)
+    if params[:container][:description].empty?
+      val = ""
+    else
+      val = params[:container][:description]
+    end
+    if @container.update_attribute(:description, val)
       redirect_to container_path(@container.id)
     end
   end

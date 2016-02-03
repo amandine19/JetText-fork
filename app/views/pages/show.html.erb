@@ -9,20 +9,20 @@
   		<%= link_to 'voir', '/'+@container.url %>
   	</div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <nav id="main-nav">
         <ul>
           <% @pages.each do |page| %>
             <% if page.parent.nil? %>
               <a href='<%= "/pages/#{page.id}" %>'>
-                <li><%= "#{page.id.to_s}. #{page.name}" %></li>
+                <li><%= "#{page.name}" %></li>
               </a>
               <% if has_children(page) %>
                 <ul>
                   <% children = get_children(page) %>
                   <% children.each do |c| %>
                     <a href='<%= "/pages/#{c.id.to_s}" %>'>
-                      <li><%= "#{c.id.to_s}. #{c.name}" %></li>
+                      <li><%= "#{c.name}" %></li>
                     </a>
                   <% end %>
                 </ul>
@@ -34,7 +34,7 @@
         <%= render :partial => 'pages/new', :object => @page %>
       </nav>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <div>
         <h2><%= @page.name %></h2>
       </div>
