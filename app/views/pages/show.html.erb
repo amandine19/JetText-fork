@@ -1,3 +1,43 @@
-<div id='outlet' data-component='Pages' data-view='Show'>
-	<h1><%= @page.name %></h1>
+<div id='outlet' class="row" data-component='Pages' data-view='Show'>
+	<div class="col-lg-12">
+    <header>
+      <h1><%= link_to(@container.name, container_path(@container.id)) %></h1>
+    </header>
+  	<div class="actions">
+  		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
+  		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+  		<%= link_to 'voir', '/'+@container.url %>
+  	</div>
+
+    <div class="col-lg-4">
+      <nav id="main-nav">
+        <ul>
+          <% @pages.each do |page| %>
+            <% if page.parent.nil? %>
+              <a href='<%= "/pages/#{page.id}" %>'>
+                <li><%= "#{page.id.to_s}. #{page.name}" %></li>
+              </a>
+              <% if has_children(page) %>
+                <ul>
+                  <% children = get_children(page) %>
+                  <% children.each do |c| %>
+                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
+                      <li><%= "#{c.id.to_s}. #{c.name}" %></li>
+                    </a>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+
+        <%= render :partial => 'pages/new', :object => @page %>
+      </nav>
+    </div>
+    <div class="col-lg-8">
+      <div>
+        <h2><%= @page.name %></h2>
+      </div>
+    </div>
+  </div>
 </div>

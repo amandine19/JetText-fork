@@ -1,35 +1,44 @@
-<div id='outlet' data-component='Containers' data-view='Show'>
-	<h1>Container : <%= @container.name %></h1>
-	<div class="actions">
-		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
-		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
-		<%= link_to 'voir', '/'+@container.url %>
-	</div>
-  	
-  <div>
-    <%= CGI.unescapeHTML(@container.description).html_safe %>
-  </div>
+<div id='outlet' class="row" data-component='Containers' data-view='Show'>
+	<div class="col-lg-12">
+    <header>
+      <h1><%= link_to(@container.name, container_path(@container.id)) %></h1>
+    </header>
+  	<div class="actions">
+  		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
+  		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+  		<%= link_to 'voir', '/'+@container.url %>
+  	</div>
 
-  <div id="pages_list">
-  	<h3>Pages :</h3>
-  	<ul>
-  		<% @pages.each do |page| %>
-  			<% if page.parent.nil? %>
-  				<li><%= page.id.to_s + ' ' + page.name %></li>
-          <% if has_children(page) %>
-            <ul>
-              <% children = get_children(page) %>
-              <% children.each do |c| %>
-                <li><%= c.id.to_s + ' ' + c.name %></li>
+    <div class="col-lg-4">
+      <nav id="main-nav">
+        <ul>
+          <% @pages.each do |page| %>
+            <% if page.parent.nil? %>
+              <a href='<%= "/pages/#{page.id}" %>'>
+                <li><%= "#{page.id.to_s}. #{page.name}" %></li>
+              </a>
+              <% if has_children(page) %>
+                <ul>
+                  <% children = get_children(page) %>
+                  <% children.each do |c| %>
+                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
+                      <li><%= "#{c.id.to_s}. #{c.name}" %></li>
+                    </a>
+                  <% end %>
+                </ul>
               <% end %>
-            </ul>
+            <% end %>
           <% end %>
-  			<% end %>
-  		<% end %>
-  	</ul>
-  </div>
+        </ul>
 
-  <div>
-  	<%= render :partial => 'pages/new', :object => @page %>
+        <%= render :partial => 'pages/new', :object => @page %>
+      </nav>
+    </div>
+  	
+    <div class="col-lg-8">
+      <div>
+        <%= render :partial => 'containers/edit', :object => @container %>
+      </div>
+    </div>
   </div>
 </div>

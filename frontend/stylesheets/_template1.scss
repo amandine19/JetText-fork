@@ -1,0 +1,48 @@
+@import "vars";
+
+header {
+	background: $blue;
+	color: $white;
+	padding: 5px 10px;
+
+	h1 {
+		padding: 0;
+		margin: 0;
+
+		a {
+			color: $white;
+			text-decoration: none;
+		}
+	}
+}
+
+nav#main-nav {
+	color: $textGrey;
+
+	ul {
+		padding-left: 0;
+		border: 1px solid $green;
+
+		a {
+			text-decoration: none;
+
+			li {
+				padding: 5px;
+				background: $green;
+				list-style-type: none;
+				color: $white;
+			}
+		}
+
+		ul {
+			border: 0;
+
+			a {
+				li {
+					background: $brown;
+					color: $textGrey;
+				}
+			}
+		}
+	}
+}

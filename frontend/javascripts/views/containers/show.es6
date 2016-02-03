@@ -1,5 +1,8 @@
 class ContainersShow extends App {
 	render() {
+		console.log("containers/show");
+		AlloyEditor.editable('editor1');
+		
 		$('form#new_page').submit(function(e) {
 			e.preventDefault();
 			

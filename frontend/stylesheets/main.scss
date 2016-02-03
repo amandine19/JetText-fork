@@ -1,5 +1,6 @@
 @import "grids";
 @import "misc";
+@import "vars";
 
 html {
 	@include container(100%);
@@ -13,6 +14,10 @@ html {
 	  min-height: 90vh;
 		flex: 1 0 auto;
 		margin-top: 50px;
+
+		#outlet {
+			@import 'template1';
+		}
 	}
 
 	@import 'footer';

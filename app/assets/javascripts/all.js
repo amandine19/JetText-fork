@@ -187,6 +187,9 @@ var ContainersShow = function (_App) {
 	_createClass(ContainersShow, [{
 		key: 'render',
 		value: function render() {
+			console.log("containers/show");
+			AlloyEditor.editable('editor1');
+
 			$('form#new_page').submit(function (e) {
 				e.preventDefault();
 

@@ -8,6 +8,8 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
+    @container = Container.find(@page.container_id)
+    @pages = Page.where(@container.id)
     unless @page.user_id == current_user.id
       redirect_to action: "index"
     end 
@@ -37,6 +39,20 @@ class PagesController < ApplicationController
   private
     def page_params
       params.require(:page).permit(:name, :parent, :container_id, :user_id)
+    end
+
+    helper_method :has_children
+    def has_children(page)
+      if Page.where(:parent => page.id).empty?
+        return false
+      else
+        return true
+      end
+    end
+
+    helper_method :get_children
+    def get_children(page)
+      return Page.where(:parent => page.id)
     end
   
 end
