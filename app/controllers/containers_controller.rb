@@ -11,7 +11,7 @@ class ContainersController < ApplicationController
     @container = Container.find(params[:id])
     @pages = Page.where(:container_id => @container.id)
     @page = Page.new
-    self.generate(@container.id)
+    #self.generate(@container.id)
     unless @container.user_id == current_user.id
       redirect_to action: "index"
     end
@@ -44,7 +44,7 @@ class ContainersController < ApplicationController
       val = params[:container][:description]
     end
 
-    @doc = image_transformer(val)
+    @doc = image_transformer(val, @container.url)
 
     if @container.update_attribute(:description, @doc)
       redirect_to container_path(@container.id)
@@ -58,16 +58,23 @@ class ContainersController < ApplicationController
     end
   end
 
-  def image_transformer(html)
+  def image_transformer(html, url)
+    require 'fileutils'
     @doc = Nokogiri::HTML(html)
     images = @doc.search('img') if @doc.search('img').present?
     unless images.nil?
       images.each_with_index do |item, index|
         if item['src']['data:image/'].to_s.length > 0
-          image = Base64.decode64(item['src']['data:image/png;base64,'.length .. -1])
-          path = "public/image#{index}.png"
-          File.open(path, 'wb') { |f| f.write(image) }
-          item['src'] = "/image#{index}.png"
+          format = item['src'].split(';')[0].split('/')[-1]
+          if format =~ /^*(png|jpg|jpeg|gif)$/
+            image = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
+            path = "public/#{url}/img/image#{index}.#{format}"
+            unless File.directory?("public/#{url}/img/")
+              FileUtils.mkdir_p "public/#{url}/img"
+            end
+            File.open(path, 'wb') { |f| f.write(image) }
+            item['src'] = "/#{url}/img/image#{index}.#{format}"
+          end
         end
       end
     end
@@ -76,6 +83,7 @@ class ContainersController < ApplicationController
 
   def generate(id)
     require 'fileutils'
+
     @container = Container.find(id)
     directory = Rails.public_path + @container.url
 
@@ -87,9 +95,7 @@ class ContainersController < ApplicationController
         + "\t</head>\n" \
         + "\t<body>\n\n" \
       )
-
       f.write("\t\t<div>"+@container.description+"</div>\n\n")
-
       f.write(
         "\t</body>\n" \
         + "</html>" \
