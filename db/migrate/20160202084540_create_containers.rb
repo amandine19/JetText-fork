@@ -1,10 +1,9 @@
-class CreatePages < ActiveRecord::Migration
+class CreateContainers < ActiveRecord::Migration
   def change
-    create_table :pages do |t|
+    create_table :containers do |t|
       t.string :name
-      t.integer :parent, limit: 4
       t.binary :content, limit: 16777215
-      t.references :container, index: true, foreign_key: true
+      t.string :url, limit: 255
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

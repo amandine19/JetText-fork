@@ -3,7 +3,7 @@ class Container < ActiveRecord::Base
   has_many :pages, :dependent => :delete_all
 
   validates :name,		:presence => true, length: { maximum: 250 }
-  validates :description, :presence => false
+  validates :content, :presence => false
 end
 
 # == Schema Information

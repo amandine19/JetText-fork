@@ -5,8 +5,8 @@
       <p><%= f.text_field :name, :placeholder => :title %></p>
     </div>
     <div>
-      <p><%= f.label :description %></p>
-      <p><%= f.text_area raw(:description), :id => "editor1" %></p>
+      <p><%= f.label :content %></p>
+      <p><%= f.text_area raw(:content), :id => "editor1" %></p>
     </div>
     <%= f.submit :save, class: "btn btn-primary" %>
   <% end %>

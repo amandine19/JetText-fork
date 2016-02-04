@@ -38,15 +38,15 @@ class ContainersController < ApplicationController
 
   def update
     @container = Container.where(:id => params[:id]).where(:user_id => current_user.id).take
-    if params[:container][:description].empty?
+    if params[:container][:content].empty?
       val = ""
     else
-      val = params[:container][:description]
+      val = params[:container][:content]
     end
 
     @doc = image_transformer(val, @container.url)
 
-    if @container.update_attribute(:description, @doc)
+    if @container.update_attribute(:content, @doc)
       redirect_to container_path(@container.id)
     end
   end
@@ -56,29 +56,6 @@ class ContainersController < ApplicationController
     if @container.destroy
       redirect_to action: "index"
     end
-  end
-
-  def image_transformer(html, url)
-    require 'fileutils'
-    @doc = Nokogiri::HTML(html)
-    images = @doc.search('img') if @doc.search('img').present?
-    unless images.nil?
-      images.each_with_index do |item, index|
-        if item['src']['data:image/'].to_s.length > 0
-          format = item['src'].split(';')[0].split('/')[-1]
-          if format =~ /^*(png|jpg|jpeg|gif)$/
-            image = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
-            path = "public/#{url}/img/image#{index}.#{format}"
-            unless File.directory?("public/#{url}/img/")
-              FileUtils.mkdir_p "public/#{url}/img"
-            end
-            File.open(path, 'wb') { |f| f.write(image) }
-            item['src'] = "/#{url}/img/image#{index}.#{format}"
-          end
-        end
-      end
-    end
-    return @doc
   end
 
   def generate(id)
@@ -107,7 +84,7 @@ class ContainersController < ApplicationController
 
   private
     def container_params
-      params.require(:container).permit(:name, :description, :url)
+      params.require(:container).permit(:name, :content, :url)
     end
 
     def create_folder
@@ -130,6 +107,29 @@ class ContainersController < ApplicationController
     helper_method :get_children
     def get_children(page)
       return Page.where(:parent => page.id)
+    end
+
+    def image_transformer(html, url)
+      require 'fileutils'
+      @doc = Nokogiri::HTML(html)
+      images = @doc.search('img') if @doc.search('img').present?
+      unless images.nil?
+        images.each_with_index do |item, index|
+          if item['src']['data:image/'].to_s.length > 0
+            format = item['src'].split(';')[0].split('/')[-1]
+            if format =~ /^*(png|jpg|jpeg|gif)$/
+              image = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
+              path = "public/#{url}/img/image#{index}.#{format}"
+              unless File.directory?("public/#{url}/img/")
+                FileUtils.mkdir_p "public/#{url}/img"
+              end
+              File.open(path, 'wb') { |f| f.write(image) }
+              item['src'] = "/#{url}/img/image#{index}.#{format}"
+            end
+          end
+        end
+      end
+      return @doc
     end
 
 end
