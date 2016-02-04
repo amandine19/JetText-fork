@@ -43,7 +43,22 @@ class ContainersController < ApplicationController
     else
       val = params[:container][:description]
     end
-    if @container.update_attribute(:description, val)
+
+    #t = Nokogiri::HTML(val).at_css('img')['src']
+    #png = Base64.decode64(t['data:image/png;base64,'.length .. -1])
+    #File.open('public/test.png', 'wb') { |f| f.write(png) }
+    #t = "<img src='/test.png'>"
+
+    doc = Nokogiri::HTML(val)
+    images = doc.search('img')
+    images.each_with_index do |item, index|
+      image = Base64.decode64(item['src']['data:image/png;base64,'.length .. -1])
+      path = "public/image#{index}.png"
+      File.open(path, 'wb') { |f| f.write(image) }
+      item['src'] = "/image#{index}.png"
+    end
+
+    if @container.update_attribute(:description, doc)
       redirect_to container_path(@container.id)
     end
   end
