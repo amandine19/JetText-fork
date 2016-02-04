@@ -10,7 +10,7 @@ class ContainersController < ApplicationController
   def show
     @container = Container.find(params[:id])
     @pages = Page.where(:container_id => @container.id)
-    @page = Page.new
+    @new_page = Page.new
     #self.generate(@container.id)
     unless @container.user_id == current_user.id
       redirect_to action: "index"

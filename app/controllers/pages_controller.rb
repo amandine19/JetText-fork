@@ -10,22 +10,23 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @container = Container.find(@page.container_id)
     @pages = Page.where(:container_id => @container.id)
+    @new_page = Page.new
     unless @page.user_id == current_user.id
       redirect_to action: "index"
     end 
   end
 
   def new
-    @page = Page.new
+    @new_page = Page.new
   end
 
   def create
-    @page = Page.new(page_params)
-    @page.user_id = current_user.id
-    @container = Container.find(@page.container_id) if Container.exists?(@page.container_id)
+    @new_page = Page.new(page_params)
+    @new_page.user_id = current_user.id
+    @container = Container.find(@new_page.container_id) if Container.exists?(@new_page.container_id)
     if @container.present? && current_user.id == @container.user_id
-      if @page.save
-        redirect_to action: "show", id: @page.id
+      if @new_page.save
+        redirect_to action: "show", id: @new_page.id
       end
     else
       redirect_to containers_path()
