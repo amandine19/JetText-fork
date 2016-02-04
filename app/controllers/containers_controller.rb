@@ -11,6 +11,7 @@ class ContainersController < ApplicationController
     @container = Container.find(params[:id])
     @pages = Page.where(:container_id => @container.id)
     @page = Page.new
+    self.generate(@container.id)
     unless @container.user_id == current_user.id
       redirect_to action: "index"
     end
@@ -52,6 +53,31 @@ class ContainersController < ApplicationController
     if @container.destroy
       redirect_to action: "index"
     end
+  end
+
+  def generate(id)
+    require 'fileutils'
+    @container = Container.find(id)
+    directory = Rails.public_path + @container.url
+
+    FileUtils.mkdir_p directory
+    File.open(Rails.public_path + @container.url + "index.html", "w+") do |f|
+      f.write(
+        "<html>\n" \
+        + "\t<head>\n" \
+        + "\t</head>\n" \
+        + "\t<body>\n\n" \
+      )
+
+      f.write("\t\t<div>"+@container.description+"</div>\n\n")
+
+      f.write(
+        "\t</body>\n" \
+        + "</html>" \
+      )
+      f.close
+    end
+    return true
   end
 
   private

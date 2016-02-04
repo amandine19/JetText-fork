@@ -165,7 +165,7 @@ var ContainersNew = function (_App) {
 
   return ContainersNew;
 }(App);
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -185,32 +185,59 @@ var ContainersShow = function (_App) {
 	}
 
 	_createClass(ContainersShow, [{
-		key: 'render',
+		key: "render",
 		value: function render() {
 			console.log("containers/show");
 			AlloyEditor.editable('editor1');
 
-			$('form#new_page').submit(function (e) {
-				e.preventDefault();
-
-				var name = $('#page_name').val();
-				var container = $('#page_container_id').val();
-				var parent = $('#page_parent option:selected').val();
-
-				$.ajax({
-					type: "POST",
-					url: $(this).attr('action'),
-					data: { page: { name: name, parent: parent, container_id: container, user_id: currentUser } }
-				}).success(function () {
-					$('#pages_list > ul').append('<li>' + name + '</li>');
-					$('form').get(0).reset();
-				});
-
-				return false;
-			});
+			/*$('form#new_page').submit(function(e) {
+   	e.preventDefault();
+   	
+   	var name = $('#page_name').val();
+   	var container = $('#page_container_id').val();
+   	var parent = $('#page_parent option:selected').val();
+   		$.ajax({
+   		type: "POST",
+   		url: $(this).attr('action'),
+   		data: { page: { name: name, parent: parent, container_id: container, user_id: currentUser } }
+   	}).success(function() {
+   		$('#pages_list > ul').append('<li>'+name+'</li>');
+   		$('form').get(0).reset();
+   	});
+   	  return false;
+   });*/
 		}
 	}]);
 
 	return ContainersShow;
+}(App);
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PagesShow = function (_App) {
+	_inherits(PagesShow, _App);
+
+	function PagesShow() {
+		_classCallCheck(this, PagesShow);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(PagesShow).apply(this, arguments));
+	}
+
+	_createClass(PagesShow, [{
+		key: "render",
+		value: function render() {
+			console.log("pages/show");
+			AlloyEditor.editable('editor1');
+		}
+	}]);
+
+	return PagesShow;
 }(App);
 //# sourceMappingURL=all.js.map

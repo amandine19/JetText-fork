@@ -22,15 +22,26 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     @page.user_id = current_user.id
-    if @page.save
-      render :nothing => true, :status => 200
+    @container = Container.find(@page.container_id) if Container.exists?(@page.container_id)
+    if @container.present? && current_user.id == @container.user_id
+      if @page.save
+        #render :nothing => true, :status => 200
+        redirect_to action: "show", id: @page.id
+      end
+    else
+      redirect_to containers_path()
     end
   end
 
   def edit
+    @page = Page.find(params[:id])
   end
 
   def update
+    @page = Page.find(params[:id])
+    if @page.update_attribute(:name, params[:page][:name])
+      redirect_to action: "show", id: @page.id
+    end
   end
 
   def destroy

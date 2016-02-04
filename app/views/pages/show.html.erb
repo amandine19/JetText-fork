@@ -30,13 +30,12 @@
             <% end %>
           <% end %>
         </ul>
-
         <%= render :partial => 'pages/new', :object => @page %>
       </nav>
     </div>
     <div class="col-lg-9">
       <div>
-        <h2><%= @page.name %></h2>
+        <%= render :partial => 'pages/edit', :object => @page %>
       </div>
     </div>
   </div>

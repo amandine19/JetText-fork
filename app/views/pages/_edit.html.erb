@@ -1,0 +1,6 @@
+<%= form_for @page do |f| %>
+	<div>
+		<%= f.text_area :name, :id => "editor1" %>
+	</div>
+  <%= f.submit :save, class: "btn btn-primary" %>
+<% end %>

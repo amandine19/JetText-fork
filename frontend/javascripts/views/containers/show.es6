@@ -3,7 +3,7 @@ class ContainersShow extends App {
 		console.log("containers/show");
 		AlloyEditor.editable('editor1');
 		
-		$('form#new_page').submit(function(e) {
+		/*$('form#new_page').submit(function(e) {
 			e.preventDefault();
 			
 			var name = $('#page_name').val();
@@ -20,6 +20,6 @@ class ContainersShow extends App {
 			});
 
 		  return false;
-		});
+		});*/
 	}
 }
