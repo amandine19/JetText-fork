@@ -15,3 +15,4 @@
 # Custom
 /node_modules
 /bower_components
+/public/generated
