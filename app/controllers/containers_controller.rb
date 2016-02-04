@@ -44,21 +44,9 @@ class ContainersController < ApplicationController
       val = params[:container][:description]
     end
 
-    #t = Nokogiri::HTML(val).at_css('img')['src']
-    #png = Base64.decode64(t['data:image/png;base64,'.length .. -1])
-    #File.open('public/test.png', 'wb') { |f| f.write(png) }
-    #t = "<img src='/test.png'>"
+    @doc = image_transformer(val)
 
-    doc = Nokogiri::HTML(val)
-    images = doc.search('img')
-    images.each_with_index do |item, index|
-      image = Base64.decode64(item['src']['data:image/png;base64,'.length .. -1])
-      path = "public/image#{index}.png"
-      File.open(path, 'wb') { |f| f.write(image) }
-      item['src'] = "/image#{index}.png"
-    end
-
-    if @container.update_attribute(:description, doc)
+    if @container.update_attribute(:description, @doc)
       redirect_to container_path(@container.id)
     end
   end
@@ -68,6 +56,22 @@ class ContainersController < ApplicationController
     if @container.destroy
       redirect_to action: "index"
     end
+  end
+
+  def image_transformer(html)
+    @doc = Nokogiri::HTML(html)
+    images = @doc.search('img') if @doc.search('img').present?
+    unless images.nil?
+      images.each_with_index do |item, index|
+        if item['src']['data:image/'].to_s.length > 0
+          image = Base64.decode64(item['src']['data:image/png;base64,'.length .. -1])
+          path = "public/image#{index}.png"
+          File.open(path, 'wb') { |f| f.write(image) }
+          item['src'] = "/image#{index}.png"
+        end
+      end
+    end
+    return @doc
   end
 
   def generate(id)
