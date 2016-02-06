@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
 
   before_action :authenticate_user!
+  require 'image_generator/image_generator'
+  include ImageGenerator
 
   def index
     @pages = Page.all.where(:user_id => current_user.id)
@@ -46,7 +48,7 @@ class PagesController < ApplicationController
       val = params[:page][:content]
     end
 
-    @doc = image_transformer(val, @container.url)
+    @doc = ImageGenerator.image_transformer(val, @container.url)
 
     if @page.update_attribute(:content, @doc)
       redirect_to action: "show", id: @page.id
@@ -60,43 +62,6 @@ class PagesController < ApplicationController
   private
     def page_params
       params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)
-    end
-
-    helper_method :has_children
-    def has_children(page)
-      if Page.where(:parent => page.id).empty?
-        return false
-      else
-        return true
-      end
-    end
-
-    helper_method :get_children
-    def get_children(page)
-      return Page.where(:parent => page.id)
-    end
-
-    def image_transformer(html, url)
-      require 'fileutils'
-      @doc = Nokogiri::HTML(html)
-      images = @doc.search('img') if @doc.search('img').present?
-      unless images.nil?
-        images.each_with_index do |item, index|
-          if item['src']['data:image/'].to_s.length > 0
-            format = item['src'].split(';')[0].split('/')[-1]
-            if format =~ /^*(png|jpg|jpeg|gif)$/
-              image = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
-              path = "public/#{url}/img/image#{index}.#{format}"
-              unless File.directory?("public/#{url}/img/")
-                FileUtils.mkdir_p "public/#{url}/img"
-              end
-              File.open(path, 'wb') { |f| f.write(image) }
-              item['src'] = "/#{url}/img/image#{index}.#{format}"
-            end
-          end
-        end
-      end
-      return @doc
     end
   
 end

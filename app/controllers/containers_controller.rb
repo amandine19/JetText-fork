@@ -2,7 +2,8 @@ class ContainersController < ApplicationController
 
   before_action :authenticate_user!
   skip_before_filter :verify_authenticity_token
-
+  require 'image_generator/image_generator'
+  
   def index
     @containers = Container.all.where(:user_id => current_user.id)
   end
@@ -44,7 +45,7 @@ class ContainersController < ApplicationController
       val = params[:container][:content]
     end
 
-    @doc = image_transformer(val, @container.url)
+    @doc = ImageGenerator.image_transformer(val, @container.url)
 
     if @container.update_attribute(:content, @doc)
       redirect_to container_path(@container.id)
@@ -93,43 +94,6 @@ class ContainersController < ApplicationController
       dest = "generated/#{current_user.email}/#{token}"
       FileUtils.mkdir_p "#{Rails.root}/public/#{dest}"
       return dest
-    end
-
-    helper_method :has_children
-    def has_children(page)
-      if Page.where(:parent => page.id).empty?
-        return false
-      else
-        return true
-      end
-    end
-
-    helper_method :get_children
-    def get_children(page)
-      return Page.where(:parent => page.id)
-    end
-
-    def image_transformer(html, url)
-      require 'fileutils'
-      @doc = Nokogiri::HTML(html)
-      images = @doc.search('img') if @doc.search('img').present?
-      unless images.nil?
-        images.each_with_index do |item, index|
-          if item['src']['data:image/'].to_s.length > 0
-            format = item['src'].split(';')[0].split('/')[-1]
-            if format =~ /^*(png|jpg|jpeg|gif)$/
-              image = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
-              path = "public/#{url}/img/image#{index}.#{format}"
-              unless File.directory?("public/#{url}/img/")
-                FileUtils.mkdir_p "public/#{url}/img"
-              end
-              File.open(path, 'wb') { |f| f.write(image) }
-              item['src'] = "/#{url}/img/image#{index}.#{format}"
-            end
-          end
-        end
-      end
-      return @doc
     end
 
 end
