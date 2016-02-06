@@ -21,7 +21,7 @@ module ImageGenerator
   end
 
   def self.create_image(content, path, url, index, format)
-    unless File.directory?("#{path}")
+    unless File.directory?("#{path}/img")
       FileUtils.mkdir_p "#{path}/img"
     end
     i = define_index("#{path}/img", index, format)

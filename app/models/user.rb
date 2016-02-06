@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :containers, dependent: :destroy        
+  has_many :containers, dependent: :destroy       
+  has_many :variabels, dependent: :destroy 
 end
 
 # == Schema Information
