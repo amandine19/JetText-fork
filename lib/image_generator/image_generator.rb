@@ -10,9 +10,9 @@ module ImageGenerator
           format = item['src'].split(';')[0].split('/')[-1]
           if format =~ /^*(png|jpg|jpeg|gif)$/
             content = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
-            path = "#{Rails.root}/public/#{url}/img/"
-            create_image(content, path, url, index, format)
-            item['src'] = "/#{url}/img/image#{index}.#{format}"
+            path = "#{Rails.root}/public/#{url}"
+            i = create_image(content, path, url, index, format)
+            item['src'] = "/#{url}/img/image#{i}.#{format}"
           end
         end
       end
@@ -25,13 +25,15 @@ module ImageGenerator
       FileUtils.mkdir_p "#{path}/img"
     end
     i = define_index("#{path}/img", index, format)
-    File.open("#{path}/image#{i}.#{format}", 'wb') { |f| f.write(content) }
+    File.open("#{path}/img/image#{i}.#{format}", 'wb') { |f| f.write(content) }
+    return i
   end
 
   def self.define_index(path, index, format)
     image_name = "image#{index}.#{format}"
-    if File.exist?("#{path}/#{image_name}")
-      return define_index(path, index += 1, format)
+    if File.file?("#{path}/#{image_name}")
+      index = index.to_i + 1
+      return define_index(path, index, format)
     else
       return index
     end
