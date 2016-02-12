@@ -1,11 +1,11 @@
-one:
+user_one:
   firstname: Pierre
   lastname: D.
   email: pierre.duverneix@iut.fr
   encrypted_password: pierrepierre
 
 
-two:
+user_two:
   firstname: Bob
   lastname: Dit l'âne
   email: bob@iutenligne.net

@@ -53,8 +53,12 @@ class ContainersController < ApplicationController
   end
 
   def destroy
-    @container = Container.where(:id => params[:id]).where(:user_id => current_user.id).take
-    if @container.destroy
+    @container = Container.find(params[:id])
+    if @container.user_id == current_user.id
+      if @container.destroy
+        redirect_to action: "index"
+      end
+    else
       redirect_to action: "index"
     end
   end

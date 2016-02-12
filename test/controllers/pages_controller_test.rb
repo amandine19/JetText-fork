@@ -30,8 +30,7 @@ class PagesControllerTest < ActionController::TestCase
     assert_redirected_to containers_path()
   end  
 
- test "no difference" do
-
+  test "no difference" do
     assert_no_difference 'Page.count', 'An page should not be created' do
       post :create, page: { name: "titre"}
     end
@@ -39,7 +38,7 @@ class PagesControllerTest < ActionController::TestCase
 
  private
     def initialize_page
-      @user = users(:one)
-      @container = containers(:one)
+      @user = users(:user_one)
+      @container = containers(:container_one)
     end
 end
