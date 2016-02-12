@@ -21,21 +21,23 @@ class PagesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+
   test "should create page" do
     sign_in @user
-   assert_difference('Page.count') do
-    post :create, page: {name: "ressouce 1", parent: nil, content: "description de la ressource", container_id: @container, user_id: 1}
-  end
+    assert_difference('Page.count', +1) do
+      post :create, page: {name: "ressouce 1"}
+    end
     assert_redirected_to containers_path()
   end  
-  
+
+
  test "no difference" do
-    sign_in @user
+
     assert_no_difference 'Page.count', 'An page should not be created' do
-    post :create, page: invalid_attributes
+      post :create, page: { name: "titre"}
     end
   end  
-
+ 
 
 
  private
