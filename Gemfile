@@ -18,13 +18,13 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters'
-
+  gem 'guard'
+  gem 'guard-minitest'
 end
 
 group :development, :test do
   gem 'annotate'
   gem 'better_errors'
-
 end
 
 # Custom gems

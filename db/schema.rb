@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202084543) do
+ActiveRecord::Schema.define(version: 20160206222158) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 20160202084543) do
   add_index "pages", ["container_id"], name: "index_pages_on_container_id", using: :btree
   add_index "pages", ["user_id"], name: "index_pages_on_user_id", using: :btree
 
+  create_table "pages_variables", id: false, force: :cascade do |t|
+    t.integer "page_id",     limit: 4, null: false
+    t.integer "variable_id", limit: 4, null: false
+  end
+
+  add_index "pages_variables", ["page_id", "variable_id"], name: "index_pages_variables_on_page_id_and_variable_id", using: :btree
+  add_index "pages_variables", ["variable_id", "page_id"], name: "index_pages_variables_on_variable_id_and_page_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false
     t.string   "encrypted_password",     limit: 255, default: "",      null: false
@@ -57,7 +65,18 @@ ActiveRecord::Schema.define(version: 20160202084543) do
     t.string   "authentication_token",   limit: 255
   end
 
+  create_table "variables", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "value",      limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "variables", ["user_id"], name: "index_variables_on_user_id", using: :btree
+
   add_foreign_key "containers", "users"
   add_foreign_key "pages", "containers"
   add_foreign_key "pages", "users"
+  add_foreign_key "variables", "users"
 end
