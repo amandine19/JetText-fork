@@ -26,9 +26,31 @@ class ContainersControllerTest < ActionController::TestCase
   end
 
 
+
+    test "should show controller" do
+      sign_in @user
+      get :show, id: @container
+    end  
+
+    test "should destroy controller" do
+      sign_in @user
+      assert_difference('Container.count', -1)  do
+        delete :destroy, id: @container
+    end  
+     assert_response :success
+end
+
+      test "should update" do
+        container = Container.create(name: "ressource")
+        get :update
+      end  
+
+
+
   private
     def initialize_container
       @user = users(:one)
       @container = containers(:one)
+      
     end
 end

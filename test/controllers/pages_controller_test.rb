@@ -32,9 +32,8 @@ class PagesControllerTest < ActionController::TestCase
 
 
  test "no difference" do
-
     assert_no_difference 'Page.count', 'An page should not be created' do
-      post :create, page: { name: "titre"}
+      post :create, page: { name: "titre" }
     end
   end  
  
