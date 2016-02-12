@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  container_id: 
-  user_id: 
+  container_id: one
+  user_id: one
 
 two:
   name: MyString
