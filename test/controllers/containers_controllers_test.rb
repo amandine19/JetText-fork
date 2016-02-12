@@ -14,7 +14,7 @@ class ContainersControllerTest < ActionController::TestCase
   test "should get new" do
     sign_in @user
     get :new
-    assert_response :success
+    assert_response :succes
   end
 
   test "should create container" do
@@ -24,7 +24,6 @@ class ContainersControllerTest < ActionController::TestCase
     end
     assert_redirected_to container_path(assigns(:container))
   end
-
 
   private
     def initialize_container

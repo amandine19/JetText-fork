@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PagesControllerTest < ActionController::TestCase
+
   include Devise::TestHelpers
   setup :initialize_page
 
@@ -21,7 +22,6 @@ class PagesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-
   test "should create page" do
     sign_in @user
     assert_difference('Page.count', +1) do
@@ -30,15 +30,12 @@ class PagesControllerTest < ActionController::TestCase
     assert_redirected_to containers_path()
   end  
 
-
  test "no difference" do
 
     assert_no_difference 'Page.count', 'An page should not be created' do
       post :create, page: { name: "titre"}
     end
   end  
- 
-
 
  private
     def initialize_page
