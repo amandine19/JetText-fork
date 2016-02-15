@@ -14,7 +14,7 @@ class ContainersControllerTest < ActionController::TestCase
   test "should get new" do
     sign_in @user
     get :new
-    assert_response :succes
+    assert_response :success
   end
 
   test "should create container" do
@@ -25,18 +25,27 @@ class ContainersControllerTest < ActionController::TestCase
     assert_redirected_to container_path(assigns(:container))
   end
 
-    test "should show controller" do
+    test "should show container" do
       sign_in @user
       get :show, id: @container
     end  
 
-    test "should destroy controller" do
+    test "should destroy container" do
       sign_in @user
+      if @user.id == @container.user_id
       assert_difference('Container.count', -1)  do
-        delete :destroy, id: @container
-    end  
-     assert_response :success
-end
+        delete :destroy, id: @container.id
+      end  
+       assert_redirected_to container_path
+      else
+        assert_no_difference('Container.count', -1) do
+        delete :destroy, id: @container.id
+      end
+         assert_redirected_to container_path
+       end
+      end 
+
+
 
       test "should update" do
         container = Container.create(name: "ressource")
@@ -47,6 +56,5 @@ end
     def initialize_container
       @user = users(:one)
       @container = containers(:one)
-      
     end
 end
