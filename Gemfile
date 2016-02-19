@@ -25,6 +25,7 @@ end
 group :development, :test do
   gem 'annotate'
   gem 'better_errors'
+  
 end
 
 # Custom gems

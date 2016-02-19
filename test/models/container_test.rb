@@ -37,9 +37,5 @@ class ContainerTest < ActiveSupport::TestCase
 		assert @container.valid?
 	end	
 
-	
-
-
-
 
 end

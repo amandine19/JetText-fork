@@ -59,6 +59,10 @@ class PagesController < ApplicationController
   def destroy
   end
 
+  def ajax
+    render json: Page.all
+  end
+
   private
     def page_params
       params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)

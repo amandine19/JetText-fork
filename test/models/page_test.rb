@@ -32,6 +32,10 @@ class PageTest < ActiveSupport::TestCase
 		assert_not @page.valid?
 	end
 
+	test "should save page with container " do
+		@page.container_id = @container.id
+		assert @page.valid?
+	end	
 
 	
 

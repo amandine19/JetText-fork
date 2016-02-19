@@ -83,6 +83,11 @@ class ContainersController < ApplicationController
     return true
   end
 
+  def ajax
+    render json: Container.all
+  end
+
+  
   private
     def container_params
       params.require(:container).permit(:name, :content, :url)
