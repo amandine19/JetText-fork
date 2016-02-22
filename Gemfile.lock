@@ -47,7 +47,11 @@ GEM
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     builder (3.2.2)
-    coderay (1.1.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -100,10 +104,11 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.99)
+    mime-types (2.99.1)
+    mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    minitest-reporters (1.1.7)
+    minitest-reporters (1.1.8)
       ansi
       builder
       minitest (>= 5.0)
@@ -117,6 +122,12 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    paperclip (4.3.5)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (= 0.3.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -207,6 +218,7 @@ DEPENDENCIES
   minitest-reporters
   mysql2 (~> 0.3.13)
   nokogiri
+  paperclip
   pry
   rails (= 4.2.4)
   sass-rails (~> 4.0.3)

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :containers
     resources :pages
     resources :variables
+    resources :uploads
+
+    root :tp => 'uploads#index'
 
   end
 

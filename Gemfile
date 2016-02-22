@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0'
 gem 'pry'
 
+
 group :development do
 	gem 'spring'
 end
@@ -31,3 +32,4 @@ end
 # Custom gems
 gem 'devise'
 gem 'nokogiri'
+gem 'paperclip'
