@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     resources :pages
     resources :variables
     resources :uploads
-
-    root :tp => 'uploads#index'
-
   end
 
 end
