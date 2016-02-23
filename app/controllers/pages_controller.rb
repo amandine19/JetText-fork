@@ -45,11 +45,10 @@ class PagesController < ApplicationController
     if params[:page][:content].empty?
       val = ""
     else
-      val = params[:page][:content]
+      val = check_encoding(params[:page][:content])
     end
 
     @doc = ImageGenerator.image_transformer(val, @container.url)
-
     if @page.update_attribute(:content, @doc)
       redirect_to action: "show", id: @page.id
     end
@@ -68,4 +67,11 @@ class PagesController < ApplicationController
       params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)
     end
   
+  def check_encoding(content)
+    if content.force_encoding("ASCII-8BIT").valid_encoding? #it's true
+      return content
+    else
+      return content.force_encoding("ASCII-8BIT")
+    end  
+  end
 end
