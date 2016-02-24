@@ -21,6 +21,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
+  gem  'rspec', '~> 3.0'
 end
 
 group :development, :test do

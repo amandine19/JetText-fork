@@ -68,10 +68,10 @@ class PagesController < ApplicationController
     end
   
   def check_encoding(content)
-    if content.force_encoding("ASCII-8BIT").valid_encoding? #it's true
+    if content.force_encoding("UTF-8").valid_encoding? #it's true
       return content
     else
-      return content.force_encoding("ASCII-8BIT")
+      return content.force_encoding("UTF-8")
     end  
   end
 end
