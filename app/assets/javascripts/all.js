@@ -211,7 +211,7 @@ var ContainersShow = function (_App) {
 
 	return ContainersShow;
 }(App);
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -231,13 +231,27 @@ var PagesShow = function (_App) {
 	}
 
 	_createClass(PagesShow, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
 			console.log("pages/show");
 			AlloyEditor.editable('editor1');
+
+			addPageBox();
+
+			$('.editable_elem').click(function () {
+				$('#editor1').attr('id', '');
+				$(this).attr('id', 'editor1');
+			});
 		}
 	}]);
 
 	return PagesShow;
 }(App);
+
+function addPageBox() {
+	$('.hidden_elem').hide();
+	$('#add_new_page_button').click(function () {
+		$('#add_new_page').toggle();
+	});
+}
 //# sourceMappingURL=all.js.map

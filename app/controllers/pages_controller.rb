@@ -42,6 +42,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.where(:id => params[:id]).where(:user_id => current_user.id).take
     @container = Container.find(@page.container_id)
+
     if params[:page][:content].empty?
       val = ""
     else
@@ -49,6 +50,7 @@ class PagesController < ApplicationController
     end
 
     @doc = ImageGenerator.image_transformer(val, @container.url)
+    @page.update_attribute(:name, params[:page][:name])
 
     if @page.update_attribute(:content, @doc)
       redirect_to action: "show", id: @page.id
