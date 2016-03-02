@@ -8,7 +8,7 @@ class App {
 			view.render();
 		}
 		catch (err) {
-  		console.error("outer", err.message);
+			console.error("outer", err.message);
 		}
 	}
 }

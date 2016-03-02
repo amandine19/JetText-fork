@@ -4,7 +4,7 @@
   <%= form_for @new_page, :html => { :id => "new_page" } do |f| %>
     <div>
       <p><%= f.text_field :name, :placeholder => :name %></p>
-      <p><%= select('page', 'parent', Page.where(:container_id => @container.id).collect { |p| [ p.name, p.id ] }, {include_blank: 'Aucun'}) %></p>
+      <p><%= select('page', 'parent', Page.where(:container_id => @container.id).where(:parent => nil).collect { |p| [ p.name, p.id ] }, {include_blank: 'Aucun'}) %></p>
     </div>
     <div>
 	   	<%= f.hidden_field :container_id, :value => @container.id %>
