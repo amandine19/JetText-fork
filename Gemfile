@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0'
 gem 'pry'
 
+
 group :development do
 	gem 'spring'
 end
@@ -20,13 +21,18 @@ group :test do
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
+  gem 'guard-rspec'
+  gem  'rspec', '~> 3.0'
 end
 
 group :development, :test do
   gem 'annotate'
   gem 'better_errors'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
 # Custom gems
 gem 'devise'
 gem 'nokogiri'
+gem 'paperclip'

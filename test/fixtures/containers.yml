@@ -4,6 +4,6 @@ one:
   user_id: 1
 
 two:
-  name: cressource 2
+  name: ressource 2
   content: description de la ressource2
   user_id: 2

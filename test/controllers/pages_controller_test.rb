@@ -25,21 +25,30 @@ class PagesControllerTest < ActionController::TestCase
   test "should create page" do
     sign_in @user
     assert_difference('Page.count', +1) do
-      post :create, page: {name: "ressouce 1"}
+      post :create, page: {name: "ressouce 1", container_id: @container.id, user_id: 1}
     end
     assert_redirected_to containers_path()
   end  
 
  test "no difference" do
-
     assert_no_difference 'Page.count', 'An page should not be created' do
-      post :create, page: { name: "titre"}
+      post :create, page: { name: "titre" }
     end
   end  
+
+test "should save content" do
+    content = @page.content
+    content.encode(Encoding::ISO_8859_1)
+    assert_difference('Page.count', +1) do
+      post :create, page: {name: "ressource 1", content: "content", container_id: @container.id, user_id: 1}
+    end
+  end
+
 
  private
     def initialize_page
       @user = users(:one)
       @container = containers(:one)
+      @page = pages(:one)
     end
 end

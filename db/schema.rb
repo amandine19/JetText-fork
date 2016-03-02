@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206222158) do
+ActiveRecord::Schema.define(version: 20160222091658) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160206222158) do
     t.string   "name",         limit: 255
     t.integer  "parent",       limit: 4
     t.binary   "content",      limit: 16777215
-    t.integer  "container_id", limit: 4
-    t.integer  "user_id",      limit: 4
+    t.integer  "imit: 4
+    t.integer  "user_icontainer_id", ld",      limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20160206222158) do
 
   add_index "pages_variables", ["page_id", "variable_id"], name: "index_pages_variables_on_page_id_and_variable_id", using: :btree
   add_index "pages_variables", ["variable_id", "page_id"], name: "index_pages_variables_on_variable_id_and_page_id", using: :btree
+
+  create_table "table_uploads", force: :cascade do |t|
+    t.string  "name", limit: 255
+    t.string  "type", limit: 255
+    t.string  "url",  limit: 255
+    t.integer "size", limit: 4
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false
