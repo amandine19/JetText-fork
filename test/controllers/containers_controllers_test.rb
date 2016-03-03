@@ -5,7 +5,7 @@ class ContainersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup :initialize_container
 
-  test "dshould get index" do
+  test "should get index" do
     sign_in @user
     get :index
     assert_response :success, "Possède une méthode index"
@@ -24,6 +24,7 @@ class ContainersControllerTest < ActionController::TestCase
     end
     assert_redirected_to container_path(assigns(:container))
   end
+
 
     test "should show container" do
       sign_in @user
@@ -54,7 +55,7 @@ class ContainersControllerTest < ActionController::TestCase
 
   private
     def initialize_container
-      @user = users(:one)
-      @container = containers(:one)
+      @user = users(:user_one)
+      @container = containers(:container_one)
     end
 end

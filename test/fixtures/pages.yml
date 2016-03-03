@@ -3,10 +3,10 @@
 one:
   name: MyString
   content: "nkjhfdhfimdshfjdhfosdfjhgosgrohgoizrhgkrhgorhgomrjgmzlrjg"
-  container_id: one
-  user_id: 1
+  container_id: container_one
+  user_id: user_one
 
 two:
   name: MyString
-  container_id: 
-  user_id: 
+  container_id: container_two
+  user_id: user_two
