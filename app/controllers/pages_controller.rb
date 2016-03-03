@@ -42,13 +42,16 @@ class PagesController < ApplicationController
   def update
     @page = Page.where(:id => params[:id]).where(:user_id => current_user.id).take
     @container = Container.find(@page.container_id)
+
     if params[:page][:content].empty?
       val = ""
     else
-      val = check_encoding(params[:page][:content])
+      val = params[:page][:content]
     end
 
     @doc = ImageGenerator.image_transformer(val, @container.url)
+    @page.update_attribute(:name, params[:page][:name])
+
     if @page.update_attribute(:content, @doc)
       redirect_to action: "show", id: @page.id
     end
@@ -58,20 +61,9 @@ class PagesController < ApplicationController
   def destroy
   end
 
-  def ajax
-    render json: Page.all
-  end
-
   private
     def page_params
       params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)
     end
   
-  def check_encoding(content)
-    if content.force_encoding("ASCII-8BIT").valid_encoding? #it's true
-      return content
-    else
-      return content.force_encoding("ASCII-8BIT")
-    end  
-  end
 end
