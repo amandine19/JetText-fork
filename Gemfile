@@ -22,7 +22,9 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'guard-rspec'
-  gem  'rspec', '~> 3.0'
+  gem 'rspec', '~> 3.0'
+  gem 'shoulda'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

@@ -95,4 +95,8 @@ RSpec.configure do |config|
 =end
 
   require File.expand_path("../../config/environment", __FILE__)
+
+  require 'shoulda/matchers'
 end
+
+
