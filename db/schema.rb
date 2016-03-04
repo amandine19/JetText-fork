@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160222091658) do
     t.string   "name",         limit: 255
     t.integer  "parent",       limit: 4
     t.binary   "content",      limit: 16777215
-    t.integer  "imit: 4
-    t.integer  "user_icontainer_id", ld",      limit: 4
+    t.integer  "container_id", limit: 4
+    t.integer  "user_id",      limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
