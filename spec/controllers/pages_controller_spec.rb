@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-
+=begin
 RSpec.describe PagesController do
 
 	describe " POST 'create'" do 
@@ -30,3 +30,4 @@ RSpec.describe PagesController do
 
 	end
 end
+=end
