@@ -97,6 +97,7 @@ RSpec.configure do |config|
   require File.expand_path("../../config/environment", __FILE__)
 
   require 'shoulda/matchers'
+  require 'factory_girl_rails'
 end
 
 
