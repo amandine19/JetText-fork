@@ -16,3 +16,7 @@
     <%= f.submit :save, class: "btn btn-primary" %>
   <% end %>
 </div>
+
+<%= simple_form_for @page, url: pages_path do |form| %>
+  <%= form.input :image, as: :file %>
+<% end %>

@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160222091658) do
     t.string  "type", limit: 255
     t.string  "url",  limit: 255
     t.integer "size", limit: 4
+    t.binary   "content",    limit: 16777215
   end
 
   create_table "users", force: :cascade do |t|
