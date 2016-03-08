@@ -44,11 +44,10 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
-
  private
     def initialize_page
+      @user = users(:one)
       @user = users(:user_one)
       @container = containers(:container_one)
-      @page = pages(:one)
     end
 end

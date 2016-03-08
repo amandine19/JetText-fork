@@ -25,33 +25,30 @@ class ContainersControllerTest < ActionController::TestCase
     assert_redirected_to container_path(assigns(:container))
   end
 
+  test "should show container" do
+    sign_in @user
+    get :show, id: @container
+  end  
+  
+  test "should update" do
+    container = Container.create(name: "ressource")
+    get :update
+  end  
 
-    test "should show container" do
-      sign_in @user
-      get :show, id: @container
-    end  
-
-    test "should destroy container" do
-      sign_in @user
-      if @user.id == @container.user_id
-      assert_difference('Container.count', -1)  do
-        delete :destroy, id: @container.id
-      end  
-       assert_redirected_to container_path
-      else
-        assert_no_difference('Container.count', -1) do
+  test "should destroy container" do
+    sign_in @user
+    if @user.id == @container.user_id
+      assert_difference('Container.count', -1) do
         delete :destroy, id: @container.id
       end
-         assert_redirected_to container_path
-       end
-      end 
-
-
-
-      test "should update" do
-        container = Container.create(name: "ressource")
-        get :update
-      end  
+      assert_redirected_to containers_path
+    else
+      assert_no_difference('Container.count', -1) do
+        delete :destroy, id: @container.id
+      end
+      assert_redirected_to containers_path
+    end
+  end
 
   private
     def initialize_container
