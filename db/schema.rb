@@ -49,14 +49,6 @@ ActiveRecord::Schema.define(version: 20160309104015) do
   add_index "pages_variables", ["page_id", "variable_id"], name: "index_pages_variables_on_page_id_and_variable_id", using: :btree
   add_index "pages_variables", ["variable_id", "page_id"], name: "index_pages_variables_on_variable_id_and_page_id", using: :btree
 
-  create_table "table_uploads", force: :cascade do |t|
-    t.string  "name",    limit: 255
-    t.string  "type",    limit: 255
-    t.string  "url",     limit: 255
-    t.integer "size",    limit: 4
-    t.binary  "content", limit: 4294967295, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false
     t.string   "encrypted_password",     limit: 255, default: "",      null: false
