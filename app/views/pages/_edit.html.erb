@@ -7,6 +7,6 @@
   <input name="commit" value="save" class="btn btn-primary" type="submit">
 <% end %>
 
-<%= simple_form_for @page, url: pages_path do |form| %>
-<%= form.input :image, as: :file %>
+<%= form_for @page, url: pages_path, html: { multipart: true } do |form| %>
+  <%= form.file_field :image %>
 <% end %>

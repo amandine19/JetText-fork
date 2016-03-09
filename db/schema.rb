@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222091658) do
+ActiveRecord::Schema.define(version: 20160309104015) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -25,13 +25,17 @@ ActiveRecord::Schema.define(version: 20160222091658) do
   add_index "containers", ["user_id"], name: "index_containers_on_user_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.integer  "parent",       limit: 4
-    t.binary   "content",      limit: 16777215
-    t.integer  "container_id", limit: 4
-    t.integer  "user_id",      limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name",               limit: 255
+    t.integer  "parent",             limit: 4
+    t.binary   "content",            limit: 16777215
+    t.integer  "container_id",       limit: 4
+    t.integer  "user_id",            limit: 4
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
   add_index "pages", ["container_id"], name: "index_pages_on_container_id", using: :btree
@@ -46,11 +50,11 @@ ActiveRecord::Schema.define(version: 20160222091658) do
   add_index "pages_variables", ["variable_id", "page_id"], name: "index_pages_variables_on_variable_id_and_page_id", using: :btree
 
   create_table "table_uploads", force: :cascade do |t|
-    t.string  "name", limit: 255
-    t.string  "type", limit: 255
-    t.string  "url",  limit: 255
-    t.integer "size", limit: 4
-    t.binary   "content",    limit: 16777215
+    t.string  "name",    limit: 255
+    t.string  "type",    limit: 255
+    t.string  "url",     limit: 255
+    t.integer "size",    limit: 4
+    t.binary  "content", limit: 4294967295, null: false
   end
 
   create_table "users", force: :cascade do |t|
