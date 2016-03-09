@@ -1,7 +1,7 @@
 class Page < ActiveRecord::Base
 
   
-  has_attached_file :image, styles: { medium: "150x150>", thumb: "60x60>"}	
+  has_attached_file :image, styles: { medium: "150x150>", thumb: "60x60>"}, :storage => :database	
   #validates_attachment :type, 
   #content_type: [ 'type/png', 'jpg', 'image/gif', "application/pdf", 'video/mpeg', 'video/quicktime', 'video/x-ms-asf', 'video/x-msvideo', 
                                  						#'video/x-flv' ]
