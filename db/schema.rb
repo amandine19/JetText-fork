@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160309104015) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "image_file_name",    limit: 255
-    t.binary  "image_content_type", limit: 16777215
+    t.binary  "image_content_type",  limit: 16777215
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
   end

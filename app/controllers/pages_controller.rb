@@ -24,7 +24,7 @@ class PagesController < ApplicationController
 
   def create
     @new_page = Page.new(page_params)
-    @new_page.upload = params[:page][:upload]
+    #@new_page.upload = params[:page][:upload]
     @new_page.user_id = current_user.id
     @container = Container.find(@new_page.container_id) if Container.exists?(@new_page.container_id)
     if @container.present? && current_user.id == @container.user_id

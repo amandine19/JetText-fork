@@ -38,3 +38,4 @@ end
 gem 'devise'
 gem 'nokogiri'
 gem 'paperclip'
+gem 'paperclip_database'
