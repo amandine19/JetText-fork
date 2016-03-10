@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!
   require 'image_generator/image_generator'
   include ImageGenerator
+  #downloads_files_for :page, :upload
 
   def index
     @pages = Page.all.where(:user_id => current_user.id)
@@ -64,7 +65,7 @@ class PagesController < ApplicationController
 
   private
     def page_params
-      params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)
+      params.require(:page).permit(:name, :parent, :content, :container_id, :user_id, :image)
     end
   
 end
