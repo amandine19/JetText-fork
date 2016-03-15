@@ -11,9 +11,6 @@ class CreatePages < ActiveRecord::Migration
 
       t.datetime   null: false
       t.datetime   null: false
-      t.string     :image_file_name,    limit: 255
-      t.binary     :image_content_type,  limit: 16777215
-      t.integer    :image_file_size,    limit: 4
 
     end
   end
