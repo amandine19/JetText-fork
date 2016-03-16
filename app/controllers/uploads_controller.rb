@@ -8,11 +8,11 @@ class UploadsController < ApplicationController
 	def create
 		@upload = Upload.new(upload_params)
 		@upload.user_id = current_user.id
-		@upload.url = @upload.file.path
+		@upload.url = @upload.file.url
 		if @upload.save
       respond_to do |format|
 			  format.js
-			  format.html { head :no_content}
+			  format.html { head :no_content }
 			end
 		end
 		#render json: {file: @upload.file_file_name}, status: :ok
@@ -20,6 +20,6 @@ class UploadsController < ApplicationController
 
 	private
 		def upload_params
-			params.require(:upload).permit(:name, :file, :url, :uploaded_file)
+			params.require(:upload).permit(:name, :file, :url, :container_id)
 		end
 end	

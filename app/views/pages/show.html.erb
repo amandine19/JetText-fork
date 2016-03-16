@@ -37,7 +37,7 @@
     <div class="col-lg-9">
       <div class="uploads">
         <% @uploads.each do |file| %>
-          <a class="file"><%= file.url %></a><br>
+          <a class="file"><%= "/#{file.url}" %></a><br>
         <% end %>
       </div>
       <div>

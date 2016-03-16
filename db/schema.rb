@@ -59,9 +59,11 @@ ActiveRecord::Schema.define(version: 20160316081258) do
     t.string   "type",              limit: 255
     t.string   "url",               limit: 255
     t.integer  "size",              limit: 4
+    t.integer  "container_id",      limit: 4
     t.integer  "user_id",           limit: 4
   end
 
+  add_index "uploads", ["container_id"], name: "index_uploads_on_container_id", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160316081258) do
   add_foreign_key "containers", "users"
   add_foreign_key "pages", "containers"
   add_foreign_key "pages", "users"
+  add_foreign_key "uploads", "containers"
   add_foreign_key "uploads", "users"
   add_foreign_key "variables", "users"
 end
