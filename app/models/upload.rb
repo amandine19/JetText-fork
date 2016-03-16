@@ -2,7 +2,8 @@ class Upload < ActiveRecord::Base
 	has_and_belongs_to_many :pages, :through => :pages_uploads
 
   has_attached_file :file,
-  	:path => "/Users/pierre/Desktop/ressources/:basename.:extension",
+  	:url => "/Desktop/ressources/:basename.:extension",
+  	:path => "/Users/pierre",
   	:use_timestamp => false
 
   validates_attachment_content_type :file, 

@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     resources :pages
     resources :variables
     resources :uploads
+    post "/uploads_plugin/create" => "uploads#create", as: 'uploads_create'
   end
-
 end
