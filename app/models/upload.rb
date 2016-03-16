@@ -18,8 +18,4 @@ class Upload < ActiveRecord::Base
 			"image/png"
 		],
 		:message => 'seuls les fichiers PDF et MP4 sont autorisés.'
-
-  def get_container(container_id)
-    return Container.find(container_id).url
-  end
 end
