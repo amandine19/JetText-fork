@@ -234,22 +234,20 @@ var PagesShow = function (_App) {
 		key: 'render',
 		value: function render() {
 			console.log("pages/show");
-			//AlloyEditor.editable('editor1');
-      tinymce.init({
-        selector: '#editor1',
-        plugins: "code link visualblocks uploader", 
-        menubar: false,
-        extended_valid_elements : "span[!class]",
-        toolbar: "undo redo | formatselect | link code | uploader",
-        visualblocks_default_state: false, //show info boxes around elements  
-      });
-
+			AlloyEditor.editable('editor1');
+    
 			addPageBox();
 
 			$('.editable_elem').click(function () {
 				$('#editor1').attr('id', '');
 				$(this).attr('id', 'editor1');
 			});
+
+      $('.file').click(function(e) {
+        e.preventDefault();
+        console.log($(this).html());
+        $('.cke_textarea_inline').append('<img src="'+$(this).html()+'" />');
+      });
 		}
 	}]);
 

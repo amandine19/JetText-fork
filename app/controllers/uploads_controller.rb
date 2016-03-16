@@ -1,16 +1,25 @@
 class UploadsController < ApplicationController
+	skip_before_filter :verify_authenticity_token, :only => [:create]
+
 	def new
 		@upload = Upload.new
 	end
 	
 	def create
-		@upload = Upload.create(upload_params)
+		@upload = Upload.new(upload_params)
+		@upload.user_id = current_user.id
+		@upload.url = @upload.file.path
+		if @upload.save
+      respond_to do |format|
+			  format.js
+			  format.html { head :no_content}
+			end
+		end
 		#render json: {file: @upload.file_file_name}, status: :ok
-		render partial: "save_upload", locals: {file: @upload}
 	end
 
 	private
 		def upload_params
-			params.require(:upload).permit(:name, :file, :file_file_name, :file_content_type, :file_file_size)
+			params.require(:upload).permit(:name, :file, :url, :uploaded_file)
 		end
 end	

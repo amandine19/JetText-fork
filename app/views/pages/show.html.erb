@@ -33,7 +33,13 @@
         <%= render :partial => 'pages/new', :object => @new_page %>
       </nav>
     </div>
+    
     <div class="col-lg-9">
+      <div class="uploads">
+        <% @uploads.each do |file| %>
+          <a class="file"><%= file.url %></a><br>
+        <% end %>
+      </div>
       <div>
         <%= render :partial => 'pages/edit', :object => @page %>
       </div>

@@ -10,6 +10,8 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
+    @upload = Upload.new
+    @uploads = Upload.all
     @container = Container.find(@page.container_id)
     @pages = Page.where(:container_id => @container.id)
     @new_page = Page.new
@@ -37,6 +39,7 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find(params[:id])
+    @upload = Upload.new
   end
 
   def update
@@ -63,7 +66,7 @@ class PagesController < ApplicationController
 
   private
     def page_params
-      params.require(:page).permit(:name, :parent, :content, :container_id, :user_id)
+      params.require(:page).permit(:name, :parent, :content, :container_id, :user_id, :bootsy_image_gallery_id)
     end
   
 end

@@ -7,6 +7,7 @@ class CreateTableUploads < ActiveRecord::Migration
     t.string :type		
     t.string :url		
     t.integer :size
+    t.references :user, index: true, foreign_key: true
     end
   end
 end

@@ -1,8 +1,8 @@
-<%= form_for @upload do |f| %>
+<%= form_for @upload, :remote => true, :authenticity_token => true do |f| %>
 	<p>
 		<%= f.label :file %><br />
 		<%= f.file_field :file %>
 	</p>
 	
 	<p><%= f.submit "submit"%></p>
-<%end%>
+<% end %>
