@@ -8,6 +8,8 @@
 	<p><%= f.submit "submit"%></p>
 <% end %>
 
+	<%= Container.find(3).url %>
+
 <!-- custom form to deal with escaped HTML characters -->
 <%= form_for @page do |f| %>
 	<div class="editable_elem">

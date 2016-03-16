@@ -4,7 +4,7 @@ class Upload < ActiveRecord::Base
   has_and_belongs_to_many :pages, :through => :pages_uploads
 
   Paperclip.interpolates('container') do |attachment, style|
-    attachment.instance.get_container(3).url
+    attachment.instance.container.url.to_s
   end
 
   has_attached_file :file,
@@ -20,6 +20,6 @@ class Upload < ActiveRecord::Base
 		:message => 'seuls les fichiers PDF et MP4 sont autorisés.'
 
   def get_container(container_id)
-    return Container.find(container_id)
+    return Container.find(container_id).url
   end
 end
