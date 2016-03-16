@@ -1,8 +1,9 @@
 class CreateTableUploads < ActiveRecord::Migration
   def change
-    create_table :table_uploads do |t|
+    create_table :uploads do |t|
 
     t.string :name		
+    t.attachment :file
     t.string :type		
     t.string :url		
     t.integer :size

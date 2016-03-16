@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222091658) do
+ActiveRecord::Schema.define(version: 20160316081258) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 20160222091658) do
   add_index "pages", ["container_id"], name: "index_pages_on_container_id", using: :btree
   add_index "pages", ["user_id"], name: "index_pages_on_user_id", using: :btree
 
+  create_table "pages_uploads", id: false, force: :cascade do |t|
+    t.integer "page_id",   limit: 4
+    t.integer "upload_id", limit: 4
+  end
+
   create_table "pages_variables", id: false, force: :cascade do |t|
     t.integer "page_id",     limit: 4, null: false
     t.integer "variable_id", limit: 4, null: false
@@ -45,11 +50,15 @@ ActiveRecord::Schema.define(version: 20160222091658) do
   add_index "pages_variables", ["page_id", "variable_id"], name: "index_pages_variables_on_page_id_and_variable_id", using: :btree
   add_index "pages_variables", ["variable_id", "page_id"], name: "index_pages_variables_on_variable_id_and_page_id", using: :btree
 
-  create_table "table_uploads", force: :cascade do |t|
-    t.string  "name", limit: 255
-    t.string  "type", limit: 255
-    t.string  "url",  limit: 255
-    t.integer "size", limit: 4
+  create_table "uploads", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
+    t.integer  "file_file_size",    limit: 4
+    t.datetime "file_updated_at"
+    t.string   "type",              limit: 255
+    t.string   "url",               limit: 255
+    t.integer  "size",              limit: 4
   end
 
   create_table "users", force: :cascade do |t|

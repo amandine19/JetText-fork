@@ -1,6 +1,15 @@
 class Upload < ActiveRecord::Base
-  attr_accessible :file
-  has_attached_file :file
+	has_and_belongs_to_many :pages, :through => :pages_uploads
 
-  
+  has_attached_file :file,
+  	:path => "/Users/pierre/Desktop/ressources/:basename.:extension",
+  	:use_timestamp => false
+
+  validates_attachment_content_type :file, 
+		:content_type => [
+			"video/mp4",
+			"application/pdf",
+			"image/png"
+		],
+		:message => 'seuls les fichiers PDF et MP4 sont autorisés.'
 end

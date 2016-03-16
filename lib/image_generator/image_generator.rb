@@ -12,6 +12,7 @@ module ImageGenerator
             content = Base64.decode64(item['src']["data:image/#{format};base64,".length .. -1])
             path = "#{Rails.root}/public/#{url}"
             i = create_image(content, path, url, index, format)
+            #replaces image base64 code by the file url
             item['src'] = "/#{url}/img/image#{i}.#{format}"
           end
         end
