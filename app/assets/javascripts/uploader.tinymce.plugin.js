@@ -35,13 +35,14 @@ tinymce.PluginManager.add('uploader', function(editor, url) {
 
     function wrapElem(type, name) {
         console.log(type);
+        var t = type.split('/')[0];
         switch(type) {
             case 'image/png':
-                return '<img src="'+c_path+name+'" />';
+                return '<img src="'+c_path+t+'/'+name+'" />';
             case 'application/pdf':
-                return '<a href="'+c_path+name+'" target="_blank">'+name+'</a>';
+                return '<a href="'+c_path+t+'/'+name+'" target="_blank"><i class="fa fa-file-pdf-o"></i> '+name+'</a>';
             case 'video/mp4':
-                return '<video width="100%" controls>\n<source src="'+c_path+name+'" type="video/mp4">\n</video>';
+                return '<video width="100%" controls>\n<source src="'+c_path+t+'/'+name+'" type="video/mp4">\n</video>';
         }
     }
 });
