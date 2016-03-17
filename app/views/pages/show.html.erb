@@ -20,14 +20,14 @@
         <ul>
           <% @pages.each do |page| %>
             <% if page.parent.nil? %>
-              <a href='<%= "/pages/#{page.id}" %>'>
+              <a href='<%= "/pages/#{page.id}" %>' data-no-turbolink>
                 <li><%= "#{page.name}" %></li>
               </a>
               <% if has_children(page) %>
                 <ul>
                   <% children = get_children(page) %>
                   <% children.each do |c| %>
-                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
+                    <a href='<%= "/pages/#{c.id.to_s}" %>' data-no-turbolink>
                       <li><%= "#{c.name}" %></li>
                     </a>
                   <% end %>
