@@ -12,7 +12,6 @@ class ContainersController < ApplicationController
     @container = Container.find(params[:id])
     @pages = Page.where(:container_id => @container.id)
     @new_page = Page.new
-    #self.generate(@container.id)
     unless @container.user_id == current_user.id
       redirect_to action: "index"
     end
@@ -63,34 +62,19 @@ class ContainersController < ApplicationController
     end
   end
 
-  def generate(id)
+  def generate
     require 'fileutils'
+    require 'generator/generator'
 
-    @container = Container.find(id)
-    directory = Rails.public_path + @container.url
+    @container = Container.find(params[:id])
+    @pages = Page.where(:container_id => @container.id)
+    
+    Generator.generate(@container, @pages)
 
-    FileUtils.mkdir_p directory
-    File.open(Rails.public_path + @container.url + "index.html", "w+") do |f|
-      f.write(
-        "<html>\n" \
-        + "\t<head>\n" \
-        + "\t</head>\n" \
-        + "\t<body>\n\n" \
-      )
-      f.write("\t\t<div>"+@container.description+"</div>\n\n")
-      f.write(
-        "\t</body>\n" \
-        + "</html>" \
-      )
-      f.close
+    respond_to do |format|
+      format.html { head :no_content }
     end
-    return true
   end
-
-  def ajax
-    render json: Container.all
-  end
-
   
   private
     def container_params

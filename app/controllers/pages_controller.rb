@@ -52,9 +52,10 @@ class PagesController < ApplicationController
       val = params[:page][:content]
     end
 
+    val.force_encoding("ASCII-8BIT").encode('UTF-8', undef: :replace, replace: '')
+
     @doc = ImageGenerator.image_transformer(val, @container.url)
     @page.update_attribute(:name, params[:page][:name])
-
     if @page.update_attribute(:content, @doc)
       redirect_to action: "show", id: @page.id
     end

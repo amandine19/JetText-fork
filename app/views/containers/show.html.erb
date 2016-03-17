@@ -6,7 +6,7 @@
   	<div class="actions">
   		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@container.id)) %>
   		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
-  		<%= link_to 'voir', '/'+@container.url %>
+  		<a href="#" id="generate_container">Voir</a>
   	</div>
 
     <div class="col-lg-3">
@@ -14,14 +14,14 @@
         <ul>
           <% @pages.each do |page| %>
             <% if page.parent.nil? %>
-              <a href='<%= "/pages/#{page.id}" %>'>
+              <a href='<%= "/pages/#{page.id}" %>' data-no-turbolink>
                 <li><%= "#{page.name}" %></li>
               </a>
               <% if has_children(page) %>
                 <ul>
                   <% children = get_children(page) %>
                   <% children.each do |c| %>
-                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
+                    <a href='<%= "/pages/#{c.id.to_s}" %>' data-no-turbolink>
                       <li><%= "#{c.name}" %></li>
                     </a>
                   <% end %>
@@ -33,7 +33,7 @@
         <%= render :partial => 'pages/new', :object => @page %>
       </nav>
     </div>
-  	
+
     <div class="col-lg-9">
       <div>
         <%= render :partial => 'containers/edit', :object => @container %>
@@ -41,3 +41,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#generate_container').click(function() {
+    $.ajax({
+      type: "GET",
+      url: "/generate_container/<%= @container.id %>"
+    });
+  });
+</script>

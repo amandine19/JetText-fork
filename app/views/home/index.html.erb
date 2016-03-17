@@ -9,39 +9,3 @@
 	  </div>
 	<% end %>
 </div>
-
-
-<a href="#" id="ajax_call">Ajax</a>
-<div id="ajax_response"></div>
-
-<script>
-$('#ajax_call').click(function() {
-  $.ajax({
-    type: "get",
-    url: 'container/ajax',
-    success: function(data){
-    	$.each(data, function(index, el){
-    		$('#ajax_response').append(el.id, el.name);
-    	})
-    }
-  });
-})
-
-</script>
-
-<a href='#' id="page_call">Page_Ajax</a>
-<div id="ajax_page"></div>
-
-<script>
-$('#page_call').click(function() {
- $.ajax({
- 	type: "get",
- 	url: 'page/ajax',
- 	success: function(data){
- 		$.each(data, function(i, el){
- 			$('#ajax_page').append(el.id, el.name);
- 		})
- 	}
- });
-})
-</script>

@@ -15,7 +15,6 @@ class UploadsController < ApplicationController
 			  format.html { head :no_content }
 			end
 		end
-		#render json: {file: @upload.file_file_name}, status: :ok
 	end
 
 	private
