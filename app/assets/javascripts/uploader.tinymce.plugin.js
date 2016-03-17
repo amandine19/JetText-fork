@@ -1,34 +1,31 @@
 tinymce.PluginManager.add('uploader', function(editor, url) {
     editor.addButton('uploader', {
         type: 'button',
-        title: 'Insert image',
+        title: 'File uploader',
         icon: 'image',
         id: 'uploader',
         onclick: function() {
-            // Open window
-
             editor.windowManager.open({
-                title: 'Image Browser',
-                width: 600,
-                height: 400,
-                oninsert: function (url, objVals) {
-                    console.log($("#result"));
-                    callback(url, objVals);
-                },
-                onsubmit: function(e) {
-                    console.log($("#result"));
-                    editor.insertContent('Title: ' + e.data.title);
-                },
-                onsubmit: function(e) {
-                    console.log($("#result"));
-                },
+                title: 'File uploader',
+                html: '<div id="uploadform"></div>',
+                buttons: [{
+                    text: 'Submit',
+                    onclick: 'submit'
+                }, {
+                    text: 'Cancel',
+                    onclick: 'close'
+                }],
+                width: 500,
+                height: 325,
                 onopen: function(e) {
-                    console.log($("#result"));
-
+                    $('#new_upload').clone().appendTo('#uploadform').show();
                 },
-                body: [
-                    { type: 'textbox', subtype: 'file', name: 'title', label: 'Title' }
-                ],
+                onsubmit: function(e) {
+                   e.preventDefault();
+                   $('#uploadform').find('#new_upload').submit();
+                   var file = $('#uploadform').find('#upload_file')[0].files[0];
+                   editor.insertContent('<img src="'+c_path + file.name+'" />');
+                }
             });
         }
     });

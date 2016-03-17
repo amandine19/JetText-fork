@@ -2,7 +2,13 @@
 	<div class="col-lg-12">
     <header>
       <h1><%= link_to(@page.container.name, container_path(@page.container.id)) %></h1>
+      <script type="text/javascript">  
+        //used by the editor upload plugin
+        var c_path = "<%= raw("/#{@page.container.url}/files/") %>";  
+        console.log(c_path);
+      </script>
     </header>
+
   	<div class="actions">
   		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@page.container.id)) %>
   		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
@@ -35,7 +41,7 @@
     </div>
     
     <div class="col-lg-9">
-      <div class="uploads">
+      <div class="uploads" style="display: none">
         <% @uploads.each do |file| %>
           <a class="file"><%= "/#{file.url}" %></a><br>
         <% end %>

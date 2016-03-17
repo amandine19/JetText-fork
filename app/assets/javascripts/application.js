@@ -14,8 +14,8 @@
 //= require ckeditor/lang/fr.js
 //= require alloyeditor/dist/alloy-editor/alloy-editor-no-ckeditor-min.js
 
-// require tinymce/tinymce.min.js
-// require uploader.tinymce.plugin
+//= require tinymce/tinymce.min.js
+//= require uploader.tinymce.plugin
 
 //= require all
 
