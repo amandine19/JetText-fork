@@ -1,10 +1,9 @@
 module Generator
 
-	require 'fileutils'
+  require 'fileutils'
 
   def self.generate(container, pages)
-  	container.content = gsub_content(container.content)
-  	container.content = container.content.gsub!("../#{container.url}", ".")
+    container.content = gsub_content(container.content, container.url) if container.content
     File.open("#{Rails.public_path}/#{container.url}/index.html", "w+") do |f|
       f.write(
         "<html>\n" \
@@ -21,8 +20,7 @@ module Generator
     end
 
     pages.each do |page|
-    	page.content = gsub_content(page.content)
-    	page.content = page.content.gsub!("../#{container.url}", ".")
+    	page.content = gsub_content(page.content, container.url) if page.content
     	File.open("#{Rails.public_path}/#{container.url}/#{page.name}.html", "w+") do |f|
 	      f.write(
 	        "<html>\n" \
@@ -35,23 +33,26 @@ module Generator
 	        "\t</body>\n" \
 	        + "</html>" \
 	      )
-	      f.close
-	    end
+        f.close
+      end
     end
 
     return true
   end
 
-  def self.gsub_content(content)
-  	patterns = [
-  		'<body>',
-  		'</body>',
-  		'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">',
-  		'<html>',
-  		'</html>'
-  	]
-  	patterns.map {|s| content.gsub!(s, '')}
-  	return content
+  def self.gsub_content(content, container_url)
+    patterns = [
+      '<body>',
+      '</body>',
+      '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">',
+      '<html>',
+      '</html>'
+    ]
+    patterns.map {|s| content.gsub!(s, '')}
+    if content.include? container_url
+    	content.gsub!("../#{container_url}", ".")
+    end
+    return content
   end
 
 end
