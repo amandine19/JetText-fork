@@ -2,7 +2,7 @@ tinymce.PluginManager.add('uploader', function(editor, url) {
     editor.addButton('uploader', {
         type: 'button',
         title: 'File uploader',
-        icon: 'image',
+        icon: 'uploader',
         id: 'uploader',
         onclick: function() {
             editor.windowManager.open({
@@ -15,8 +15,8 @@ tinymce.PluginManager.add('uploader', function(editor, url) {
                     text: 'Cancel',
                     onclick: 'close'
                 }],
-                width: 500,
-                height: 325,
+                width: 400,
+                height: 150,
                 onopen: function(e) {
                     $('#new_upload').clone().appendTo('#uploadform').show();
                 },
@@ -24,7 +24,8 @@ tinymce.PluginManager.add('uploader', function(editor, url) {
                    e.preventDefault();
                    $('#uploadform').find('#new_upload').submit();
                    var file = $('#uploadform').find('#upload_file')[0].files[0];
-                   editor.insertContent('<img src="'+c_path + file.name+'" />');
+                   editor.insertContent('<img src="'+ c_path + file.name +'" />');
+                   editor.windowManager.close();
                 }
             });
         }

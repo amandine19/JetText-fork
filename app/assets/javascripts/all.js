@@ -235,7 +235,6 @@ var PagesShow = function (_App) {
 		value: function render() {
 			console.log("pages/show");
 			//AlloyEditor.editable('editor1');
-      $('#editor1').css({"height":"500px"});
 
       tinymce.init({
         selector: '#editor1',

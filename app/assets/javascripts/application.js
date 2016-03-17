@@ -9,10 +9,10 @@
 //= require jquery_ujs
 //= require turbolinks
 
-//= require cke/cke_fix.js
-//= require ckeditor/ckeditor.js
-//= require ckeditor/lang/fr.js
-//= require alloyeditor/dist/alloy-editor/alloy-editor-no-ckeditor-min.js
+// require cke/cke_fix.js
+// require ckeditor/ckeditor.js
+// require ckeditor/lang/fr.js
+// require alloyeditor/dist/alloy-editor/alloy-editor-no-ckeditor-min.js
 
 //= require tinymce/tinymce.min.js
 //= require uploader.tinymce.plugin
