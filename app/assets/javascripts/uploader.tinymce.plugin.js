@@ -24,10 +24,24 @@ tinymce.PluginManager.add('uploader', function(editor, url) {
                    e.preventDefault();
                    $('#uploadform').find('#new_upload').submit();
                    var file = $('#uploadform').find('#upload_file')[0].files[0];
-                   editor.insertContent('<img src="'+ c_path + file.name +'" />');
+                   var elem = wrapElem(file.type, file.name);
+                   editor.insertContent(elem);
                    editor.windowManager.close();
+                   return;
                 }
             });
         }
     });
+
+    function wrapElem(type, name) {
+        console.log(type);
+        switch(type) {
+            case 'image/png':
+                return '<img src="'+c_path+name+'" />';
+            case 'application/pdf':
+                return '<a href="'+c_path+name+'" target="_blank">'+name+'</a>';
+            case 'video/mp4':
+                return '<video width="100%" controls>\n<source src="'+c_path+name+'" type="video/mp4">\n</video>';
+        }
+    }
 });
