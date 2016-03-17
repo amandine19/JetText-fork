@@ -10,8 +10,5 @@
 class ContainersNew extends App {
   render() {
     console.log("containers/new"); //file
-    //CKEDITOR.disableAutoInline = true;
-    //CKEDITOR.inline('editor1');
-    AlloyEditor.editable('editor1');
   }
 }

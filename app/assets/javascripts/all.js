@@ -189,7 +189,7 @@ var ContainersShow = function (_App) {
 
 	return ContainersShow;
 }(App);
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -200,51 +200,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var PagesShow = function (_App) {
-	_inherits(PagesShow, _App);
+  _inherits(PagesShow, _App);
 
-	function PagesShow() {
-		_classCallCheck(this, PagesShow);
+  function PagesShow() {
+    _classCallCheck(this, PagesShow);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(PagesShow).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PagesShow).apply(this, arguments));
+  }
 
-	_createClass(PagesShow, [{
-		key: 'render',
-		value: function render() {
-			console.log("pages/show");
-      $('#editor1').css({"height": "500px"});
-      
+  _createClass(PagesShow, [{
+    key: "render",
+    value: function render() {
+      console.log("pages/show");
+      $('#editor1').css({ "height": "500px" });
+
       tinymce.init({
         selector: '#editor1',
         plugins: "code link visualblocks uploader",
         menubar: false,
-        extended_valid_elements : "span[!class]",
+        extended_valid_elements: "span[!class]",
         toolbar: "undo redo | formatselect | link code | uploader",
-        visualblocks_default_state: false, //show info boxes around elements  
+        visualblocks_default_state: false, //show info boxes around elements 
+        force_br_newlines : false,
+        force_p_newlines : false,
+        forced_root_block : ''
       });
 
-			addPageBox();
+      addPageBox();
+    }
+  }]);
 
-			/*$('.editable_elem').click(function () {
-				$('#editor1').attr('id', '');
-				$(this).attr('id', 'editor1');
-			});*/
-
-      $('.file').click(function(e) {
-        e.preventDefault();
-        console.log($(this).html());
-        $('.cke_textarea_inline').append('<img src="'+$(this).html()+'" />');
-      });
-		}
-	}]);
-
-	return PagesShow;
+  return PagesShow;
 }(App);
 
 function addPageBox() {
-	$('.hidden_elem').hide();
-	$('#add_new_page_button').click(function () {
-		$('#add_new_page').toggle();
-	});
+  $('.hidden_elem').hide();
+  $('#add_new_page_button').click(function () {
+    $('#add_new_page').toggle();
+  });
 }
 //# sourceMappingURL=all.js.map

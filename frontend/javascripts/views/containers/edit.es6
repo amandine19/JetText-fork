@@ -10,6 +10,5 @@
 class ContainersEdit extends App {
   render() {
     console.log("containers/edit"); //file
-    AlloyEditor.editable('editor1');
   }
 }

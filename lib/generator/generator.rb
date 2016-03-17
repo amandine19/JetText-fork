@@ -1,5 +1,7 @@
 module Generator
 
+	# Generates static files
+
   require 'fileutils'
 
   def self.generate(container, pages)
@@ -11,7 +13,7 @@ module Generator
         + "\t</head>\n" \
         + "\t<body>\n\n" \
       )
-      f.write("\t\t<div>"+container.content+"</div>\n\n") if container.content
+      f.write("\t\t<div>"+container.content+"\t\t</div>\n\n") if container.content
       f.write(
         "\t</body>\n" \
         + "</html>" \
@@ -20,19 +22,19 @@ module Generator
     end
 
     pages.each do |page|
-    	page.content = gsub_content(page.content, container.url) if page.content
-    	File.open("#{Rails.public_path}/#{container.url}/#{page.name}.html", "w+") do |f|
-	      f.write(
+      page.content = gsub_content(page.content, container.url) if page.content
+      File.open("#{Rails.public_path}/#{container.url}/#{page.name}.html", "w+") do |f|
+        f.write(
 	        "<html>\n" \
-	        + "\t<head>\n" \
-	        + "\t</head>\n" \
-	        + "\t<body>\n\n" \
-	      )
-	      f.write("\t\t<div>"+page.content+"</div>\n\n") if page.content
-	      f.write(
-	        "\t</body>\n" \
-	        + "</html>" \
-	      )
+          + "\t<head>\n" \
+          + "\t</head>\n" \
+          + "\t<body>\n\n" \
+        )
+        f.write("\t\t<div>"+page.content+"\t\t</div>\n\n") if page.content
+        f.write(
+          "\t</body>\n" \
+          + "</html>" \
+        )
         f.close
       end
     end

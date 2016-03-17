@@ -1,5 +1,7 @@
 module ImageGenerator
 
+  # Saves base64 images code in files
+
   def self.image_transformer(html, url)
     require 'fileutils'
     doc = Nokogiri::HTML(html)
@@ -13,7 +15,7 @@ module ImageGenerator
             path = "#{Rails.root}/public/#{url}"
             i = create_image(content, path, url, index, format)
             #replaces image base64 code by the file url
-            item['src'] = "/#{url}/img/image#{i}.#{format}"
+            item['src'] = "/#{url}/files/image/image#{i}.#{format}"
           end
         end
       end
@@ -22,11 +24,11 @@ module ImageGenerator
   end
 
   def self.create_image(content, path, url, index, format)
-    unless File.directory?("#{path}/img")
-      FileUtils.mkdir_p "#{path}/img"
+    unless File.directory?("#{path}/files/image")
+      FileUtils.mkdir_p "#{path}/files/image"
     end
-    i = define_index("#{path}/img", index, format)
-    File.open("#{path}/img/image#{i}.#{format}", 'wb') { |f| f.write(content) }
+    i = define_index("#{path}/files/image", index, format)
+    File.open("#{path}/files/image/image#{i}.#{format}", 'wb') { |f| f.write(content) }
     return i
   end
 
