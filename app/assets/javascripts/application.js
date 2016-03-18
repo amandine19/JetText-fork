@@ -19,7 +19,7 @@
 // require MathJax/extensions/MathZoom
 //= require tinymce/tinymce.min.js
 //= require tinymceplugins/uploader.tinymce.plugin
-//= require tinymceplugins/enlightner.tinymce.plugin
+//= require tinymceplugins/formula.tinymce.plugin
 
 //= require all
 
