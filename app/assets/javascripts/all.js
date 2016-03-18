@@ -216,14 +216,58 @@ var PagesShow = function (_App) {
 
       tinymce.init({
         selector: '#editor1',
-        plugins: "code link visualblocks uploader",
+        plugins: "code link visualblocks uploader mathslate",
         menubar: false,
         extended_valid_elements: "span[!class]",
-        toolbar: "undo redo | formatselect | link code | uploader",
+        toolbar: "undo redo | formatselect | link code | uploader | mathslate",
         visualblocks_default_state: false, //show info boxes around elements 
-        force_br_newlines : false,
-        force_p_newlines : false,
-        forced_root_block : ''
+        force_br_newlines: false,
+        force_p_newlines: false,
+        forced_root_block: '',
+        setup: function (ed) {
+          ed.on('init', function(args) {
+            var iframe = $("#" + args.target.id + "_ifr");
+            var content = $(iframe[0].contentWindow.document.body);
+            var jax = content.find('pre');
+            jax.each(function(){
+              if (this.innerHTML.indexOf('$$')) {
+                MathJax.Hub.Queue(
+                  ["Typeset",MathJax.Hub,this.innerHTML]
+                );
+                console.log(this.innerHTML);
+                $(this).mouseover(function(){
+                  var f = $(this).html();
+                  ed.windowManager.open({
+                    title: 'Jax',
+                    html: f,
+                    width: 400,
+                    height: 150,
+                    onopen: function() {
+                      MathJax.Hub.Queue(
+                        ["Typeset",MathJax.Hub,f]
+                      );
+                    }
+                  });
+                });
+              }
+            });
+          });
+        }
+        /*setup: function (ed) {
+          ed.on('init', function(args) {
+            var iframe = $("#" + args.target.id + "_ifr");
+            $(iframe[0].contentWindow.document)
+                .children('html')
+                .children('head')
+                .append('<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]},displayAlign: "center",displayIndent: "0.1em"});<\/script>');
+          
+            var doc = args.target.contentDocument || args.target.contentWindow.document;
+            var s = doc.createElement('script');
+            s.type = 'text/javascript';
+            s.src = '/assets/MathJax/MathJax.js?config=TeX-AMS_HTML';
+            doc.getElementsByTagName('head')[0].appendChild(s);
+          });
+        }*/
       });
 
       addPageBox();

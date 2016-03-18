@@ -17,10 +17,9 @@
   ],
   "dependencies": {
     "susy": "^2.2.12",
-    "ckeditor": "^4.5.6",
     "font-awesome": "^4.5.0",
     "bootstrap": "^3.3.6",
-    "alloyeditor": "^0.7.5",
-    "tinymce": "^4.3.8"
+    "tinymce": "^4.3.8",
+    "MathJax": "^2.6.1"
   }
 }

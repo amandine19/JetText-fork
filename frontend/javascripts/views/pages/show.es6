@@ -5,12 +5,14 @@ class PagesShow extends App {
       
     tinymce.init({
       selector: '#editor1',
-      plugins: "code link visualblocks uploader",
+      plugins: "code link visualblocks uploader mathslate",
       menubar: false,
       extended_valid_elements : "span[!class]",
-      toolbar: "undo redo | formatselect | link code | uploader",
+      toolbar: "undo redo | formatselect | link code | uploader | mathslate",
       visualblocks_default_state: false, //show info boxes around elements  
-      force_p_newlines : false
+      force_br_newlines : false,
+      force_p_newlines : false,
+      forced_root_block : '',
     });
 
 	  addPageBox();

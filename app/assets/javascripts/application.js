@@ -14,8 +14,11 @@
 // require ckeditor/lang/fr.js
 // require alloyeditor/dist/alloy-editor/alloy-editor-no-ckeditor-min.js
 
+// require MathJax/MathJax
+// require MathJax/extensions/MathMenu
+// require MathJax/extensions/MathZoom
 //= require tinymce/tinymce.min.js
-//= require uploader.tinymce.plugin
+//= require tinymceplugins/uploader.tinymce.plugin
 
 //= require all
 
