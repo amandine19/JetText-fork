@@ -225,8 +225,20 @@ var PagesShow = function (_App) {
         force_p_newlines: true,
         forced_root_block: '',
         content_css: '/assets/tinymce.css',
-        setup: function (ed) {
-          ed.on('init', function(args) {
+        setup: function(editor) {
+          editor.on('init', function(args) {
+            tinymce.get("editor1").execCommand(
+                'mceInsertRawHTML',
+                false,
+                '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]},displayAlign: "center",displayIndent: "0.1em"});</script><script type="text/javascript" src="/assets/MathJax/MathJax.js?config=TeX-AMS_HTML" defer></script>'
+            );
+            var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
+            var math = null;    // the element jax for the math output, and the box it's in
+            QUEUE.Push(function () {
+              math = MathJax.Hub.getAllJax(editor.id);
+            });
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,editor.getContent()]);
+            
             /*var iframe = $("#" + args.target.id + "_ifr");
             var content = $(iframe[0].contentWindow.document.body);
             var text = content.html();
@@ -252,7 +264,7 @@ var PagesShow = function (_App) {
 
               <span class="formula">{{$$F1$$}}</span>
 
-              {{$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$}}
+              $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 
               {{any text}}
 

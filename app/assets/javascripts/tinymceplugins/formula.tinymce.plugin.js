@@ -27,13 +27,14 @@ tinymce.PluginManager.add('formula', function(editor, url) {
 							    $('#formula_content').on('change keyup paste', function() {
 							    	var f = $('#formula_content').val();
 			      				$('#preview').html(f);
-			      				MathJax.Hub.Queue(["Typeset",MathJax.Hub,$('#preview').html()])
+			      				MathJax.Hub.Queue(["Typeset",MathJax.Hub,$('#preview').html()]);
 							    });
                 },
                 onsubmit: function(e) {
-                   editor.insertContent(elem);
-                   editor.windowManager.close();
-                   return;
+                	e.preventDefault();
+                  editor.insertContent($('#formula_content').val());
+                  editor.windowManager.close();
+                  return;
                 }
             });
         }

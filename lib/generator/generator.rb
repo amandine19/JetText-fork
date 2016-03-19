@@ -10,6 +10,12 @@ module Generator
       f.write(
         "<html>\n" \
         + "\t<head>\n" \
+        + "\t\t<script type=\"text/x-mathjax-config\">" \
+        + "\t\t\tMathJax.Hub.Config({tex2jax: {inlineMath: [[\"$\",\"$\"]]},displayAlign: \"center\",displayIndent: \"0.1em\"});" \
+        + "\t\t</script>" \
+        + "\t\t<script type=\"text/javascript\" src=\"/assets/MathJax/MathJax.js?config=TeX-AMS_HTML\" defer></script>" \
+        + "\t\t<script type=\"text/javascript\" src=\"/assets/MathJax/extensions/MathMenu.js\" defer></script>" \
+        + "\t\t<script type=\"text/javascript\" src=\"/assets/MathJax/extensions/MathZoom.js\" defer></script>" \
         + "\t</head>\n" \
         + "\t<body>\n\n" \
       )
@@ -27,6 +33,12 @@ module Generator
         f.write(
 	        "<html>\n" \
           + "\t<head>\n" \
+          + "\t\t<script type=\"text/x-mathjax-config\">" \
+          + "\t\t\tMathJax.Hub.Config({tex2jax: {inlineMath: [[\"$\",\"$\"]]},displayAlign: \"center\",displayIndent: \"0.1em\"});" \
+          + "\t\t</script>" \
+          + "\t\t<script type=\"text/javascript\" src=\"/Users/pierre/Documents/Developpement/Ruby/Rails/JetText/bower_components/MathJax/MathJax.js?config=TeX-AMS_HTML\" defer></script>" \
+          + "\t\t<script type=\"text/javascript\" src=\"/Users/pierre/Documents/Developpement/Ruby/Rails/JetText/bower_components/MathJax/extensions/MathMenu.js\" defer></script>" \
+          + "\t\t<script type=\"text/javascript\" src=\"/Users/pierre/Documents/Developpement/Ruby/Rails/JetText/bower_components/MathJax/extensions/MathZoom.js\" defer></script>" \
           + "\t</head>\n" \
           + "\t<body>\n\n" \
         )
