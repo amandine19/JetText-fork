@@ -216,10 +216,10 @@ var PagesShow = function (_App) {
 
       tinymce.init({
         selector: '#editor1',
-        plugins: "code link visualblocks uploader formula",
+        plugins: "code link visualblocks uploader formula definition",
         menubar: false,
         extended_valid_elements: "span[!class]",
-        toolbar: "undo redo | formatselect | link code | uploader | formula",
+        toolbar: "undo redo | formatselect | link code | uploader formula definition",
         visualblocks_default_state: false, //show info boxes around elements 
         force_br_newlines: false,
         force_p_newlines: true,
@@ -239,10 +239,17 @@ var PagesShow = function (_App) {
             });
             MathJax.Hub.Queue(["Typeset",MathJax.Hub,editor.getContent()]);
             
-            /*var iframe = $("#" + args.target.id + "_ifr");
+            var iframe = $("#" + args.target.id + "_ifr");
             var content = $(iframe[0].contentWindow.document.body);
-            var text = content.html();
-            text = text.replace(/(\{\{.*?\}\})/ig, '<span class="formula" style="background:yellow">$1</span>').replace(/\{\{|\}\}/g, '');
+            
+            content.mouseup(function() {
+              console.log(getIframeSelectionText(iframe[0]));
+              var s = getIframeSelectionText(iframe[0]);
+              var selected = $.parseHTML(getIframeSelectionText(iframe[0]));
+              /*.wrap('<span style="background:red"></span>');*/
+            });
+            
+            /*text = text.replace(/(\{\{.*?\}\})/ig, '<span class="formula" style="background:yellow">$1</span>').replace(/\{\{|\}\}/g, '');
             content.html(text);*/
   
             /*var jax = content.html().includes('$');
@@ -287,4 +294,18 @@ function addPageBox() {
     $('#add_new_page').toggle();
   });
 }
+
+// selected text in the editor's iframe
+function getIframeSelectionText(iframe) {
+  var win = iframe.contentWindow;
+  var doc = win.document;
+
+  if (win.getSelection) {
+    return win.getSelection().toString();
+  } else if (doc.selection && doc.selection.createRange) {
+    return doc.selection.createRange().text;
+  }
+}
+
+
 //# sourceMappingURL=all.js.map
