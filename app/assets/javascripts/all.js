@@ -212,8 +212,13 @@ var PagesShow = function (_App) {
     key: "render",
     value: function render() {
       console.log("pages/show");
-      $('#editor1').css({ "height": "500px" });
 
+      $(document).on('page:receive',function(){
+        tinymce.remove(); //fixes turbolinks issue
+      });
+
+      $('#editor1').css({ "height": "500px" });
+      
       tinymce.init({
         selector: '#editor1',
         plugins: "code link visualblocks uploader formula definition",
@@ -232,6 +237,7 @@ var PagesShow = function (_App) {
                 false,
                 '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]},displayAlign: "center",displayIndent: "0.1em"});</script><script type="text/javascript" src="/assets/MathJax/MathJax.js?config=TeX-AMS_HTML" defer></script>'
             );
+            
             var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
             var math = null;    // the element jax for the math output, and the box it's in
             QUEUE.Push(function () {
@@ -241,42 +247,32 @@ var PagesShow = function (_App) {
             
             var iframe = $("#" + args.target.id + "_ifr");
             var content = $(iframe[0].contentWindow.document.body);
+            var iframeElm = $.parseHTML(content.html());
+
+            $(iframeElm).contents().each(function() {
+              $(this).click(function(e) {
+              });
+            });
+
+            for (var i=0; i<iframeElm.length; i++) {
+              $(iframeElm[i]).css({"background":"grey"});
+              $(iframeElm[i]).click(function(e) {
+              });
+            }
+            
+            function clickIframeElm(element, index, array) {
+              $(element).addClass('idok');
+              $(element).click(function(e) {
+                console.log(e);
+              });
+            }
             
             content.mouseup(function() {
               console.log(getIframeSelectionText(iframe[0]));
               var s = getIframeSelectionText(iframe[0]);
               var selected = $.parseHTML(getIframeSelectionText(iframe[0]));
-              /*.wrap('<span style="background:red"></span>');*/
             });
-            
-            /*text = text.replace(/(\{\{.*?\}\})/ig, '<span class="formula" style="background:yellow">$1</span>').replace(/\{\{|\}\}/g, '');
-            content.html(text);*/
-  
-            /*var jax = content.html().includes('$');
-            jax.each(function(){
-              $(this).mouseover(function(){
-                var formula = $(this).html();
-                ed.windowManager.open({
-                  title: 'Jax',
-                  html: formula,
-                  width: 400,
-                  height: 150,
-                  onopen: function() {
-                    MathJax.Hub.Queue(
-                      ["Typeset",MathJax.Hub,formula]
-                    );
-                  }
-                });
-              });
-
-              <span class="formula">{{$$F1$$}}</span>
-
-              $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
-
-              {{any text}}
-
-              $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-            });*/
+          
           });
         }
       });
