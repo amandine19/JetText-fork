@@ -18,11 +18,6 @@ tinymce.PluginManager.add('formula', function(editor, url) {
                 width: 400,
                 height: 250,
                 onopen: function(e) {
-                	var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
-				    var math = null, box = null;    // the element jax for the math output, and the box it's in
-				    QUEUE.Push(function () {
-				      math = MathJax.Hub.getAllJax("formula_content")[0];
-				    });
 
 				    $('#formula_content').on('change keyup paste', function() {
 				    	var f = $('#formula_content').val();

@@ -65,6 +65,7 @@ module Generator
     patterns.map {|s| content.gsub!(s, '')}
     if content.include? container_url
     	content.gsub!("../#{container_url}", ".")
+      content.gsub!("/#{container_url}", ".")
     end
     return content
   end

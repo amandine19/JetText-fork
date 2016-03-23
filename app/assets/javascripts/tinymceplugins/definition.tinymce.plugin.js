@@ -10,7 +10,7 @@ tinymce.PluginManager.add('definition', function(editor, url) {
             console.log(selection);
             editor.windowManager.open({
                 title: 'Definition',
-                html: '<textarea id="formula_content" style="width:100%;height:50%;padding: 5px"></textarea><div id="preview" style="width:100%;height:50%;padding: 5px">Preview</div>',
+                html: '<input type="text" id="glossary_name" placeholder="name..." style="width:100%;height:20%;padding: 5px"><br><textarea id="glossary_description" placeholder="description..." style="width:100%;height:80%;padding: 5px"></textarea>',
                 buttons: [{
                     text: 'Submit',
                     onclick: 'submit'
@@ -22,6 +22,30 @@ tinymce.PluginManager.add('definition', function(editor, url) {
                 height: 250,
                 onopen: function(e) {
                     
+                },
+                onsubmit: function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        url: '/glossaries',
+                        data: {
+                            glossary: {
+                                name: $('#glossary_name').val(),
+                                description: $('#glossary_description').val()
+                            }
+                        },
+                        beforeSend: function(jqXHR, settings) {
+                            jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        },
+                        error: function(){
+                            alert("An error ocurred");
+                        },
+                        success: function(){
+
+                        }
+                    });
+                    editor.windowManager.close();
+                    return;
                 }
             });
         }

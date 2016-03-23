@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316081258) do
+ActiveRecord::Schema.define(version: 20160323201707) do
 
   create_table "containers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -23,6 +23,24 @@ ActiveRecord::Schema.define(version: 20160316081258) do
   end
 
   add_index "containers", ["user_id"], name: "index_containers_on_user_id", using: :btree
+
+  create_table "glossaries", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "glossaries", ["user_id"], name: "index_glossaries_on_user_id", using: :btree
+
+  create_table "glossaries_pages", id: false, force: :cascade do |t|
+    t.integer "page_id",     limit: 4, null: false
+    t.integer "glossary_id", limit: 4, null: false
+  end
+
+  add_index "glossaries_pages", ["glossary_id", "page_id"], name: "index_glossaries_pages_on_glossary_id_and_page_id", using: :btree
+  add_index "glossaries_pages", ["page_id", "glossary_id"], name: "index_glossaries_pages_on_page_id_and_glossary_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -97,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160316081258) do
   add_index "variables", ["user_id"], name: "index_variables_on_user_id", using: :btree
 
   add_foreign_key "containers", "users"
+  add_foreign_key "glossaries", "users"
   add_foreign_key "pages", "containers"
   add_foreign_key "pages", "users"
   add_foreign_key "uploads", "containers"

@@ -1,8 +1,8 @@
 class PagesShow extends App {
-	render() {
-		console.log("pages/show");
+  render() {
+    console.log("pages/show");
 
-		$(document).on('page:receive',function(){
+    $(document).on('page:receive',function(){
       tinymce.remove(); //fixes turbolinks issue
     });
 
@@ -19,20 +19,40 @@ class PagesShow extends App {
       force_p_newlines: true,
       forced_root_block: '',
       content_css: '/assets/tinymce.css',
+      style_formats: [
+        { title: 'Bold text', inline: 'strong' },
+        { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
+        { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
+        { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } },
+        { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
+      ],
+      formats: {
+        alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'left' },
+        aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'center' },
+        alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'right' },
+        alignfull: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'full' },
+        bold: { inline: 'span', 'classes': 'bold' },
+        italic: { inline: 'span', 'classes': 'italic' },
+        underline: { inline: 'span', 'classes': 'underline', exact: true },
+        strikethrough: { inline: 'del' },
+        customformat: { inline: 'span', styles: { color: '#00ff00', fontSize: '20px' }, attributes: { title: 'My custom format' }, classes: 'example1' },
+      },
+      theme_advanced_blockformats : "p,div,h1,h2,h3,h4,h5,h6,blockquote,dt,dd,code,samp",
       setup: function(editor) {
         editor.on('init', function(args) {
-          tinymce.get("editor1").execCommand(
-              'mceInsertRawHTML',
-              false,
-              '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]},displayAlign: "center",displayIndent: "0.1em"});</script><script type="text/javascript" src="/assets/MathJax/MathJax.js?config=TeX-AMS_HTML" defer></script>'
-          );
-          
-          var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
-          var math = null;    // the element jax for the math output, and the box it's in
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub, editor.getContent()], function() {
+            editor.getContent();
+          });
+          MathJax.Hub.Queue(function() {
+            editor.getContent();
+          });
+          editor.setContent(editor.getContent());
+          console.log(editor.getContent());
+          /*var math = null;  // the element jax for the math output, and the box it's in
           QUEUE.Push(function () {
             math = MathJax.Hub.getAllJax(editor.id);
           });
-          MathJax.Hub.Queue(["Typeset",MathJax.Hub,editor.getContent()]);
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub,editor.getContent()]);*/
           
           var iframe = $("#" + args.target.id + "_ifr");
           var content = $(iframe[0].contentWindow.document.body);
@@ -42,12 +62,6 @@ class PagesShow extends App {
             $(this).click(function(e) {
             });
           });
-
-          for (var i=0; i<iframeElm.length; i++) {
-            $(iframeElm[i]).css({"background":"grey"});
-            $(iframeElm[i]).click(function(e) {
-            });
-          }
           
           function clickIframeElm(element, index, array) {
             $(element).addClass('idok');
@@ -67,7 +81,7 @@ class PagesShow extends App {
     });
 
     addPageBox();
-	}
+  }
 }
 
 // create a new page from the menu

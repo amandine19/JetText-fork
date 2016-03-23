@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :pages
     resources :variables
     resources :uploads
+    resources :glossaries
     get "/generate_container/:id" => "containers#generate", as: 'generate_container'
   end
 end
