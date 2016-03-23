@@ -12,13 +12,13 @@ class GlossariesController < ApplicationController
   end
 
   def create
-		@glossary = Glossary.new(glossary_params)
-		@glossary.user_id = current_user.id
-		if @glossary.save
+    @glossary = Glossary.new(glossary_params)
+    @glossary.user_id = current_user.id
+    if @glossary.save
       respond_to do |format|
-			  format.html { head :no_content }
-			end
-		end
+        format.html { head :no_content }
+      end
+    end
   end
 
   def edit

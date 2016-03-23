@@ -29,6 +29,7 @@ module Generator
 
     pages.each do |page|
       page.content = gsub_content(page.content, container.url) if page.content
+      page.content = gsub_glossary(page.id, page.content) if page.content
       File.open("#{Rails.public_path}/#{container.url}/#{page.name}.html", "w+") do |f|
         f.write(
 	        "<html>\n" \
@@ -63,9 +64,23 @@ module Generator
       '</html>'
     ]
     patterns.map {|s| content.gsub!(s, '')}
+
+    # changes the files default url to a relative one
     if content.include? container_url
     	content.gsub!("../#{container_url}", ".")
       content.gsub!("/#{container_url}", ".")
+    end
+    return content
+  end
+
+  def self.gsub_glossary(page_id, content)
+    glossaries = Glossary.all
+    unless glossaries.empty?
+      glossaries.each do |glossary|
+        if content.downcase.include? glossary.name.downcase
+          content.gsub!(/#{glossary.name}/i, "<span style='background:red'>#{glossary.name}</span><span>#{glossary.description}</span>")
+        end
+      end
     end
     return content
   end

@@ -48,12 +48,7 @@ class PagesShow extends App {
           });
           editor.setContent(editor.getContent());
           console.log(editor.getContent());
-          /*var math = null;  // the element jax for the math output, and the box it's in
-          QUEUE.Push(function () {
-            math = MathJax.Hub.getAllJax(editor.id);
-          });
-          MathJax.Hub.Queue(["Typeset",MathJax.Hub,editor.getContent()]);*/
-          
+
           var iframe = $("#" + args.target.id + "_ifr");
           var content = $(iframe[0].contentWindow.document.body);
           var iframeElm = $.parseHTML(content.html());
