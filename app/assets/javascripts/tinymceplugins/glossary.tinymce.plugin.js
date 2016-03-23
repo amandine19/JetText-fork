@@ -1,15 +1,15 @@
-tinymce.PluginManager.add('definition', function(editor, url) {
-    editor.addButton('definition', {
+tinymce.PluginManager.add('glossary', function(editor, url) {
+    editor.addButton('glossary', {
         type: 'button',
-        title: 'Definition',
-        icon: 'image',
-        id: 'definition',
+        title: 'Glossary',
+        icon: 'glossary',
+        id: 'glossary',
         onclick: function(e, args) {
             console.log(e, args);
             var selection = window.getSelection().toString();
             console.log(selection);
             editor.windowManager.open({
-                title: 'Definition',
+                title: 'Glossary',
                 html: '<input type="text" id="glossary_name" placeholder="name..." style="width:100%;height:20%;padding: 5px"><br><textarea id="glossary_description" placeholder="description..." style="width:100%;height:80%;padding: 5px"></textarea>',
                 buttons: [{
                     text: 'Submit',
@@ -21,7 +21,11 @@ tinymce.PluginManager.add('definition', function(editor, url) {
                 width: 400,
                 height: 250,
                 onopen: function(e) {
-                    
+                    var iframe = $("#editor1_ifr");
+                    var selected_text = getIframeSelectionText(iframe[0]);
+                    if (selected_text != "") {
+                        $('#glossary_name').val(selected_text);
+                    }
                 },
                 onsubmit: function(e) {
                     e.preventDefault();

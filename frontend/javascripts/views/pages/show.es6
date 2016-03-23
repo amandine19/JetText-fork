@@ -10,10 +10,10 @@ class PagesShow extends App {
     
     tinymce.init({
       selector: '#editor1',
-      plugins: "code link visualblocks uploader formula definition",
+      plugins: "code link visualblocks uploader formula glossary",
       menubar: false,
       extended_valid_elements: "span[!class]",
-      toolbar: "undo redo | formatselect | link code | uploader formula definition",
+      toolbar: "undo redo | formatselect | link code | uploader formula glossary",
       visualblocks_default_state: false, //show info boxes around elements 
       force_br_newlines: false,
       force_p_newlines: true,
@@ -47,8 +47,7 @@ class PagesShow extends App {
             editor.getContent();
           });
           editor.setContent(editor.getContent());
-          console.log(editor.getContent());
-
+          
           var iframe = $("#" + args.target.id + "_ifr");
           var content = $(iframe[0].contentWindow.document.body);
           var iframeElm = $.parseHTML(content.html());
@@ -65,9 +64,9 @@ class PagesShow extends App {
             });
           }
           
+          var selected_text = "";
           content.mouseup(function() {
-            console.log(getIframeSelectionText(iframe[0]));
-            var s = getIframeSelectionText(iframe[0]);
+            selected_text = getIframeSelectionText(iframe[0]);
             var selected = $.parseHTML(getIframeSelectionText(iframe[0]));
           });
         

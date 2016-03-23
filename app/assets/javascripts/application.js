@@ -22,7 +22,7 @@
 //= require tinymce/tinymce.min.js
 //= require tinymceplugins/uploader.tinymce.plugin
 //= require tinymceplugins/formula.tinymce.plugin
-//= require tinymceplugins/definition.tinymce.plugin
+//= require tinymceplugins/glossary.tinymce.plugin
 
 //= require all
 

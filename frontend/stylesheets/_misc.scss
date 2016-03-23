@@ -13,8 +13,8 @@
 	display: none;
 }
 
-.mce-i-uploader:before {
-	content: "\f093";
+@mixin mce-fa($value) {
+  content: $value;
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
@@ -28,19 +28,16 @@
   left: 0;
 }
 
+.mce-i-uploader:before {
+  @include mce-fa("\f093");
+}
+
 .mce-i-formula:before {
-  content: "\f0c3";
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: inherit;
-  color: #000;
-  font-size: 1em;
-  padding-right: 0.5em;
-  padding-left: 0.6em;
-  position: absolute;
-  top: 20%;
-  left: 0;
+  @include mce-fa("\f0c3");
+}
+
+.mce-i-glossary:before {
+  @include mce-fa("\f02c");
 }
 
 #uploadform {
