@@ -17,7 +17,9 @@
   ],
   "dependencies": {
     "susy": "^2.2.12",
-    "core.js": "^2.0.3",
-    "core": "core-js#*"
+    "font-awesome": "^4.5.0",
+    "bootstrap": "^3.3.6",
+    "tinymce": "^4.3.8",
+    "MathJax": "^2.6.1"
   }
 }

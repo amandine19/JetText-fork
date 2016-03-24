@@ -1,21 +1,27 @@
-<div id="menu">
-	<ul>
-		<% if user_signed_in? %>
-			<% if current_user.firstname && current_user.lastname %>
-				<li>
-					<i class="fa fa-user"></i> <%= current_user.firstname + " " + current_user.lastname %>
-				</li>
-				<li>
-					<%= link_to 'Déconnexion', destroy_user_session_path, method: :delete  %>
-				</li>
-			<% end %>
-		<% end %>
-	</ul>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div id="logo">
+		<h1><%= link_to(raw('<i class="fa fa-plane"></i> JetText'), root_path()) %></h1>
+	</div>
 
-<nav>
-	<ul>
-		<li><%= link_to :containers, containers_path %></li>
-		<li><%= link_to :my, my_path %></li>
-	</ul>
+	<div id="user-menu">
+		<ul>
+			<% if user_signed_in? %>
+				<% if current_user.firstname && current_user.lastname %>
+					<li>
+						<i class="fa fa-user"></i> <%= current_user.firstname + " " + current_user.lastname %>
+					</li>
+					<li>
+						<%= link_to :logout, destroy_user_session_path, :method => :delete  %>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+
+	<div id="top-menu">
+		<ul>
+			<li><%= link_to :containers, containers_path %></li>
+			<li><%= link_to :new_container, new_container_path %></li>
+		</ul>
+	</div>
 </nav>

@@ -1,0 +1,68 @@
+<div id='outlet' class="row" data-component='Pages' data-view='Show'>
+	<div class="col-lg-12">
+    <header>
+      <h1><%= link_to(@page.container.name, container_path(@page.container.id)) %></h1>
+      <script type="text/javascript">  
+        //used by the editor upload plugin
+        var c_path = "<%= raw("/#{@page.container.url}/files/") %>";  
+      </script>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"]]},displayAlign: "center",displayIndent: "0.1em"});
+      </script>
+      <script type="text/javascript" src="/assets/MathJax/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script type="text/javascript" src="/assets/MathJax/extensions/MathMenu.js" defer></script>
+      <script type="text/javascript" src="/assets/MathJax/extensions/MathZoom.js" defer></script>
+    </header>
+
+    <div class="actions">
+  		<%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@page.container.id)) %>
+  		<%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+  		<a href="#" id="generate_container">Générer</a>
+  	</div>
+
+    <div class="col-lg-3">
+      <nav id="main-nav">
+        <ul>
+          <% @pages.each do |page| %>
+            <% if page.parent.nil? %>
+              <a href='<%= "/pages/#{page.id}" %>'>
+                <li><%= "#{page.name}" %></li>
+              </a>
+              <% if has_children(page) %>
+                <ul>
+                  <% children = get_children(page) %>
+                  <% children.each do |c| %>
+                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
+                      <li><%= "#{c.name}" %></li>
+                    </a>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= render :partial => 'pages/new', :object => @new_page %>
+      </nav>
+    </div>
+    
+    <div class="col-lg-9">
+      <div class="uploads" style="display: none">
+        <% @uploads.each do |file| %>
+          <a class="file"><%= "/#{file.url}" %></a><br>
+        <% end %>
+      </div>
+      <div>
+        <%= render :partial => 'pages/edit', :object => @page %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#generate_container').click(function() {
+    $.ajax({
+      type: "GET",
+      url: "/generate_container/<%= @page.container.id %>"
+    });
+  });
+</script>

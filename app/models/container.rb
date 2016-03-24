@@ -1,23 +1,11 @@
 class Container < ActiveRecord::Base
   belongs_to :user
+  has_many :pages, :dependent => :delete_all
+  has_many :uploads, :dependent => :delete_all
 
-  validates :name,		:presence => true, length: { maximum: 50 }
-  validates :description, :presence => false, length: { maximum: 1000 }
-
-  before_save :create_folder
-
-  def create_folder
-  	return nil unless get_user
-  	user = get_user
-  	token = SecureRandom.hex(8)
-  	FileUtils.mkdir_p "#{Rails.root}/public/#{user}/{#token}"
-  end
-
-  def get_user
-  	return nil unless user_id.present?
-  	user = User.where(:user_id)
-  end
-
+  validates :name,		:presence => true, length: { maximum: 250 }
+  validates :content, 	:presence => false
+  validates :user_id, 		:presence => true
 end
 
 # == Schema Information

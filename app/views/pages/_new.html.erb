@@ -1,0 +1,18 @@
+<a id="add_new_page_button">
+  <i class="fa fa-plus"></i>
+</a>
+<div id="add_new_page" class="hidden_elem">
+  <%#= form_for @page, :remote => true, :html => { :multipart => true } do |f| %>
+  <%= form_for @new_page, :html => { :id => "new_page" } do |f| %>
+    <div>
+      <p>
+        <%= f.text_field :name, :placeholder => :name %>
+        <%= select('page', 'parent', Page.where(:container_id => @container.id).where(:parent => nil).collect { |p| [ p.name, p.id ] }, {include_blank: 'Aucun'}) %>
+      </p>
+    </div>
+    <div>
+	   	<%= f.hidden_field :container_id, :value => @container.id %>
+	  </div>	
+    <%= f.submit :save, class: "btn btn-primary" %>
+  <% end %>
+</div>

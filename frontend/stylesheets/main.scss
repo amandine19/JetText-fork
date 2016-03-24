@@ -1,1 +1,28 @@
-html {}
+@import "grids";
+@import "misc";
+@import "vars";
+
+html {
+	@include container(100%);
+
+	header {
+		@import "header";
+	}
+
+	section#main-outlet {
+		display: flex;
+	  min-height: 90vh;
+		flex: 1 0 auto;
+		margin-top: 50px;
+
+		div.container {
+			width: 100%;
+
+			#outlet {
+				@import 'template1';
+			}
+		}
+	}
+
+	@import 'footer';
+}

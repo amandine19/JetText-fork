@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :containers
-    get "/my", :to => "containers#my"
+    resources :pages
+    resources :variables
+    resources :uploads
+    resources :glossaries
+    get "/generate_container/:id" => "containers#generate", as: 'generate_container'
   end
-
 end
