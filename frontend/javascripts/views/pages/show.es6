@@ -5,7 +5,7 @@ class PagesShow extends App {
     $(document).on('page:receive',function(){
       tinymce.remove(); //fixes turbolinks issue
     });
-    
+
     $('#editor1').css({ "height": "500px" });
 
     tinymce.init({
@@ -18,7 +18,7 @@ class PagesShow extends App {
       force_br_newlines: false,
       force_p_newlines: true,
       forced_root_block: '',
-      content_css: '/assets/tinymce.css',
+      content_css: '/assets/bootstrap/dist/css/bootstrap.min.css',
       setup: function(editor) {
         editor.on('init', function(args) {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub, editor.getContent()], function() {
@@ -33,10 +33,6 @@ class PagesShow extends App {
           var content = $(iframe[0].contentWindow.document.body);
           var iframeElm = $.parseHTML(content.html());
 
-          $(iframeElm).contents().each(function() {
-            $(this).click(function(e) {
-            });
-          });
           
           function clickIframeElm(element, index, array) {
             $(element).addClass('idok');
@@ -50,7 +46,7 @@ class PagesShow extends App {
             selected_text = getIframeSelectionText(iframe[0]);
             var selected = $.parseHTML(getIframeSelectionText(iframe[0]));
           });
-        
+
         });
       }
     });

@@ -229,7 +229,7 @@ var PagesShow = function (_App) {
         force_br_newlines: false,
         force_p_newlines: true,
         forced_root_block: '',
-        content_css: '/assets/tinymce.css',
+        content_css: '/assets/bootstrap/dist/css/bootstrap.min.css',
         setup: function setup(editor) {
           editor.on('init', function (args) {
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, editor.getContent()], function () {
@@ -243,10 +243,6 @@ var PagesShow = function (_App) {
             var iframe = $("#" + args.target.id + "_ifr");
             var content = $(iframe[0].contentWindow.document.body);
             var iframeElm = $.parseHTML(content.html());
-
-            $(iframeElm).contents().each(function () {
-              $(this).click(function (e) {});
-            });
 
             function clickIframeElm(element, index, array) {
               $(element).addClass('idok');
