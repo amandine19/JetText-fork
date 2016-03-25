@@ -11,11 +11,11 @@ html {
 
 	section#main-outlet {
 		display: flex;
-	  min-height: 90vh;
+	  	min-height: 90vh;
 		flex: 1 0 auto;
 		margin-top: 50px;
 
-		div.container {
+		div#wrapper {
 			width: 100%;
 
 			#outlet {
