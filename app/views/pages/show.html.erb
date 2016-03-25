@@ -50,9 +50,9 @@
                     <a href="http://www.iutenligne.net/resources.html">
                         <img src="/templates/iutenligne/img/iutenligne.png" border="0">
                     </a>
-                    <ul class="nav" id="side-menu">
+                    <ul class="nav pages-panel sortable" id="side-menu">
                         <% @pages.each do |page| %>
-                            <a href='<%= "/pages/#{page.id}" %>'>
+                            <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
                                 <li>
                                     <%= "#{page.name}" %>
                                 </li>
@@ -79,13 +79,6 @@
         <div id="page-wrapper">
             <div class="col-lg-3 row">
                 <nav id="main-nav">
-                    <ul class="pages-panel sortable">
-                        <% @pages.each do |page| %>
-                            <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
-                                <li><%= "#{page.name}" %></li>
-                            </a>
-                        <% end %>
-                    </ul>
                     <%= render :partial => 'pages/new', :object => @new_page %>
                 </nav>
             </div>
