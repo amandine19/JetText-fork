@@ -286,7 +286,6 @@ var PagesShow = function (_App) {
 
 // create a new page from the menu
 
-
 function addPageBox() {
   $('.hidden_elem').hide();
   $('#add_new_page_button').click(function () {
