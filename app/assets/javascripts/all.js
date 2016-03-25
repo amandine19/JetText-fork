@@ -5,26 +5,26 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var App = function () {
-	function App() {
-		_classCallCheck(this, App);
-	}
+  function App() {
+    _classCallCheck(this, App);
+  }
 
-	_createClass(App, [{
-		key: 'ready',
-		value: function ready() {
-			var componentName, viewName;
-			componentName = $('#outlet').data('component');
-			viewName = $('#outlet').data('view');
-			try {
-				var view = eval("new " + componentName + viewName + "()");
-				view.render();
-			} catch (err) {
-				console.error("outer", err.message);
-			}
-		}
-	}]);
+  _createClass(App, [{
+    key: 'ready',
+    value: function ready() {
+      var componentName, viewName;
+      componentName = $('#outlet').data('component');
+      viewName = $('#outlet').data('view');
+      try {
+        var view = eval("new " + componentName + viewName + "()");
+        view.render();
+      } catch (err) {
+        console.error("outer", err.message);
+      }
+    }
+  }]);
 
-	return App;
+  return App;
 }();
 
 var app = new App();
@@ -219,10 +219,10 @@ var PagesShow = function (_App) {
 
       tinymce.init({
         selector: '#editor1',
-        plugins: "code link visualblocks uploader formula glossary",
+        plugins: "code link visualblocks table uploader formula glossary",
         menubar: false,
         extended_valid_elements: "span[!class]",
-        toolbar: "undo redo | formatselect | link code | uploader formula glossary",
+        toolbar: "undo redo | formatselect | link code table | uploader formula glossary",
         visualblocks_default_state: false, //show info boxes around elements
         force_br_newlines: false,
         force_p_newlines: true,

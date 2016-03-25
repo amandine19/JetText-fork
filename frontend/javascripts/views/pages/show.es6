@@ -8,10 +8,10 @@ class PagesShow extends App {
 
     tinymce.init({
       selector: '#editor1',
-      plugins: "code link visualblocks uploader formula glossary",
+      plugins: "code link visualblocks table uploader formula glossary",
       menubar: false,
       extended_valid_elements: "span[!class]",
-      toolbar: "undo redo | formatselect | link code | uploader formula glossary",
+      toolbar: "undo redo | formatselect | link code table | uploader formula glossary",
       visualblocks_default_state: false, //show info boxes around elements 
       force_br_newlines: false,
       force_p_newlines: true,
