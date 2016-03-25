@@ -56,18 +56,21 @@
 
             <div class="col-lg-3 row">
                 <nav id="main-nav">
-                    <ul>
+                    <ul class="pages-panel sortable">
                         <% @pages.each do |page| %>
                             <% if page.parent.nil? %>
-                                <a href='<%= "/pages/#{page.id}" %>'>
+                                <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>">
                                     <li><%= "#{page.name}" %></li>
                                 </a>
                                 <% if has_children(page) %>
-                                    <ul>
+                                    <ul class="sub-pages-panel sortable">
                                         <% children = get_children(page) %>
                                         <% children.each do |c| %>
-                                            <a href='<%= "/pages/#{c.id.to_s}" %>'>
-                                              <li><%= "#{c.name}" %></li>
+                                            <a href='<%= "/pages/#{c.id.to_s}" %>' data-id="<%= page.id %>">
+                                                <li>
+                                                    <%= "#{c.name}" %>
+                                                    <a href="#"><i class="fa fa-sort"></i></a>
+                                                </li>
                                             </a>
                                         <% end %>
                                     </ul>

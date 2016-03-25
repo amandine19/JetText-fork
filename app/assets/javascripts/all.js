@@ -278,6 +278,37 @@ var PagesShow = function (_App) {
       });
 
       addPageBox();
+
+      // sortable pages order using jquery.sortable.min.js
+      function set_positions() {
+        // loop through and give each task a data-pos
+        // attribute that holds its position in the DOM
+        $('.pages-panel.sortable').find('a').each(function (i) {
+          $(this).attr("data-pos", i + 1);
+        });
+      }
+
+      set_positions();
+      $('.pages-panel.sortable').sortable();
+
+      $('.pages-panel.sortable').sortable().bind('sortupdate', function (e, ui) {
+        // array to store new order
+        var updated_order = [];
+        // set the updated positions
+        set_positions();
+
+        // populate the updated_order array with the new task positions
+        $('.pages-panel.sortable').find('a').each(function (i) {
+          updated_order.push({ id: $(this).data("id"), position: i + 1 });
+        });
+
+        // send the updated order via ajax
+        $.ajax({
+          type: "PUT",
+          url: '/pages/sort',
+          data: { order: updated_order }
+        });
+      });
     }
   }]);
 

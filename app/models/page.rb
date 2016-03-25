@@ -6,6 +6,8 @@ class Page < ActiveRecord::Base
   validates :name,			:presence => true, length: { maximum: 250 }
   validates :user_id, 		:presence => true
   validates :container_id, 	:presence => true
+
+  default_scope { order("weight ASC") }
 end
 
 # == Schema Information

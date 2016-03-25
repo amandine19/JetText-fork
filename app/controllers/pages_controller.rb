@@ -80,6 +80,13 @@ class PagesController < ApplicationController
   def destroy
   end
 
+  def sort
+    params[:order].each do |key,value|
+      Page.find(value[:id]).update_attribute(:weight, value[:position])
+    end
+    render :nothing => true
+  end
+
   private
     def page_params
       params.require(:page).permit(:name, :parent, :content, :container_id, :user_id, :bootsy_image_gallery_id)

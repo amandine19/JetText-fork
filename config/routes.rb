@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :containers
-    resources :pages
+    resources :pages do
+      put :sort, on: :collection
+    end
     resources :variables
     resources :uploads
     resources :glossaries
