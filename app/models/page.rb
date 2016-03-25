@@ -3,9 +3,9 @@ class Page < ActiveRecord::Base
   belongs_to :user
   has_many :uploads
 
-  validates :name,			:presence => true, length: { maximum: 250 }
-  validates :user_id, 		:presence => true
-  validates :container_id, 	:presence => true
+  validates :name,          :presence => true, length: { maximum: 250 }
+  validates :user_id,       :presence => true
+  validates :container_id,  :presence => true
 
   default_scope { order("weight ASC") }
 end

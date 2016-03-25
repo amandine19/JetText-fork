@@ -59,18 +59,15 @@
                     <ul class="pages-panel sortable">
                         <% @pages.each do |page| %>
                             <% if page.parent.nil? %>
-                                <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>">
+                                <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
                                     <li><%= "#{page.name}" %></li>
                                 </a>
                                 <% if has_children(page) %>
-                                    <ul class="sub-pages-panel sortable">
+                                    <ul class="sub-pages-panel">
                                         <% children = get_children(page) %>
                                         <% children.each do |c| %>
-                                            <a href='<%= "/pages/#{c.id.to_s}" %>' data-id="<%= page.id %>">
-                                                <li>
-                                                    <%= "#{c.name}" %>
-                                                    <a href="#"><i class="fa fa-sort"></i></a>
-                                                </li>
+                                            <a href='<%= "/pages/#{c.id.to_s}" %>' data-id="<%= page.id %>" data-no-turbolink>
+                                              <li><%= "#{c.name}" %></li>
                                             </a>
                                         <% end %>
                                     </ul>

@@ -5,9 +5,9 @@ class PagesShow extends App {
     $(document).on('page:receive',function(){
       tinymce.remove(); //fixes turbolinks issue
     });
-
-    $('#editor1').css({ "height": "500px" });
     
+    $('#editor1').css({ "height": "500px" });
+
     tinymce.init({
       selector: '#editor1',
       plugins: "code link visualblocks uploader formula glossary",
@@ -19,25 +19,6 @@ class PagesShow extends App {
       force_p_newlines: true,
       forced_root_block: '',
       content_css: '/assets/tinymce.css',
-      style_formats: [
-        { title: 'Bold text', inline: 'strong' },
-        { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
-        { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
-        { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } },
-        { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
-      ],
-      formats: {
-        alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'left' },
-        aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'center' },
-        alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'right' },
-        alignfull: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'full' },
-        bold: { inline: 'span', 'classes': 'bold' },
-        italic: { inline: 'span', 'classes': 'italic' },
-        underline: { inline: 'span', 'classes': 'underline', exact: true },
-        strikethrough: { inline: 'del' },
-        customformat: { inline: 'span', styles: { color: '#00ff00', fontSize: '20px' }, attributes: { title: 'My custom format' }, classes: 'example1' },
-      },
-      theme_advanced_blockformats : "p,div,h1,h2,h3,h4,h5,h6,blockquote,dt,dd,code,samp",
       setup: function(editor) {
         editor.on('init', function(args) {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub, editor.getContent()], function() {
