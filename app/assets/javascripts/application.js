@@ -21,4 +21,3 @@
 //= require tinymceplugins/glossary.tinymce.plugin
 
 //= require all
-
