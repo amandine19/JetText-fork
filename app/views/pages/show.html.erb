@@ -72,27 +72,9 @@
 
         <!-- Mise en place des elements centraux -->
         <div id="page-wrapper">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
+            <div>
+                <%= render :partial => 'pages/edit', :object => @page %>
             </div>
-        
-            <!-- /Fin des elements centraux -->
-            <div class="row">
-                <div class="col-lg-3">
-                    <nav id="main-nav">
-                        <%= render :partial => 'pages/new', :object => @new_page %>
-                    </nav>
-                </div>
-            
-                <div class="col-lg-9">
-                    <div>
-                        <%= render :partial => 'pages/edit', :object => @page %>
-                    </div>
-                </div>
         </div>
         <!-- /Fin des elements centraux -->
     </div>
