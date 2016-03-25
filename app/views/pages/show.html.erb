@@ -74,23 +74,24 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-        </div>
-        <!-- /Fin des elements centraux -->
-        <div id="page-wrapper">
-            <div class="col-lg-3 row">
-                <nav id="main-nav">
-                    <%= render :partial => 'pages/new', :object => @new_page %>
-                </nav>
-            </div>
         
-            <div class="col-lg-9">
-                <div class="uploads" style="display: none">
-                    <% @uploads.each do |file| %>
-                        <a class="file"><%= "/#{file.url}" %></a><br>
-                    <% end %>
+            <!-- /Fin des elements centraux -->
+            <div class="row">
+                <div class="col-lg-3">
+                    <nav id="main-nav">
+                        <%= render :partial => 'pages/new', :object => @new_page %>
+                    </nav>
                 </div>
-                <div>
-                    <%= render :partial => 'pages/edit', :object => @page %>
+            
+                <div class="col-lg-9">
+                    <div class="uploads" style="display: none">
+                        <% @uploads.each do |file| %>
+                            <a class="file"><%= "/#{file.url}" %></a><br>
+                        <% end %>
+                    </div>
+                    <div>
+                        <%= render :partial => 'pages/edit', :object => @page %>
+                    </div>
                 </div>
             </div>
         </div>
