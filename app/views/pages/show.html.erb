@@ -58,7 +58,9 @@
                                 </li>
                             </a>
                         <% end %>
+                        <li>
                         <%= render :partial => 'pages/new', :object => @new_page %>
+                        </li>
                     </ul>
                 </div>
           	</div>
@@ -69,33 +71,18 @@
 
         <!-- Mise en place des elements centraux -->
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
+            <div class="uploads" style="display: none">
+                <% @uploads.each do |file| %>
+                    <a class="file"><%= "/#{file.url}" %></a><br>
+                <% end %>
+            </div>
+            <div>
+                <%= render :partial => 'pages/edit', :object => @page %>
             </div>
         </div>
         <!-- /Fin des elements centraux -->
-        <div id="page-wrapper">
-            <div class="col-lg-3 row">
-                <nav id="main-nav">
-                    <%= render :partial => 'pages/new', :object => @new_page %>
-                </nav>
-            </div>
-        
-            <div class="col-lg-9">
-                <div class="uploads" style="display: none">
-                    <% @uploads.each do |file| %>
-                        <a class="file"><%= "/#{file.url}" %></a><br>
-                    <% end %>
-                </div>
-                <div>
-                    <%= render :partial => 'pages/edit', :object => @page %>
-                </div>
-            </div>
-        </div>
     </div>
+
 </div>
 
 <script>

@@ -1,11 +1,13 @@
 @import "vars";
 
-
 .col-lg-12{
+	margin: 0;
+	padding: 0;
+	@include span(12 of 12);
+	margin-top: 40px;
 	nav {
 		ul.navbar-top-links li{
 			display: inline-block;
-			margin: 0 15px 0 15px;
 		}
 		/* pour le header */
 		div.navbar-header {
@@ -26,12 +28,13 @@
     		}
 		}
 		/* pour le menu a droite */
-		div.sidebar{
+		div.sidebar {
 			padding-right: 0;
     		padding-left: 0;
 			.sidebar-nav {
 				ul#side-menu {
 					border-bottom: 1px solid #e7e7e7;
+					margin-bottom: 10px;
 					a {
 						display: block;
 						text-decoration: none;
@@ -47,7 +50,7 @@
 			    		background-color: #eee;
 			    		text-decoration: none;
 					}
-					ul.menu{
+					ul.menu {
 						width: span( 12 of 12);
 						position: relative;
 						display: block;
@@ -67,53 +70,29 @@
 	}
 }
 
-
-nav#main-nav {
-	color: $textGrey;
-
-	ul {
-		padding-left: 0;
-
-		a {
-			text-decoration: none;
-
-			li {
-				padding: 5px;
-				background: $green;
-				list-style-type: none;
-				color: $white;
-			}
-		}
-
-		ul {
-			border: 0;
-
-			a {
-				li {
-					background: $brown;
-					color: $textGrey;
-				}
-			}
-		}
-	}
-}
-
-form.edit_page {
-	h3 {
-		margin-top: 0;
-	}
-}
-
 @media(min-width:765px) {
 	.col-lg-12{
 		nav{
 			.sidebar {
 				display: block;
 				position: absolute;
-				z-index: -100;		    	width: span(3 of 12);
+				z-index: -100;		    	
+				width: span(3 of 12);
+				ul li {
+					#add_new_page, a {
+						text-align: center;
+						div{
+							padding-top: 10px;
+						}
+						.btn {
+							float: right;
+							margin: 0 15px 3px 0;
+						}
+					}
+				}
 			}
 		}
-		#page-wrapper{
+		#page-wrapper {
 			position: inherit;
 			margin-left: span(3 of 12);
 			padding: 0 30px;
