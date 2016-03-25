@@ -7,7 +7,7 @@ class PagesShow extends App {
     });
 
     $('#editor1').css({ "height": "500px" });
-    
+
     tinymce.init({
       selector: '#editor1',
       plugins: "code link visualblocks uploader formula glossary",
@@ -18,26 +18,7 @@ class PagesShow extends App {
       force_br_newlines: false,
       force_p_newlines: true,
       forced_root_block: '',
-      content_css: '/assets/tinymce.css',
-      style_formats: [
-        { title: 'Bold text', inline: 'strong' },
-        { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
-        { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } },
-        { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } },
-        { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }
-      ],
-      formats: {
-        alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'left' },
-        aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'center' },
-        alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'right' },
-        alignfull: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'full' },
-        bold: { inline: 'span', 'classes': 'bold' },
-        italic: { inline: 'span', 'classes': 'italic' },
-        underline: { inline: 'span', 'classes': 'underline', exact: true },
-        strikethrough: { inline: 'del' },
-        customformat: { inline: 'span', styles: { color: '#00ff00', fontSize: '20px' }, attributes: { title: 'My custom format' }, classes: 'example1' },
-      },
-      theme_advanced_blockformats : "p,div,h1,h2,h3,h4,h5,h6,blockquote,dt,dd,code,samp",
+      content_css: '/assets/bootstrap/dist/css/bootstrap.min.css',
       setup: function(editor) {
         editor.on('init', function(args) {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub, editor.getContent()], function() {
@@ -52,10 +33,6 @@ class PagesShow extends App {
           var content = $(iframe[0].contentWindow.document.body);
           var iframeElm = $.parseHTML(content.html());
 
-          $(iframeElm).contents().each(function() {
-            $(this).click(function(e) {
-            });
-          });
           
           function clickIframeElm(element, index, array) {
             $(element).addClass('idok');
@@ -69,12 +46,43 @@ class PagesShow extends App {
             selected_text = getIframeSelectionText(iframe[0]);
             var selected = $.parseHTML(getIframeSelectionText(iframe[0]));
           });
-        
+
         });
       }
     });
 
     addPageBox();
+
+    // sortable pages order using jquery.sortable.min.js
+    function set_positions(){
+      // loop through and give each task a data-pos
+      // attribute that holds its position in the DOM
+      $('.pages-panel.sortable').find('a').each(function(i){
+        $(this).attr("data-pos",i+1);
+      });
+    }
+
+    set_positions();
+    $('.pages-panel.sortable').sortable();
+
+    $('.pages-panel.sortable').sortable().bind('sortupdate', function(e, ui) {
+      // array to store new order
+      var updated_order = [];
+      // set the updated positions
+      set_positions();
+
+      // populate the updated_order array with the new task positions
+      $('.pages-panel.sortable').find('a').each(function(i){
+        updated_order.push({ id: $(this).data("id"), position: i+1 });
+      });
+
+      // send the updated order via ajax
+      $.ajax({
+        type: "PUT",
+        url: '/pages/sort',
+        data: { order: updated_order }
+      });
+    });
   }
 }
 

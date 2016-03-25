@@ -29,3 +29,19 @@ class Upload < ActiveRecord::Base
     end
 end
 
+# == Schema Information
+#
+# Table name: uploads
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  file_file_name    :string(255)
+#  file_content_type :string(255)
+#  file_file_size    :integer
+#  file_updated_at   :datetime
+#  type              :string(255)
+#  url               :string(255)
+#  size              :integer
+#  container_id      :integer
+#  user_id           :integer
+#
