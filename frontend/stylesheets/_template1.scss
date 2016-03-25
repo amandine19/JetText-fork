@@ -30,24 +30,34 @@
 			padding-right: 0;
     		padding-left: 0;
 			.sidebar-nav {
-				ul {
+				ul#side-menu {
 					border-bottom: 1px solid #e7e7e7;
-					li {
+					a {
+						display: block;
+						text-decoration: none;
+						li {
+							border-bottom: 1px solid #e7e7e7;
+							padding: 10px 30px;
+							i{
+								float: right;
+							}
+						}
+					}
+					a.active,a:hover {
+			    		background-color: #eee;
+			    		text-decoration: none;
+					}
+					ul.menu{
+						width: span( 12 of 12);
+						position: relative;
+						display: block;
 						border-bottom: 1px solid #e7e7e7;
 						a {
 							text-decoration: none;
-						}
-						a.active {
-				    		background-color: #eee;
-						}
-						ul {
-							border: none;
-							color:red;
 							li {
+								list-style: none;
 								border: none;
-								a {
-
-								}
+								padding-left: 45px;
 							}
 						}
 					}

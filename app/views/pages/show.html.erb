@@ -54,10 +54,15 @@
                         <% @pages.each do |page| %>
                             <% if page.parent.nil? %>
                                 <a href='<%= "/pages/#{page.id}" %>'>
-                                    <li><%= "#{page.name}" %></li>
+                                    <li>
+                                        <%= "#{page.name}" %>
+                                        <% if has_children(page) %>
+                                            <i class="fa fa-chevron-down"></i>
+                                        <% end %>
+                                    </li>
                                 </a>
                                 <% if has_children(page) %>
-                                    <ul>
+                                    <ul class="nav nav-second-level menu">
                                         <% children = get_children(page) %>
                                         <% children.each do |c| %>
                                             <a href='<%= "/pages/#{c.id.to_s}" %>'>
