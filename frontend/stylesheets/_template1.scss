@@ -35,12 +35,16 @@
 				ul#side-menu {
 					border-bottom: 1px solid #e7e7e7;
 					margin-bottom: 10px;
+					
+					* {
+						text-align: left;
+					}
 					a {
 						display: block;
 						text-decoration: none;
 						li {
 							border-bottom: 1px solid #e7e7e7;
-							padding: 10px 30px;
+							padding: 10px 10px;
 							i{
 								float: right;
 							}
@@ -55,15 +59,27 @@
 						position: relative;
 						display: block;
 						border-bottom: 1px solid #e7e7e7;
-						a {
-							text-decoration: none;
-							li {
-								list-style: none;
-								border: none;
-								padding-left: 45px;
+						li {
+							list-style: none;
+							border: none;
+							ul{
+								li{
+									padding-left: 15px;
+								}
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+	div#page-wrapper{
+		div.row{
+			div.editable_elem{
+				.btn{
+					float: right;
+					margin-top: 10px;
+					background: $blue;
 				}
 			}
 		}

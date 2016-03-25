@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/assets/MathJax/extensions/MathMenu.js" defer></script>
     <script type="text/javascript" src="/assets/MathJax/extensions/MathZoom.js" defer></script>
 
-	<div class="col-lg-12">
+    <div class="col-lg-12">
         <!-- Mise en place de toute la navigation  -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Mise en place du menu pour gerer les creation et autre des ressources  -->
@@ -18,11 +18,9 @@
                 <li>
                     <%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@page.container.id)) %>
                 </li>
-
                 <li>
                     <%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
                 </li>
-
                 <li>
                     <a href="#" id="generate_container"><i class="fa fa-wrench"></i> Générer</a>
                 </li>
@@ -52,31 +50,24 @@
                     </a>
                     <ul class="nav pages-panel sortable" id="side-menu">
                         <% @pages.each do |page| %>
-                            <% if page.level.nil? || page.level == 1 %>
-                                <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
-                                    <li>
-                                        <%= "#{page.name}" %>
-                                        <button class="increment-level" data-target="<%= page.id %>"><i class="fa fa-arrow-right"></i></button>
-                                    </li>
-                                </a>
-                            <% else %>
-                                <% @item = "" %>
-                                <% page.level.times do |level| %>
-                                    <% @item = @item.to_s + "<ul class='nav' style='display: inline'><li>" %>
-                                <% end %>
-                                <% @item = @item.to_s + "<a href='/pages/" + page.id.to_s + "' data-id='" + page.id.to_s + "' data-no-turbolink>" + page.level.to_s + page.name + "</a>" %>
-                                <% page.level.times do |level| %>
-                                    <% @item = @item.to_s + "</li></ul>" %>
-                                <% end %>
-                                <%= @item.html_safe %>
+                            <% @item = "" %>
+                            <% page.level.times do |level| %>
+                                <% @item = @item.to_s + "<ul class='nav menu' style='display: inline'><li>" %>
                             <% end %>
+                            <% @item = @item.to_s + "<a href='/pages/" + page.id.to_s + "' data-id='" + page.id.to_s + "' data-no-turbolink>" + page.level.to_s + page.name + "</a>" %>
+                            <% page.level.times do |level| %>
+                                <% @item = @item.to_s + "</li></ul>" %>
+                            <% end %>
+                            <%= @item.html_safe %>
                         <% end %>
                     </ul>
-                    <li>
-                        <%= render :partial => 'pages/new', :object => @new_page %>
-                    </li>
+                    <ul  class="nav pages-panel sortable" id="side-menu">
+                        <li>
+                            <%= render :partial => 'pages/new', :object => @new_page %>
+                        </li>
+                    </ul>
                 </div>
-          	</div>
+            </div>
             <!-- Fin menu d'indication d'imbrication des pages gauche -->
 
         </nav>
