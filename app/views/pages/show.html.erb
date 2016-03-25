@@ -13,12 +13,29 @@
 	<div class="col-lg-12">
         <!-- Mise en place de toute la navigation  -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <!-- Mise en place du menu pour gerer les creation et autre des ressources  -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@page.container.id)) %>
+                </li>
+
+                <li>
+                    <%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
+                </li>
+
+                <li>
+                    <a href="#" id="generate_container"><i class="fa fa-wrench"></i> Générer</a>
+                </li>
+            </ul>
+            <!-- Fin de la Mise en place du menu pour gerer les creation et autre des ressources  -->
+
             <!-- Header de la page sans reaseaux sociaux pour le moment  -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="/templates/iutenligne/img/cartable.png" border="0" style="display:inline-block;">
+                <a class="navbar-brand" href='<%= "/containers/#{@page.container.id}" %>'>
+                    <img src="/templates/iutenligne/img/cartable.png" border="0" style="display:inline-block;">
                     <h1>
                         <%= link_to(@page.container.name, container_path(@page.container.id)) %>
                     </h1>
@@ -27,33 +44,39 @@
             <!-- / fin Header de la page sans reaseaux sociaux pour le moment  -->
          
         
-            <!-- Mise en place du menu pour gerer les creation et autre des ressources  -->
-            <div class="actions navbar-default sidebar" role="navigation">
+            <!-- menu d'indication d'imbrication des pages gauche -->
+            <div class="navbar-default sidebar menu" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <a href="http://www.iutenligne.net/resources.html">
                         <img src="/templates/iutenligne/img/iutenligne.png" border="0">
                     </a>
                     <ul class="nav" id="side-menu">
-              		    <li>
-                            <%= link_to(raw('<i class="fa fa-edit"></i> Editer'), edit_container_path(@page.container.id)) %>
-                        </li>
-
-              		    <li>
-                            <%= link_to(raw('<i class="fa fa-remove"></i> Supprimer'), container_path(), :method => 'delete') %>
-                        </li>
-
-              		    <li>
-                            <a href="#" id="generate_container"><i class="fa fa-wrench"></i> Générer</a>
-                        </li>
+                        <% @pages.each do |page| %>
+                            <a href='<%= "/pages/#{page.id}" %>'>
+                                <li>
+                                    <%= "#{page.name}" %>
+                                </li>
+                            </a>
+                        <% end %>
                     </ul>
                 </div>
           	</div>
-            <!-- Fin de la Mise en place du menu pour gerer les creation et autre des ressources  -->
+            <!-- Fin menu d'indication d'imbrication des pages gauche -->
 
         </nav>
         <!-- / fin de la Mise en place de toute la navigation  -->
-        <div id="page-wrapper">
 
+        <!-- Mise en place des elements centraux -->
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /Fin des elements centraux -->
+        <div id="page-wrapper">
             <div class="col-lg-3 row">
                 <nav id="main-nav">
                     <ul class="pages-panel sortable">
@@ -89,3 +112,7 @@
         });
     });
 </script>
+
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
