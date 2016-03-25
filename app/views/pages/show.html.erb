@@ -55,6 +55,7 @@
                             <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
                                 <li>
                                     <%= "#{page.name}" %>
+                                    <a href="#" class="increment-level" data-target="<%= page.id %>"><i class="fa fa-arrow-right"></i></a>
                                 </li>
                             </a>
                         <% end %>
@@ -85,11 +86,6 @@
                 </div>
             
                 <div class="col-lg-9">
-                    <div class="uploads" style="display: none">
-                        <% @uploads.each do |file| %>
-                            <a class="file"><%= "/#{file.url}" %></a><br>
-                        <% end %>
-                    </div>
                     <div>
                         <%= render :partial => 'pages/edit', :object => @page %>
                     </div>

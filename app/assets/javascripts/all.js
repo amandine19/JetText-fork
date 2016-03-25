@@ -244,13 +244,6 @@ var PagesShow = function (_App) {
             var content = $(iframe[0].contentWindow.document.body);
             var iframeElm = $.parseHTML(content.html());
 
-            function clickIframeElm(element, index, array) {
-              $(element).addClass('idok');
-              $(element).click(function (e) {
-                console.log(e);
-              });
-            }
-
             var selected_text = "";
             content.mouseup(function () {
               selected_text = getIframeSelectionText(iframe[0]);
@@ -291,6 +284,16 @@ var PagesShow = function (_App) {
           url: '/pages/sort',
           data: { order: updated_order }
         });
+      });
+
+      $('.increment-level').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: "PUT",
+          url: '/pages/levelize',
+          data: { id: $(this).data('target'), do: "inc" }
+        });
+        return false;
       });
     }
   }]);

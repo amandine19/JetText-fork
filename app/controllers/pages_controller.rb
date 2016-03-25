@@ -87,6 +87,26 @@ class PagesController < ApplicationController
     render :nothing => true
   end
 
+  def levelize
+    @page = Page.find(params[:id])
+    if params[:do] == 'inc'
+      if @page.level.nil?
+        @page.update_attribute(:level, 1)
+      else
+        @page.update_attribute(:level, @page.level + 1)
+      end
+    else
+      if @page.level.nil?
+        @page.update_attribute(:level, 1)
+      else
+        unless @page.level == 1 || @page.level == 0
+          @page.update_attribute(:level, @page.level - 1)
+        end
+      end
+    end
+    render :nothing => true
+  end
+
   private
     def page_params
       params.require(:page).permit(:name, :content, :container_id, :user_id, :weight, :level)

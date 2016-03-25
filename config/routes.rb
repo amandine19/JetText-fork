@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :containers
     resources :pages do
       put :sort, on: :collection
+      put :levelize, on: :collection
     end
     resources :variables
     resources :uploads
