@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/assets/MathJax/extensions/MathMenu.js" defer></script>
     <script type="text/javascript" src="/assets/MathJax/extensions/MathZoom.js" defer></script>
 
-	<div class="col-lg-12">
+    <div class="col-lg-12">
         <!-- Mise en place de toute la navigation  -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Mise en place du menu pour gerer les creation et autre des ressources  -->
@@ -52,18 +52,33 @@
                     </a>
                     <ul class="nav pages-panel sortable" id="side-menu">
                         <% @pages.each do |page| %>
-                            <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
-                                <li>
-                                    <%= "#{page.name}" %>
-                                </li>
-                            </a>
+                            <% @item = "" %>
+                            <% if page.level.nil? || page.level == 1 %>
+                                <a href='<%= "/pages/#{page.id}" %>' data-id="<%= page.id %>" data-no-turbolink>
+                                    <li>
+                                        <%= "#{page.name}" %>
+                                        <button class="increment-level" data-target="<%= page.id %>"><i class="fa fa-arrow-right"></i></button>
+                                    </li>
+                                </a>
+                            <% else %>
+                                <% page.level.times do |level| %>
+                                    <% @item = @item.to_s + "<ul class='nav menu' style='display: inline'><li>" %>
+                                <% end %>
+                                <% @item = @item.to_s + "<a href='/pages/" + page.id.to_s + "' data-id='" + page.id.to_s + "' data-no-turbolink>" + page.level.to_s + page.name + "</a>" %>
+                                <% page.level.times do |level| %>
+                                    <% @item = @item.to_s + "</li></ul>" %>
+                                <% end %>
+                                <%= @item.html_safe %>
+                            <% end %>
                         <% end %>
+                    </ul>
+                    <ul  class="nav pages-panel sortable" id="side-menu">
                         <li>
-                        <%= render :partial => 'pages/new', :object => @new_page %>
+                            <%= render :partial => 'pages/new', :object => @new_page %>
                         </li>
                     </ul>
                 </div>
-          	</div>
+            </div>
             <!-- Fin menu d'indication d'imbrication des pages gauche -->
 
         </nav>
@@ -71,11 +86,6 @@
 
         <!-- Mise en place des elements centraux -->
         <div id="page-wrapper">
-            <div class="uploads" style="display: none">
-                <% @uploads.each do |file| %>
-                    <a class="file"><%= "/#{file.url}" %></a><br>
-                <% end %>
-            </div>
             <div>
                 <%= render :partial => 'pages/edit', :object => @page %>
             </div>
