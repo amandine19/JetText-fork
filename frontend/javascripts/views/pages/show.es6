@@ -6,8 +6,6 @@ class PagesShow extends App {
       tinymce.remove(); //fixes turbolinks issue
     });
 
-    $('#editor1').css({ "height": "500px" });
-
     tinymce.init({
       selector: '#editor1',
       plugins: "code link visualblocks uploader formula glossary",

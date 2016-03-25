@@ -2,8 +2,10 @@
 @import "misc";
 @import "vars";
 
-html {
+html, body {
 	@include container(100%);
+	margin: 0;
+	padding: 0;
 
 	header {
 		@import "header";
@@ -14,12 +16,20 @@ html {
 	  	min-height: 90vh;
 		flex: 1 0 auto;
 		margin-top: 50px;
+		margin: 0;
+		padding: 0;
+		@include span(12 of 12);
 
 		div#wrapper {
-			width: 100%;
+			@include span(12 of 12);
+			margin: 0;
+			padding: 0;
 
 			#outlet {
 				@import 'template1';
+				@include span(12 of 12);
+				margin: 0;
+				padding: 0;
 			}
 		}
 	}
