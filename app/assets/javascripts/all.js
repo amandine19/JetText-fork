@@ -257,7 +257,7 @@ var PagesShow = function (_App) {
       function set_positions() {
         // loop through and give each task a data-pos
         // attribute that holds its position in the DOM
-        $('.pages-panel.sortable').find('a').not('.increment-level').each(function (i) {
+        $('.pages-panel.sortable').find('a').each(function (i) {
           $(this).attr("data-pos", i + 1);
         });
       }
@@ -272,7 +272,7 @@ var PagesShow = function (_App) {
         set_positions();
 
         // populate the updated_order array with the new task positions
-        $('.pages-panel.sortable').find('a').not('.increment-level').each(function (i) {
+        $('.pages-panel.sortable').find('a').each(function (i) {
           updated_order.push({ id: $(this).data("id"), position: i + 1 });
         });
 
