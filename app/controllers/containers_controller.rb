@@ -14,11 +14,16 @@
 class ContainersController < ApplicationController
 
   before_action :authenticate_user!
+  respond_to :html, :json
   skip_before_filter :verify_authenticity_token
   require 'image_generator/image_generator'
   
   def index
-    @containers = Container.all.where(:user_id => current_user.id)
+    @containers = Container.select("id, name").all.where(:user_id => current_user.id)
+    respond_to do |format|
+      format.html
+      format.json { render json: @containers }
+    end
   end
 
   def show

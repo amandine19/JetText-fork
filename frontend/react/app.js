@@ -4,7 +4,7 @@ var Containers = require('./components/containers/Containers.jsx');
 
 $(document).ready(function () {
   ReactDOM.render(
-    <Containers />,
+    <Containers source="/containers.json" />,
     document.getElementById('container')
   );
 });
