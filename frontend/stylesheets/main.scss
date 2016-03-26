@@ -28,7 +28,7 @@ html, body {
 			#outlet {
 				@import 'template1';
 				@include span(12 of 12);
-				margin: 0;
+				margin: 50px 50px;
 				padding: 0;
 			}
 		}

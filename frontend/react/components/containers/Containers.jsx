@@ -9,7 +9,7 @@ var Containers = React.createClass({
   },
   
   componentDidMount: function() {
-    this.serverRequest = $.get(this.props.source, function (result) {
+    this.serverRequest = $.get("/containers.json", function (result) {
       this.setState({
         containersList: result
       });
