@@ -13,7 +13,10 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer');
+    buffer = require('vinyl-buffer'),
+    watchify = require('watchify'),
+    react = require('gulp-react'),
+    reactify = require('reactify');
  
 gulp.task('sass', function () {
   gulp.src('./frontend/stylesheets/**/*.scss')
@@ -74,4 +77,13 @@ gulp.task("js", function () {
     .on('end', function() { 
       gutil.log(gutil.colors.magenta('༼ つ ◕_◕ ༽つ  Yeah !') + gutil.colors.green(' JS correctly generated !'));
     });
+});
+
+gulp.task("react", function () {
+  var bundler = browserify('./frontend/react/app.js').transform(babelify, {presets: ["es2015", "react"]})
+  return bundler.bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(concat("main.js"))
+    .pipe(gulp.dest("./app/assets/javascripts/"));
 });

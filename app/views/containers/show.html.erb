@@ -13,21 +13,9 @@
       <nav id="main-nav">
         <ul>
           <% @pages.each do |page| %>
-            <% if page.parent.nil? %>
-              <a href='<%= "/pages/#{page.id}" %>'>
-                <li><%= "#{page.name}" %></li>
-              </a>
-              <% if has_children(page) %>
-                <ul>
-                  <% children = get_children(page) %>
-                  <% children.each do |c| %>
-                    <a href='<%= "/pages/#{c.id.to_s}" %>'>
-                      <li><%= "#{c.name}" %></li>
-                    </a>
-                  <% end %>
-                </ul>
-              <% end %>
-            <% end %>
+            <a href='<%= "/pages/#{page.id}" %>'>
+              <li><%= "#{page.name}" %></li>
+            </a>
           <% end %>
         </ul>
         <%= render :partial => 'pages/new', :object => @page %>

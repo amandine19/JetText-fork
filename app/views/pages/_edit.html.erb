@@ -8,14 +8,12 @@
 <!-- custom form to deal with escaped HTML characters -->
 <%= form_for @page do |f| %>
 
-	<div class="row">
-        <div class=" editable_elem">
-			<h1 class="page-header form-control"><%= f.text_field :name %></h1>
+	<div id="editor-container" class="row">
+		<%= f.text_field :name %>
 
-	  		<textarea name="page[content]" id="editor1" class="editable_elem">
-	  			<%= CGI.unescapeHTML(@page.content).html_safe if @page.content %>
-	  		</textarea>
-	  		<input name="commit" value="save" class="btn btn-primary" type="submit">
-	  	</div>
-	 </div>
+		<textarea name="page[content]" id="editor1" class="editable_elem">
+			<%= CGI.unescapeHTML(@page.content).html_safe if @page.content %>
+		</textarea>
+		<input name="commit" value="save" class="btn btn-primary" type="submit">
+	</div>
 <% end %>

@@ -1,18 +1,21 @@
 nav.navbar {
-	min-height: 40px;
-	height: 40px;
+	min-height: 44px;
+	height: 44px;
+	color: white;
+	box-shadow: 0 2px 4px -1px rgba(0,0,0,0.50);
 
 	#logo {
 		@include span(4 of 12);
 
 		h1 {
-			font-family: "Lobster-Regular",Helvetica,Arial,sans-serif;
+			font-family: "Pacifico",Helvetica,Arial,sans-serif;
 			font-size: 30px;
 			margin-top: 0;
 			padding: 1px 0;
+			color: white;
 
 			a {
-				color: black;
+				color: white;
 				text-decoration: none;
 			}
 		}
@@ -20,8 +23,8 @@ nav.navbar {
 
 	div#user-menu,
 	div#top-menu {
-		@include span(4 of 12);
-		padding: 8px 0;
+		@include span(8 of 12);
+		padding: 10px 0;
 
 		ul {
 			text-align: right;
@@ -29,6 +32,10 @@ nav.navbar {
 			li {
 				display: inline-block;
 				padding: 0 10px;
+
+				a {
+					color: #00AEEF;
+				}
 			}
 		}
 	}
