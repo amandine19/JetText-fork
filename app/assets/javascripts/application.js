@@ -20,4 +20,4 @@
 //= require tinymceplugins/formula.tinymce.plugin
 //= require tinymceplugins/glossary.tinymce.plugin
 
-//= require all
+//= require main

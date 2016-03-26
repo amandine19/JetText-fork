@@ -1,8 +1,9 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Containers = require('./components/containers/Containers.jsx');
 
 $(document).ready(function () {
-  React.render(
+  ReactDOM.render(
     <Containers />,
     document.getElementById('container')
   );
