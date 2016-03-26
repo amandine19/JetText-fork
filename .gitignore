@@ -18,3 +18,7 @@
 /public/generated
 
 /spring/*.pid
+
+/app/assets/javascripts/main.js
+/app/assets/javascripts/all.js
+/app/assets/javascripts/all.js.map
