@@ -16,17 +16,12 @@ var Editor = React.createClass({
         contentValue: result.content
       });
     }.bind(this));
-
-    var that = this;
-    var editor = CKEDITOR.replace('editor1');
-    editor.on('change', function( evt ) {
-      // setState to allow changes to be saved on submit
-      that.setState({ contentValue: evt.editor.getData() });
-    });
   },
 
   componentWillUnmount: function() {
     this.serverRequest.abort();
+    var editor = CKEDITOR.instances['editor1'];
+    if (editor) { editor.destroy(true); }
   },
 
   postData: function() {
@@ -38,12 +33,22 @@ var Editor = React.createClass({
     });
   },
 
+  unlock: function() {
+    var that = this;
+    var editor = CKEDITOR.replace('editor1');
+    editor.on('change', function( evt ) {
+      // setState to allow changes to be saved on submit
+      that.setState({ contentValue: evt.editor.getData() });
+    });
+  },
+
   render: function() {
     var page = this.state.page;
     return (
       <div className="col-lg-12">
         <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)} />
         <input type="button" onClick={this.postData} value="Save" />
+        <input type="button" onClick={this.unlock} value="Edit" />
       </div>
     );
   }
