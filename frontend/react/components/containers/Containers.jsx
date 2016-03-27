@@ -1,4 +1,5 @@
 var React = require('react');
+import { Router, Route, Link, hashHistory } from 'react-router';
 var ContainersList = require('./ContainersList.jsx');
 
 var Containers = React.createClass({
@@ -25,7 +26,11 @@ var Containers = React.createClass({
     return (
       <div>
         {results.map(function(result){
-          return <li key={result.id}>{result.name}</li>;
+          return (
+            <li>
+              <Link key={result.id} to={"/containers/"+result.id}>{result.name}</Link>
+            </li>
+          );
         })}
       </div>
     );

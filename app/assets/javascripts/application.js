@@ -21,3 +21,4 @@
 //= require tinymceplugins/glossary.tinymce.plugin
 
 //= require main
+// require all
