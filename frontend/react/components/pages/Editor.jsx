@@ -20,13 +20,13 @@ var Editor = React.createClass({
     var that = this;
     var editor = CKEDITOR.replace('editor1');
     editor.on('change', function( evt ) {
+      // setState to allow changes to be saved on submit
       that.setState({ contentValue: evt.editor.getData() });
     });
   },
 
   componentWillUnmount: function() {
     this.serverRequest.abort();
-    //tinymce.remove('#editor1');
   },
 
   postData: function() {
@@ -42,7 +42,7 @@ var Editor = React.createClass({
     var page = this.state.page;
     return (
       <div className="col-lg-12">
-        <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)}/>
+        <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)} />
         <input type="button" onClick={this.postData} value="Save" />
       </div>
     );

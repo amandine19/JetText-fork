@@ -12,8 +12,8 @@ $(document).ready(function () {
 	  <Router history={hashHistory}>
 	  	<Route path="/" component={App}/>	
 	    <Route path="containers" component={Containers}/>
-	    <Route path="containers/:id" component={Container} />
-	    <Route path="pages/:id" component={Page} />
+	    <Route path="containers/:id" component={Container}/>
+	    <Route path="pages/:id" component={Page}/>
 	  </Router>
 	), document.getElementById('container'))
 });

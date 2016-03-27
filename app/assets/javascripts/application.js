@@ -15,15 +15,14 @@
 //= require sb-admin-2
 //= require metisMenu.min
 
-//= require tinymce/tinymce.min.js
-//= require tinymceplugins/uploader.tinymce.plugin
-//= require tinymceplugins/formula.tinymce.plugin
-//= require tinymceplugins/glossary.tinymce.plugin
+// require tinymce/tinymce.min.js
+// require tinymceplugins/uploader.tinymce.plugin
+// require tinymceplugins/formula.tinymce.plugin
+// require tinymceplugins/glossary.tinymce.plugin
 
 //= require cke/cke_fix.js
 //= require ckeditor/ckeditor.js
 //= require ckeditor/lang/fr.js
-// require alloyeditor/dist/alloy-editor/alloy-editor-all-min.js
 
 //= require main
 // require all
