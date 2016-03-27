@@ -20,6 +20,10 @@ class ContainersController < ApplicationController
     unless @container.user_id == current_user.id
       redirect_to action: "index"
     end
+    respond_to do |format|
+      format.html
+      format.json { render json: {container: @container, pages: @pages} }
+    end
   end
 
   def new

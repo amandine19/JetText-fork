@@ -65,6 +65,11 @@ gulp.task('js:watch', function () {
   gulp.watch('./frontend/javascripts/**/*.es6', ['js']);
 });
 
+gulp.task('react:watch', function () {
+  gulp.watch('./frontend/react/**/*.js', ['react']);
+  gulp.watch('./frontend/react/**/*.jsx', ['react']);
+});
+
 gulp.task("js", function () {
   return gulp.src("./frontend/javascripts/**/*.es6")
     .pipe(sourcemaps.init())

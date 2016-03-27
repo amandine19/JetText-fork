@@ -1,21 +1,7 @@
-# == Schema Information
-#
-# Table name: pages
-#
-#  id           :integer          not null, primary key
-#  name         :string(255)
-#  content      :binary(16777215)
-#  container_id :integer
-#  user_id      :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  weight       :integer
-#  level        :integer
-#
-
 class PagesController < ApplicationController
 
   before_action :authenticate_user!
+  respond_to :html, :json
   require 'image_generator/image_generator'
   include ImageGenerator
 
@@ -32,6 +18,10 @@ class PagesController < ApplicationController
     @new_page = Page.new
     unless @page.user_id == current_user.id
       redirect_to action: "index"
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @page }
     end 
   end
 
@@ -113,3 +103,18 @@ class PagesController < ApplicationController
     end
   
 end
+
+# == Schema Information
+#
+# Table name: pages
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  content      :binary(16777215)
+#  container_id :integer
+#  user_id      :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  weight       :integer
+#  level        :integer
+#
