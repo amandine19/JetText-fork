@@ -4,33 +4,21 @@ import { Router, Route, Link, hashHistory } from 'react-router';
 var Page = React.createClass({
   getInitialState: function() {
     return {
-      page: ""
+      page: '',
+      contentValue: ''
     };
   },
   
   componentDidMount: function() {
     this.serverRequest = $.get("/pages/"+this.props.params.id+".json", function (result) {
       this.setState({
-        page: result
+        page: result,
+        contentValue: result.content
       });
     }.bind(this));
-  },
 
-  componentWillUnmount: function() {
-    this.serverRequest.abort();
-  },
+    var that = this;
 
-  postData: function() {
-    var page = this.state.page;
-    console.log(page);
-    $.ajax({
-      type: "PUT",
-      url: '/pages/update_ajax',
-      data: { id: page.id, content: page.content }
-    });
-  },
-
-  render: function() {
     tinymce.init({
       selector: '#editor1',
       plugins: "code link visualblocks table uploader formula glossary",
@@ -48,9 +36,27 @@ var Page = React.createClass({
           var content = $(iframe[0].contentWindow.document.body);
           var iframeElm = $.parseHTML(content.html());
         });
+        editor.on('change', function(ed) {
+          that.setState({ contentValue: editor.getContent() });
+        });
       }
     });
+  },
 
+  componentWillUnmount: function() {
+    this.serverRequest.abort();
+  },
+
+  postData: function() {
+    var page = this.state.page;
+    $.ajax({
+      type: "PUT",
+      url: '/pages/update_ajax',
+      data: { id: page.id, content: this.state.contentValue }
+    });
+  },
+
+  render: function() {
     var page = this.state.page;
     return (
       <div>
@@ -58,9 +64,13 @@ var Page = React.createClass({
           {page.id} - {page.name}
         </div>
         <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)} />
-        <input type="button" onClick={this.postData} value="Click Me!" />
+        <input type="button" onClick={this.postData} value="Save" />
       </div>
     );
+  },
+
+  onChange: function(e) {
+    this.setState({ contentValue: editor.getContent() });
   }
 
 });
