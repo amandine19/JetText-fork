@@ -21,6 +21,16 @@ tinymce.PluginManager.add('glossary', function(editor, url) {
                 width: 400,
                 height: 250,
                 onopen: function(e) {
+                    function getIframeSelectionText(iframe) {
+                      var win = iframe.contentWindow;
+                      var doc = win.document;
+
+                      if (win.getSelection) {
+                        return win.getSelection().toString();
+                      } else if (doc.selection && doc.selection.createRange) {
+                        return doc.selection.createRange().text;
+                      }
+                    }
                     //if some text is selected in the editor, removes the spaces before and after the string and adds it to the input
                     var iframe = $("#editor1_ifr");
                     var selected_text = getIframeSelectionText(iframe[0]).replace(/^\s\s*/, '').replace(/\s\s*$/, '');

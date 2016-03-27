@@ -70,6 +70,11 @@ class PagesController < ApplicationController
   def destroy
   end
 
+  def update_ajax
+    Page.find(params[:id]).update_attribute(:content, params[:content])
+    render :nothing => true
+  end
+
   def sort
     params[:order].each do |key,value|
       Page.find(value[:id]).update_attribute(:weight, value[:position])
