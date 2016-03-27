@@ -27,8 +27,8 @@ var Containers = React.createClass({
       <div>
         {results.map(function(result){
           return (
-            <li>
-              <Link key={result.id} to={"/containers/"+result.id}>{result.name}</Link>
+            <li key={result.id}>
+              <Link to={"/containers/"+result.id}>{result.name}</Link>
             </li>
           );
         })}

@@ -51,14 +51,18 @@
                     <ul class="nav pages-panel sortable" id="side-menu">
                         <% @pages.each do |page| %>
                             <% @item = "" %>
-                            <% page.level.times do |level| %>
-                                <% @item = @item.to_s + "<ul class='nav menu' style='display: inline'><li>" %>
+                            <% unless page.level.nil? %>
+                                <% page.level.times do |level| %>
+                                    <% @item = @item.to_s + "<ul class='nav menu' style='display: inline'><li>" %>
+                                <% end %>
+                                <% @item = @item.to_s + "<a href='/pages/" + page.id.to_s + "' data-id='" + page.id.to_s + "' data-no-turbolink>" + page.level.to_s + page.name + "</a>" %>
+                                <% page.level.times do |level| %>
+                                    <% @item = @item.to_s + "</li></ul>" %>
+                                <% end %>
+                                <%= @item.html_safe %>
+                            <% else %>
+                                <%= page.name %>
                             <% end %>
-                            <% @item = @item.to_s + "<a href='/pages/" + page.id.to_s + "' data-id='" + page.id.to_s + "' data-no-turbolink>" + page.level.to_s + page.name + "</a>" %>
-                            <% page.level.times do |level| %>
-                                <% @item = @item.to_s + "</li></ul>" %>
-                            <% end %>
-                            <%= @item.html_safe %>
                         <% end %>
                     </ul>
                     <ul  class="nav pages-panel sortable" id="side-menu">

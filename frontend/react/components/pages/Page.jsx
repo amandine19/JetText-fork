@@ -32,9 +32,8 @@ var Page = React.createClass({
       content_css: '/assets/bootstrap/dist/css/bootstrap.min.css',
       setup: function(editor) {
         editor.on('init', function(args) {
-          var iframe = $("#" + args.target.id + "_ifr");
-          var content = $(iframe[0].contentWindow.document.body);
-          var iframeElm = $.parseHTML(content.html());
+          that.setState({ contentValue: editor.getContent() });
+          editor.setContent(that.state.contentValue);
         });
         editor.on('change', function(ed) {
           that.setState({ contentValue: editor.getContent() });
@@ -45,6 +44,7 @@ var Page = React.createClass({
 
   componentWillUnmount: function() {
     this.serverRequest.abort();
+    //tinymce.remove('#editor1');
   },
 
   postData: function() {
@@ -59,18 +59,11 @@ var Page = React.createClass({
   render: function() {
     var page = this.state.page;
     return (
-      <div>
-        <div>
-          {page.id} - {page.name}
-        </div>
-        <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)} />
+      <div className="col-lg-12">
+        <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)}/>
         <input type="button" onClick={this.postData} value="Save" />
       </div>
     );
-  },
-
-  onChange: function(e) {
-    this.setState({ contentValue: editor.getContent() });
   }
 
 });

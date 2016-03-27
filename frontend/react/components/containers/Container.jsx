@@ -11,7 +11,6 @@ var Container = React.createClass({
   
   componentDidMount: function() {
     this.serverRequest = $.get("/containers/"+this.props.params.id+".json", function (result) {
-    	console.log(result);
       this.setState({
         container: result.container,
         pages: result.pages
@@ -28,16 +27,13 @@ var Container = React.createClass({
   	var pages = this.state.pages;
     return (
     	<div>
-	      <div>
-	        {container.id} - {container.name}
-	      </div>
-	      <div>
-	      	{container.content}
+	      <div key={container.id}>
+	        {container.id} - {container.name} - {container.content}
 	      </div>
 	      {pages.map(function(page){
           return (
-            <li>
-              <Link key={page.id} to={"/pages/"+page.id}>{page.name}</Link>
+            <li key={page.id}>
+              <Link to={"/pages/"+page.id}>{page.name}</Link>
             </li>
           );
         })}
