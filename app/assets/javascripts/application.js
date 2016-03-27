@@ -20,5 +20,10 @@
 //= require tinymceplugins/formula.tinymce.plugin
 //= require tinymceplugins/glossary.tinymce.plugin
 
+//= require cke/cke_fix.js
+//= require ckeditor/ckeditor.js
+//= require ckeditor/lang/fr.js
+// require alloyeditor/dist/alloy-editor/alloy-editor-all-min.js
+
 //= require main
 // require all
