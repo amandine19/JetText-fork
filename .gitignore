@@ -15,8 +15,7 @@
 # Custom
 /node_modules
 /bower_components
-/public
-!/public/templates
+/public/generated
 
 /spring/*.pid
 
