@@ -24,6 +24,7 @@
 //= require ckeditor/ckeditor.js
 //= require ckeditor/lang/fr.js
 //= require cke/custom_config.js
+//= require_tree ./cke/plugins
 
 //= require main
 // require all

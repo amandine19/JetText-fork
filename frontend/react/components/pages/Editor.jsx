@@ -42,6 +42,7 @@ var Editor = React.createClass({
       // setState to allow changes to be saved on submit
       that.setState({ contentValue: evt.editor.getData() });
     });
+    CKEDITOR.plugins.addExternal('uploader', '/assets/cke/plugins/uploader/', 'plugin.js');
   },
 
   render: function() {
