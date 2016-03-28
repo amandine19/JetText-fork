@@ -18,6 +18,21 @@ CKEDITOR.dialog.add('uploaderDialog', function(editor) {
         onOk: function() {
             var dialog = this;
             $('#new_upload').submit();
+            var file = $('#new_upload').find('#upload_file')[0].files[0];
+            var type = file.type.split('/')[0];
+            var url = currentUser.email + '/files/' + type + '/' + file.name;
+            if (file.type === 'image/png') {
+                var editor_elem = editor.document.createElement('img');
+                editor_elem.setAttribute('src', url);
+            } else if (file.type === 'application/pdf') {
+                var editor_elem = editor.document.createElement('a');
+                editor_elem.setAttribute('href', url);
+                editor_elem.appendText('PDF');
+            } else if (file.type === 'video/mp4') {
+                var editor_elem = editor.document.createElement('video');
+            }
+
+            editor.insertElement(editor_elem);
         }
     };
 });
