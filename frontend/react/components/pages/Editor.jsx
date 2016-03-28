@@ -15,8 +15,8 @@ var Editor = React.createClass({
   componentDidMount: function() {
     this.serverRequest = $.get("/pages/"+this.props.children.id+".json", function (result) {
       this.setState({
-        page: result,
-        contentValue: result.content
+        page: result.page,
+        contentValue: result.page.content
       });
     }.bind(this));
 

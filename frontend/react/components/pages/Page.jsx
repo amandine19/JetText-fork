@@ -6,15 +6,15 @@ var Page = React.createClass({
   getInitialState: function() {
     return {
       page: '',
-      contentValue: ''
+      pages: []
     };
   },
   
   componentDidMount: function() {
     this.serverRequest = $.get("/pages/"+this.props.params.id+".json", function (result) {
       this.setState({
-        page: result,
-        contentValue: result.content
+        page: result.page,
+        pages: result.pages
       });
     }.bind(this));
   },
@@ -30,12 +30,23 @@ var Page = React.createClass({
   render: function() {
     var page = this.state.page;
     return (
+      <div>
       <div className="col-lg-12">
         <Link to={"/containers/"+page.container_id}>Containers</Link>
         <input type="button" onClick={this.generateContainer} value="Generate" />
-        <Editor>
+        <Editor key={Math.random()}>
           {this.props.params}
         </Editor>
+      </div>
+      <div>
+        {this.state.pages.map(function(page){
+          return (
+            <li key={page.id}>
+              <Link to={"/pages/"+page.id}>{page.name}</Link>
+            </li>
+          );
+        })}
+      </div>
       </div>
     );
   }

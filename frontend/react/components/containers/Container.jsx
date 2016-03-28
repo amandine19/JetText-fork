@@ -1,5 +1,6 @@
 var React = require('react');
 import { Router, Route, Link, hashHistory } from 'react-router';
+var Menu = require('./Menu.jsx');
 
 var Container = React.createClass({
 	getInitialState: function() {
@@ -30,13 +31,7 @@ var Container = React.createClass({
 	      <div key={container.id}>
 	        {container.id} - {container.name} - {container.content}
 	      </div>
-	      {pages.map(function(page){
-          return (
-            <li key={page.id}>
-              <Link to={"/pages/"+page.id}>{page.name}</Link>
-            </li>
-          );
-        })}
+        <Menu items={pages}/>
 	    </div>
     );
   }
