@@ -23,6 +23,7 @@
 //= require cke/cke_fix.js
 //= require ckeditor/ckeditor.js
 //= require ckeditor/lang/fr.js
+//= require cke/custom_config.js
 
 //= require main
 // require all

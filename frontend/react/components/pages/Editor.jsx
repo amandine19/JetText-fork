@@ -35,7 +35,9 @@ var Editor = React.createClass({
 
   unlock: function() {
     var that = this;
-    var editor = CKEDITOR.replace('editor1');
+    var editor = CKEDITOR.replace('editor1', {
+      customConfig: '/assets/cke/custom_config.js'
+    });
     editor.on('change', function( evt ) {
       // setState to allow changes to be saved on submit
       that.setState({ contentValue: evt.editor.getData() });
