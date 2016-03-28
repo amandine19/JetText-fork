@@ -78,7 +78,7 @@ class ContainersController < ApplicationController
     @container = Container.find(params[:id])
     @pages = Page.where(:container_id => @container.id)
     
-    Generator.generate(@container, @pages)
+    Generator.generate(@container.user.email, @container, @pages)
 
     respond_to do |format|
       format.html { head :no_content }
@@ -93,8 +93,8 @@ class ContainersController < ApplicationController
     def create_folder
       return nil unless current_user.present?
       token = SecureRandom.hex(8)
-      dest = "generated/#{current_user.email}/#{token}"
-      FileUtils.mkdir_p "#{Rails.root}/public/#{dest}"
+      dest = "#{Rails.root}/public/#{current_user.email}"
+      FileUtils.mkdir_p dest
       return dest
     end
 

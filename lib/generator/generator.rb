@@ -4,8 +4,8 @@ module Generator
 
   require 'fileutils'
 
-  def self.generate(container, pages)
-    container.content = gsub_content(container.content, container.url) if container.content
+  def self.generate(username, container, pages)
+    container.content = gsub_content(username, container.content, container.url) if container.content
     File.open("#{Rails.public_path}/#{container.url}/index.html", "w+") do |f|
       f.write(
         "<html>\n" \
@@ -28,7 +28,7 @@ module Generator
     end
 
     pages.each do |page|
-      page.content = gsub_content(page.content, container.url) if page.content
+      page.content = gsub_content(username, page.content, container.url) if page.content
       page.content = gsub_glossary(page.id, page.content) if page.content
       File.open("#{Rails.public_path}/#{container.url}/#{page.name}.html", "w+") do |f|
         f.write(
@@ -55,7 +55,7 @@ module Generator
     return true
   end
 
-  def self.gsub_content(content, container_url)
+  def self.gsub_content(username, content, container_url)
     patterns = [
       '<body>',
       '</body>',
@@ -66,9 +66,9 @@ module Generator
     patterns.map {|s| content.gsub!(s, '')}
 
     # changes the files default url to a relative one
-    if content.include? container_url
-    	content.gsub!("../#{container_url}", ".")
-      content.gsub!("/#{container_url}", ".")
+    if content.include? "#{username}/files/"
+    	content.gsub!("#{username}/files/", "files/")
+      content.gsub!("/#{username}/files/", "files/")
     end
     return content
   end
