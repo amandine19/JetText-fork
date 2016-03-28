@@ -15,7 +15,13 @@
 # Custom
 /node_modules
 /bower_components
-/public/generated
+/public
+!/public/templates
+!/public/404.html
+!/public/422.html
+!/public/500.html
+!/public/favicon.ico
+!/public/robots.txt
 
 /spring/*.pid
 
