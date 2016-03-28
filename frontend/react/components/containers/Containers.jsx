@@ -1,6 +1,5 @@
 var React = require('react');
 import { Router, Route, Link, hashHistory } from 'react-router';
-var ContainersList = require('./ContainersList.jsx');
 
 var Containers = React.createClass({
   getInitialState: function() {

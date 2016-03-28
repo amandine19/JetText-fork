@@ -1,11 +1,14 @@
 var React = require('react');
-import { Router, Route, Link, hashHistory } from 'react-router';
+var NotificationSystem = require('react-notification-system');
 
 var Editor = React.createClass({
+
   getInitialState: function() {
     return {
       page: '',
-      contentValue: ''
+      contentValue: '',
+      editButton: true,
+      saveButton: false
     };
   },
   
@@ -16,6 +19,8 @@ var Editor = React.createClass({
         contentValue: result.content
       });
     }.bind(this));
+
+    this._notificationSystem = this.refs.notificationSystem;
   },
 
   componentWillUnmount: function() {
@@ -24,12 +29,19 @@ var Editor = React.createClass({
     if (editor) { editor.destroy(true); }
   },
 
-  postData: function() {
+  postData: function(event) {
     var page = this.state.page;
     $.ajax({
       type: "PUT",
       url: '/pages/update_ajax',
       data: { id: page.id, content: this.state.contentValue }
+    });
+
+    // NotificationSystem popup
+    event.preventDefault();
+    this._notificationSystem.addNotification({
+      title: 'Container saved !',
+      level: 'success'
     });
   },
 
@@ -44,15 +56,20 @@ var Editor = React.createClass({
       that.setState({ contentValue: evt.editor.getData() });
     });
     CKEDITOR.plugins.addExternal('uploader', '/assets/cke/plugins/uploader/', 'plugin.js');
+
+    this.setState({ saveButton: true, editButton: false });
   },
+
+  _notificationSystem: null,
 
   render: function() {
     var page = this.state.page;
     return (
       <div className="col-lg-12">
         <div id="editor1" dangerouslySetInnerHTML={createMarkup(page.content)} />
-        <input type="button" onClick={this.postData} value="Save" />
-        <input type="button" onClick={this.unlock} value="Edit" />
+        { this.state.editButton ? <input type="button" onClick={this.unlock} value="Edit" /> : null }
+        { this.state.saveButton ? <input type="button" onClick={this.postData} value="Save" /> : null }
+        <NotificationSystem ref="notificationSystem" />
       </div>
     );
   }
