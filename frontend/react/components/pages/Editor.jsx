@@ -35,6 +35,7 @@ var Editor = React.createClass({
 
   unlock: function() {
     var that = this;
+    
     var editor = CKEDITOR.replace('editor1', {
       customConfig: '/assets/cke/custom_config.js'
     });

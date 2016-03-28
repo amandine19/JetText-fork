@@ -20,5 +20,6 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
+	// Custom plugins app/assets/javascripts/cke/plugins
 	config.extraPlugins = 'uploader';
 };

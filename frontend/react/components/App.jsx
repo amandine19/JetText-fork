@@ -1,5 +1,5 @@
 var React = require('react');
-import { Router, Route, Link, hashHistory } from 'react-router';
+import { Link } from 'react-router';
 
 var App = React.createClass({
 
