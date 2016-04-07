@@ -4,9 +4,9 @@ class PageTest < ActiveSupport::TestCase
 
 
 	def setup 
-		@page = pages(:one)
-		@user = users(:one)
-		@container = containers(:one)
+		@page = pages(:page_one)
+		@user = users(:user_one)
+		@container = containers(:container_one)
 	end	
 
 	test "name is too long" do 
