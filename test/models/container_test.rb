@@ -3,8 +3,8 @@ require 'test_helper'
 class ContainerTest < ActiveSupport::TestCase
 
 	def setup 
-		@container = containers(:one)
-		@user = users(:one)
+		@container = containers(:container_one)
+		@user = users(:user_one)
 	end	
 
 
