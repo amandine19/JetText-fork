@@ -34,6 +34,7 @@ class GlossariesController < ApplicationController
   end
 
   def edit
+    
   end
 
   private
