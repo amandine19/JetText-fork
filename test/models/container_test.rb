@@ -35,7 +35,7 @@ class ContainerTest < ActiveSupport::TestCase
 	test "should save container without content" do
 		@container.content = nil
 		assert @container.valid?
-	end	
+	end
 
 
 end
